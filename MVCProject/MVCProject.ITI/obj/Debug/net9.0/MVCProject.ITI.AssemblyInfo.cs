@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MVCProject.ITI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6515e8448c80668c755e9b2c5711874dd5f4d14")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0d4ad873a61902756342eb93cae4c64041e9ed1")]
 [assembly: System.Reflection.AssemblyProductAttribute("MVCProject.ITI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MVCProject.ITI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

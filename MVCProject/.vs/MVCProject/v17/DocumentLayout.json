@@ -26,12 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 10,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
@@ -95,8 +91,7 @@
               "RelativeToolTip": "MVCProject.ITI\\Program.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAqwBwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T14:16:30.776Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-24T14:16:30.776Z"
             },
             {
               "$type": "Document",
@@ -108,21 +103,19 @@
               "RelativeToolTip": "MVCProject.ITI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-24T14:15:32.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-24T14:15:32.436Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MVCProject.ITI",
+              "Title": "MVCProject.ITI.csproj",
               "DocumentMoniker": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\MVCProject.ITI.csproj",
               "RelativeDocumentMoniker": "MVCProject.ITI\\MVCProject.ITI.csproj",
               "ToolTip": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\MVCProject.ITI.csproj",
               "RelativeToolTip": "MVCProject.ITI\\MVCProject.ITI.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-24T14:15:16.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-24T14:15:16.238Z"
             }
           ]
         }
