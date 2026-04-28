@@ -14,6 +14,9 @@ namespace MVCProject.ITI.DataAccessLayer.Configurations
             builder.Property(t => t.Id)
                    .HasDefaultValueSql("NEWSEQUENTIALID()");
 
+            builder.Property(t => t.CalculatedAt)
+                   .HasDefaultValueSql("GETUTCDATE()");
+
             // Configure the relationship with FuelPrice
             builder.HasOne(t => t.FuelPrice)
                    .WithMany(f => f.TripCostResults)
