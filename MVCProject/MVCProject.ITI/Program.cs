@@ -22,7 +22,7 @@ public class Program
         builder.Services.AddControllersWithViews();
         //register Services in IOC container
         builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

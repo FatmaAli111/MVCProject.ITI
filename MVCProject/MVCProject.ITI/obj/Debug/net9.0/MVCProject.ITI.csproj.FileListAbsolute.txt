@@ -206,7 +206,6 @@ F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compr
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\nezrqnk58p-muycvpuwrr.gz
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\p4654gocnk-b9sayid5wm.gz
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\47dvns7kh4-61n19gt1b8.gz
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\79kgy3l8t9-xtxxf3hu2r.gz
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\zm5ugx0le9-bqjiyaj88i.gz
@@ -286,3 +285,5 @@ F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\refin
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\MVCProject.ITI.pdb
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\MVCProject.ITI.genruntimeconfig.cache
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\ref\MVCProject.ITI.dll
+F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\p4654gocnk-c04rbg0nd9.gz
+F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\obj\Debug\net9.0\compressed\955abc9uxq-akqnlodfif.gz

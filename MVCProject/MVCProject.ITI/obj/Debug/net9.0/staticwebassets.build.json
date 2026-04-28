@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QpTZ/Y6W83/Pk9JvjjnfdjF5B0pI+Pmnosk3O7OywYs=",
+  "Hash": "dvWtT6yTiBtnohHIbIjC6MUz8ogGUsOgN3V0Xx7WWJE=",
   "Source": "MVCProject.ITI",
   "BasePath": "_content/MVCProject.ITI",
   "Mode": "Default",
@@ -1928,6 +1928,27 @@
       "OriginalItemSpec": "C:\\Users\\AB\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\9.0.2\\staticwebassets\\V5\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
+      "Identity": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\955abc9uxq-akqnlodfif.gz",
+      "SourceId": "MVCProject.ITI",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MVCProject.ITI",
+      "RelativePath": "css/Dashboard#[.{fingerprint=akqnlodfif}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\Dashboard.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "uv1nnk3ipp",
+      "Integrity": "tp9SARnOXbSTBc3sLBl140mU62CKLj+XL/wQ4XEQqRk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\Dashboard.css"
+    },
+    {
       "Identity": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\9glsckmvxo-aexeepp0ev.gz",
       "SourceId": "Microsoft.AspNetCore.Identity.UI",
       "SourceType": "Package",
@@ -2999,12 +3020,12 @@
       "OriginalItemSpec": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-b9sayid5wm.gz",
+      "Identity": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-c04rbg0nd9.gz",
       "SourceId": "MVCProject.ITI",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/MVCProject.ITI",
-      "RelativePath": "css/site#[.{fingerprint=b9sayid5wm}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=c04rbg0nd9}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -3013,8 +3034,8 @@
       "RelatedAsset": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "wf4wcyqcqt",
-      "Integrity": "fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=",
+      "Fingerprint": "sv7tg5f76l",
+      "Integrity": "2D78O67s92CV9bFFS8VNgkGsV11ecvuuXr3V+DX3ccw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\site.css"
@@ -4028,6 +4049,27 @@
       "OriginalItemSpec": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\MVCProject.ITI.bundle.scp.css"
     },
     {
+      "Identity": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\Dashboard.css",
+      "SourceId": "MVCProject.ITI",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\",
+      "BasePath": "_content/MVCProject.ITI",
+      "RelativePath": "css/Dashboard#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "akqnlodfif",
+      "Integrity": "xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Dashboard.css"
+    },
+    {
       "Identity": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\site.css",
       "SourceId": "MVCProject.ITI",
       "SourceType": "Discovered",
@@ -4042,8 +4084,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "b9sayid5wm",
-      "Integrity": "j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=",
+      "Fingerprint": "c04rbg0nd9",
+      "Integrity": "9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -5353,13 +5395,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.b9sayid5wm.css",
-      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-b9sayid5wm.gz",
+      "Route": "css/Dashboard.akqnlodfif.css",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\955abc9uxq-akqnlodfif.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003125000000"
+          "Quality": "0.000220701832"
         }
       ],
       "ResponseHeaders": [
@@ -5369,15 +5411,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "4530"
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"tp9SARnOXbSTBc3sLBl140mU62CKLj+XL/wQ4XEQqRk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:00:34 GMT"
+          "Value": "Tue, 28 Apr 2026 18:20:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5397,13 +5439,311 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "W/\"xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "akqnlodfif"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Dashboard.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE="
+        }
+      ]
+    },
+    {
+      "Route": "css/Dashboard.akqnlodfif.css",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\Dashboard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21844"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 18:20:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "akqnlodfif"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Dashboard.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE="
+        }
+      ]
+    },
+    {
+      "Route": "css/Dashboard.akqnlodfif.css.gz",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\955abc9uxq-akqnlodfif.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4530"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tp9SARnOXbSTBc3sLBl140mU62CKLj+XL/wQ4XEQqRk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 18:20:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "akqnlodfif"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Dashboard.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tp9SARnOXbSTBc3sLBl140mU62CKLj+XL/wQ4XEQqRk="
+        }
+      ]
+    },
+    {
+      "Route": "css/Dashboard.css",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\955abc9uxq-akqnlodfif.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000220701832"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4530"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tp9SARnOXbSTBc3sLBl140mU62CKLj+XL/wQ4XEQqRk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 18:20:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE="
+        }
+      ]
+    },
+    {
+      "Route": "css/Dashboard.css",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\Dashboard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21844"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 18:20:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xvQdO5baKvaPkhTi9RRd9LwqdkB0ZK5xrsvHLsGxUzE="
+        }
+      ]
+    },
+    {
+      "Route": "css/Dashboard.css.gz",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\955abc9uxq-akqnlodfif.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4530"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tp9SARnOXbSTBc3sLBl140mU62CKLj+XL/wQ4XEQqRk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 18:20:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tp9SARnOXbSTBc3sLBl140mU62CKLj+XL/wQ4XEQqRk="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.c04rbg0nd9.css",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-c04rbg0nd9.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000246548323"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4055"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2D78O67s92CV9bFFS8VNgkGsV11ecvuuXr3V+DX3ccw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 15:37:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "c04rbg0nd9"
         },
         {
           "Name": "label",
@@ -5411,12 +5751,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko="
         }
       ]
     },
     {
-      "Route": "css/site.b9sayid5wm.css",
+      "Route": "css/site.c04rbg0nd9.css",
       "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5426,7 +5766,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "667"
+          "Value": "21792"
         },
         {
           "Name": "Content-Type",
@@ -5434,11 +5774,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "\"9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:00:34 GMT"
+          "Value": "Tue, 28 Apr 2026 15:37:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5448,7 +5788,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "c04rbg0nd9"
         },
         {
           "Name": "label",
@@ -5456,13 +5796,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko="
         }
       ]
     },
     {
-      "Route": "css/site.b9sayid5wm.css.gz",
-      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-b9sayid5wm.gz",
+      "Route": "css/site.c04rbg0nd9.css.gz",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-c04rbg0nd9.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5471,7 +5811,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "4055"
         },
         {
           "Name": "Content-Type",
@@ -5479,11 +5819,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"2D78O67s92CV9bFFS8VNgkGsV11ecvuuXr3V+DX3ccw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:00:34 GMT"
+          "Value": "Tue, 28 Apr 2026 15:37:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5501,7 +5841,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "c04rbg0nd9"
         },
         {
           "Name": "label",
@@ -5509,7 +5849,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I="
+          "Value": "sha256-2D78O67s92CV9bFFS8VNgkGsV11ecvuuXr3V+DX3ccw="
         }
       ]
     },
@@ -5552,12 +5892,12 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-b9sayid5wm.gz",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-c04rbg0nd9.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003125000000"
+          "Quality": "0.000246548323"
         }
       ],
       "ResponseHeaders": [
@@ -5567,15 +5907,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "4055"
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"2D78O67s92CV9bFFS8VNgkGsV11ecvuuXr3V+DX3ccw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:00:34 GMT"
+          "Value": "Tue, 28 Apr 2026 15:37:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5595,13 +5935,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "W/\"9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko="
         }
       ]
     },
@@ -5616,7 +5956,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "667"
+          "Value": "21792"
         },
         {
           "Name": "Content-Type",
@@ -5624,11 +5964,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "\"9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:00:34 GMT"
+          "Value": "Tue, 28 Apr 2026 15:37:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5638,13 +5978,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-9Mcvav5qnWTwpKJKUk1dvy6Q/h2dcMtvk1e95yqXcko="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-b9sayid5wm.gz",
+      "AssetFile": "F:\\NewOneWithIti\\MVCProject.ITI\\MVCProject\\MVCProject.ITI\\obj\\Debug\\net9.0\\compressed\\p4654gocnk-c04rbg0nd9.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5653,7 +5993,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "4055"
         },
         {
           "Name": "Content-Type",
@@ -5661,11 +6001,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"2D78O67s92CV9bFFS8VNgkGsV11ecvuuXr3V+DX3ccw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:00:34 GMT"
+          "Value": "Tue, 28 Apr 2026 15:37:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5683,7 +6023,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I="
+          "Value": "sha256-2D78O67s92CV9bFFS8VNgkGsV11ecvuuXr3V+DX3ccw="
         }
       ]
     },
@@ -34797,7 +35137,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34850,7 +35190,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34887,7 +35227,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34934,7 +35274,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34987,7 +35327,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35024,7 +35364,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35071,7 +35411,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35132,7 +35472,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35177,7 +35517,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35232,7 +35572,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35293,7 +35633,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35338,7 +35678,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 24 Apr 2026 14:21:15 GMT"
+          "Value": "Tue, 28 Apr 2026 10:22:15 GMT"
         },
         {
           "Name": "Cache-Control",

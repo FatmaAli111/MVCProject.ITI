@@ -16,6 +16,7 @@ F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\js\site.js
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
+F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\css\Dashboard.css
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
@@ -60,6 +61,7 @@ F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+wwwroot\css\Dashboard.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js
