@@ -1,76 +1,8 @@
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\favicon.ico
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.slim.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\js\site.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\jquery.validate.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\LICENSE.txt
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.slim.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.slim.min.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\LICENSE.md
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\css\site.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\additional-methods.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.min.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
-F:\NewOneWithIti\MVCProject.ITI\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\css\site.css
+wwwroot\css\trip-style.css
 wwwroot\favicon.ico
 wwwroot\js\site.js
-wwwroot\lib\bootstrap\dist\css\bootstrap.css
-wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
-wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
-wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
-wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
-wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
-wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
-wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+wwwroot\js\trip-logic.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -95,6 +27,14 @@ wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
@@ -108,6 +48,14 @@ wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
+wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
+wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+wwwroot\lib\jquery-validation\LICENSE.md
 wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
@@ -115,11 +63,67 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\lib\jquery-validation\dist\additional-methods.js
-wwwroot\lib\jquery-validation\dist\additional-methods.min.js
-wwwroot\lib\jquery-validation\dist\jquery.validate.js
-wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
-wwwroot\lib\jquery-validation\LICENSE.md
-wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
-wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
-wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\css\site.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\css\trip-style.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\favicon.ico
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\js\site.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\js\trip-logic.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\additional-methods.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\jquery.validate.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery-validation\LICENSE.md
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.min.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.slim.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.slim.min.js
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\dist\jquery.slim.min.map
+E:\Course Web PHP Elzero\The Course\front_end(elzero)\ITI 4 Months 2026\C# Projects in C Folder\MVC Project on Github\MVCProject\MVCProject.ITI\wwwroot\lib\jquery\LICENSE.txt
