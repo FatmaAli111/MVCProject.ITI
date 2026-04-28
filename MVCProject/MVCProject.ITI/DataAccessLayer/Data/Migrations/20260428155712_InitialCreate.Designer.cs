@@ -4,6 +4,7 @@ using MVCProject.ITI.DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProject.ITI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260428155712_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,24 +90,6 @@ namespace MVCProject.ITI.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c7d8f0ec-d7f6-4f82-9746-3e4790f94e19",
-                            Email = "admin@trips.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@TRIPS.COM",
-                            NormalizedUserName = "ADMIN@TRIPS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0883b27-c1d1-4e63-9993-82d2a45a6660",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@trips.com"
-                        });
                 });
 
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.CarModel", b =>
@@ -140,30 +125,6 @@ namespace MVCProject.ITI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("13735163-952a-466d-8e7c-87d3dfa7263b"),
-                            FuelType = 0,
-                            Make = "Toyota",
-                            Model = "Corolla",
-                            WltpCity = 5.5f,
-                            WltpHighway = 4.2f,
-                            WltpMixed = 4.9f,
-                            Year = 2023
-                        },
-                        new
-                        {
-                            Id = new Guid("279318b7-6e4e-4f33-87b6-e2a7e7ed27d6"),
-                            FuelType = 0,
-                            Make = "Honda",
-                            Model = "Civic",
-                            WltpCity = 6.2f,
-                            WltpHighway = 4.8f,
-                            WltpMixed = 5.5f,
-                            Year = 2023
-                        });
                 });
 
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.FuelEfficiencyProfile", b =>
@@ -191,16 +152,6 @@ namespace MVCProject.ITI.Data.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("FuelEfficiencyProfiles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("67890123-4567-8901-2345-678901234567"),
-                            ConsumptionRate = 5f,
-                            DrivingCondation = 2,
-                            Unit = "L/100km",
-                            VehicleId = new Guid("f9b5a7a9-2f22-4a7b-a454-077a28424294")
-                        });
                 });
 
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.FuelPrice", b =>
@@ -230,26 +181,6 @@ namespace MVCProject.ITI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FuelPrices");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("85623838-8a8b-4a5d-b088-25679eff9011"),
-                            Currency = "EGP",
-                            FuelType = 0,
-                            PricePerUnit = 13.5f,
-                            RecordedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Region = "Egypt"
-                        },
-                        new
-                        {
-                            Id = new Guid("a1d82f7c-50bc-4340-a3fc-211c4794e771"),
-                            Currency = "EGP",
-                            FuelType = 1,
-                            PricePerUnit = 10f,
-                            RecordedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Region = "Egypt"
-                        });
                 });
 
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.Trip", b =>
@@ -312,26 +243,6 @@ namespace MVCProject.ITI.Data.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Trips");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("39542a3a-2a4c-4737-9755-e7a685764d26"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DestinationName = "Alexandria",
-                            DestinationPlaceId = "",
-                            DistanceKm = 220f,
-                            DurationMinutes = 180,
-                            IsAcOn = false,
-                            IsFavorite = false,
-                            IsReturnTrip = false,
-                            OriginName = "Cairo",
-                            OriginPlaceId = "",
-                            PassengerCount = 2,
-                            TripDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
-                            VehicleId = new Guid("f9b5a7a9-2f22-4a7b-a454-077a28424294")
-                        });
                 });
 
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.TripCostResult", b =>
@@ -342,9 +253,7 @@ namespace MVCProject.ITI.Data.Migrations
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<DateTime>("CalculatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<float>("CostPerKm")
                         .HasColumnType("real");
@@ -401,16 +310,6 @@ namespace MVCProject.ITI.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f9b5a7a9-2f22-4a7b-a454-077a28424294"),
-                            CarModelId = new Guid("13735163-952a-466d-8e7c-87d3dfa7263b"),
-                            NickName = "Admin's Corolla",
-                            PassengerCapacity = 5,
-                            UserId = new Guid("46686121-d1c1-4796-993d-82d2a45a6660")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -439,20 +338,6 @@ namespace MVCProject.ITI.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d6e87f16-7788-4f10-9c1c-0c3f09f023ea"),
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("f6e87f16-7788-4f10-9c1c-0c3f09f023eb"),
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -539,13 +424,6 @@ namespace MVCProject.ITI.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
-                            RoleId = new Guid("d6e87f16-7788-4f10-9c1c-0c3f09f023ea")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
