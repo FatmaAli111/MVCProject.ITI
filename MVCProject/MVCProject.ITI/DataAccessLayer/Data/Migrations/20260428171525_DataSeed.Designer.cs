@@ -4,6 +4,7 @@ using MVCProject.ITI.DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProject.ITI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260428171525_DataSeed")]
+    partial class DataSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,7 +96,7 @@ namespace MVCProject.ITI.Data.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c7d8f0ec-d7f6-4f82-9746-3e4790f94e19",
+                            ConcurrencyStamp = "28c6e58f-dc8a-4292-bb20-96b8124c0a2c",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -101,7 +104,7 @@ namespace MVCProject.ITI.Data.Migrations
                             NormalizedUserName = "ADMIN@TRIPS.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0883b27-c1d1-4e63-9993-82d2a45a6660",
+                            SecurityStamp = "09dcdd2d-bc43-4252-84de-1b966e14cd93",
                             TwoFactorEnabled = false,
                             UserName = "admin@trips.com"
                         });
@@ -342,9 +345,7 @@ namespace MVCProject.ITI.Data.Migrations
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<DateTime>("CalculatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<float>("CostPerKm")
                         .HasColumnType("real");

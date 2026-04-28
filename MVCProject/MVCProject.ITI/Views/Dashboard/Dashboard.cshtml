@@ -1,0 +1,227 @@
+﻿
+@{
+    Layout = "_AppLayout";
+
+    // ViewData["IsDashboard"] = "Dashboard";
+}
+
+<body>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-orb1"></div>
+        <div class="hero-orb2"></div>
+        <div class="hero-orb3"></div>
+
+        <button class="hero-send-btn"><i class="bi bi-send-fill"></i></button>
+
+        <div class="ai-badge">
+            <i class="bi bi-stars"></i> AI-Powered
+        </div>
+        <h1>Plan Your Trip</h1>
+        <p>Compare routes, split costs, travel smart</p>
+
+        <div class="user-chip">
+            <div class="chip-avatar">T</div>
+            <div class="chip-info">
+                <div class="chip-name">Toyota Corolla</div>
+                <div class="chip-sub">2019 · 45L · Gasoline</div>
+            </div>
+        </div>
+
+        <div class="start-bar">
+            <i class="bi bi-plus-circle-fill"></i>
+            <span>Start New Trip</span>
+            <i class="bi bi-chevron-right arrow-icon"></i>
+        </div>
+    </div>
+
+    <!-- Nav Tabs -->
+    <div class="nav-tabs-custom">
+        <button class="nav-tab active" data-tab="analytics">
+            <div class="tab-icon" style="background:linear-gradient(135deg,#7c3aed,#6025c4)">
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            Analytics
+        </button>
+        <button class="nav-tab" data-tab="garage">
+            <div class="tab-icon" style="background:linear-gradient(135deg,#f97316,#ea6c0b)">
+                <i class="bi bi-car-front-fill"></i>
+            </div>
+            <span class="tab-dot"></span>
+            Garage
+        </button>
+        <button class="nav-tab" data-tab="history">
+            <div class="tab-icon" style="background:linear-gradient(135deg,#0ea5e9,#0390cf)">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            History
+        </button>
+        <button class="nav-tab" data-tab="settings">
+            <div class="tab-icon" style="background:linear-gradient(135deg,#4f46e5,#3d35cc)">
+                <i class="bi bi-gear-fill"></i>
+            </div>
+            Settings
+        </button>
+    </div>
+
+    <!-- Main content -->
+    <div class="container-fluid px-3">
+
+        <!-- Stats -->
+        <div class="d-flex justify-content-between align-items-center mt-section mb-2">
+            <span class="section-label">Your Stats</span>
+            <a href="#" class="see-all">See all &rsaquo;</a>
+        </div>
+        <div class="row g-2">
+            <div class="col-4">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:linear-gradient(135deg,#3bbfad,#259183)">
+                        <i class="bi bi-map-fill"></i>
+                    </div>
+                    <div class="stat-value" data-target="1835">0</div>
+                    <div class="stat-unit">km</div>
+                    <div class="stat-label">Total Distance</div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a)">
+                        <i class="bi bi-wallet2"></i>
+                    </div>
+                    <div class="stat-value" data-target="2675">0</div>
+                    <div class="stat-unit" style="color:var(--green)">EGP</div>
+                    <div class="stat-label">Total Spent</div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:linear-gradient(135deg,#f97316,#ea6c0b)">
+                        <i class="bi bi-wind"></i>
+                    </div>
+                    <div class="stat-value" data-target="241">0</div>
+                    <div class="stat-unit" style="color:#f97316">kg</div>
+                    <div class="stat-label">CO₂ Saved</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-section">
+            <span class="section-label">Recent Trips</span>
+            <a href="#" class="see-all">View all &rsaquo;</a>
+        </div>
+
+        <div class="d-flex flex-column gap-1 mt-2">
+            @for (int i = 0; i < 3; i++)
+            {
+                @Html.Partial("_RecentTripCardPartial")
+            }
+        </div>
+</div>  <!-- ✅ أقفلي الـ container-fluid هنا -->
+
+    <!-- FABs -->
+    <div class="fab-stack">
+        <button class="fab active" title="Filters"><i class="bi bi-sliders2"></i></button>
+        <button class="fab" title="Compass"><i class="bi bi-compass"></i></button>
+        <button class="fab" title="List"><i class="bi bi-list-ul"></i></button>
+        <button class="fab" title="Bookmark"><i class="bi bi-bookmark"></i></button>
+        <button class="fab" title="Settings"><i class="bi bi-gear"></i></button>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+        <button class="bnav-btn"><i class="bi bi-grid-fill"></i> Garage</button>
+        <button class="bnav-btn active"><i class="bi bi-plus-circle-fill"></i> New Trip</button>
+        <button class="bnav-btn"><i class="bi bi-bar-chart-fill"></i> Stats</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* ── Tab switching with ripple ── */
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+          tab.addEventListener('click', function(e) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            const r = document.createElement('span');
+            r.className = 'ripple-el';
+            r.style.cssText = `left:${e.offsetX - 5}px;top:${e.offsetY - 5}px`;
+            this.appendChild(r);
+            setTimeout(() => r.remove(), 520);
+            // Animate icon
+            const icon = this.querySelector('.tab-icon i');
+            icon.style.animation = 'none';
+            void icon.offsetWidth;
+            icon.style.animation = 'spinOnce .5s ease';
+          });
+        });
+
+        /* ── Bottom nav with ripple ── */
+        document.querySelectorAll('.bnav-btn').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const r = document.createElement('span');
+            r.className = 'ripple-el';
+            r.style.cssText = `left:${e.offsetX - 4}px;top:${e.offsetY - 4}px`;
+            this.appendChild(r);
+            setTimeout(() => r.remove(), 520);
+          });
+        });
+
+        /* ── FAB toggle ── */
+        document.querySelectorAll('.fab').forEach(fab => {
+          fab.addEventListener('click', function() {
+            document.querySelectorAll('.fab').forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+
+        /* ── Count-up animation for stats ── */
+        function countUp(el, target, duration = 1200) {
+          const start = performance.now();
+          const update = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(ease * target).toLocaleString();
+            if (progress < 1) requestAnimationFrame(update);
+          };
+          requestAnimationFrame(update);
+        }
+
+        // Trigger count-up when visible
+        const statObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = parseInt(el.dataset.target);
+              setTimeout(() => countUp(el, target), 200);
+              statObserver.unobserve(el);
+            }
+          });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('[data-target]').forEach(el => statObserver.observe(el));
+
+        /* ── Trip item active border flash ── */
+        document.querySelectorAll('.trip-item').forEach(item => {
+          item.addEventListener('click', function() {
+            this.style.background = 'rgba(59,191,173,0.06)';
+            setTimeout(() => { this.style.background = ''; }, 400);
+          });
+        });
+
+        /* ── Start bar click ── */
+        document.querySelector('.start-bar').addEventListener('click', function() {
+          this.style.transform = 'scale(0.98)';
+          setTimeout(() => { this.style.transform = ''; }, 200);
+        });
+
+        /* ── Notification bell wiggle on click ── */
+        document.querySelector('.notif-btn').addEventListener('click', function() {
+          const icon = this.querySelector('i');
+          icon.style.animation = 'none';
+          void icon.offsetWidth;
+          icon.style.animation = 'notifWiggle .5s ease';
+        });
+    </script>
+    
+</body>
