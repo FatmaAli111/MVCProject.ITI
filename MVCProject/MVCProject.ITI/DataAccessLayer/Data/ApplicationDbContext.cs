@@ -28,12 +28,26 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
         // Rename the remaining Identity tables manually in the db
         builder.Entity<IdentityRole<Guid>>().ToTable("Roles");
-            builder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles");
-            builder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
-            builder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins");
-            builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
-            builder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens");
-        
+        builder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles");
+        builder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
+        builder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins");
+        builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
+        builder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens");
+
+        // Seed Roles
+        var adminRoleId = Guid.Parse("d6e87f16-7788-4f10-9c1c-0c3f09f023ea");
+        var userRoleId = Guid.Parse("f6e87f16-7788-4f10-9c1c-0c3f09f023eb");
+
+        builder.Entity<IdentityRole<Guid>>().HasData(
+            new IdentityRole<Guid> { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
+            new IdentityRole<Guid> { Id = userRoleId, Name = "User", NormalizedName = "USER" }
+        );
+
+        // Seed UserRole (Assign Admin to Admin User)
+        builder.Entity<IdentityUserRole<Guid>>().HasData(
+            new IdentityUserRole<Guid> { UserId = Guid.Parse("46686121-d1c1-4796-993d-82d2a45a6660"), RoleId = adminRoleId }
+        );
+
     }
 
 }

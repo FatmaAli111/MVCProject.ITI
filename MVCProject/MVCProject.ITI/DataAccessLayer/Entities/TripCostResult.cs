@@ -9,7 +9,7 @@
         public float TotalCost { get; set; } = 0;
         public float CostPerKm { get; set; } = 0;
         public float CostPerPassenger { get; set; } = 0;
-        public DateTime CalculatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CalculatedAt { get; set; }
 
         // Relationships ***********
         public Trip Trip { get; set; } = null!;
