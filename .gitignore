@@ -1,1 +1,6 @@
 .json
+.vs/
+bin/
+obj/
+*.user
+*.suo
