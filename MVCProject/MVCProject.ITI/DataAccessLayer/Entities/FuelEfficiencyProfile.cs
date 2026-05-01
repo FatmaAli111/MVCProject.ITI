@@ -18,7 +18,7 @@ namespace MVCProject.ITI.DataAccessLayer.Entities
 
         // Relationships ***********
 
-        public Vehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; } = null!;
 
     }
 }
