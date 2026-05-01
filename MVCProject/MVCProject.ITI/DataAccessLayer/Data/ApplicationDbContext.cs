@@ -13,6 +13,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         : base(options)
     {
     }
+
+    // This suppresses the PendingModelChangesWarning caused by NEWSEQUENTIALID() in configs
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.ConfigureWarnings(w =>
+            w.Ignore(RelationalEventId.PendingModelChangesWarning));
+    }
+
     public DbSet<Trip> Trips { get; set; }
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<CarModel> Cars { get; set; }
@@ -45,8 +53,5 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         builder.Entity<IdentityUserRole<Guid>>().HasData(
             new IdentityUserRole<Guid> { UserId = Guid.Parse("46686121-d1c1-4796-993d-82d2a45a6660"), RoleId = adminRoleId }
         );
-
     }
-
 }
-
