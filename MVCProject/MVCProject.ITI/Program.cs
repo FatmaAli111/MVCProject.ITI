@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MvcProject.iti.DataAccessLayer.Repository.GenericRepo;
 using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Mapper;
 
 namespace MVCProject.ITI;
 
@@ -21,8 +22,12 @@ public class Program
         builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
-        //register Services in IOC container
+        //register Services&Repos in IOC container
         builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        //Register AutoMapper
+        builder.Services.AddAutoMapper(options => options.AddProfile(new DomainProfile()));
+
 
         var app = builder.Build();
 
