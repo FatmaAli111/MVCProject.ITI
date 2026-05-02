@@ -1,0 +1,56 @@
+@model IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Vehicle>
+@{
+    ViewData["Title"] = "Garage";
+    Layout = "_AppLayout";
+}
+<section class="garage-header">
+    <div>
+        <h1 class="analytics-title">My Garage</h1>
+        <p class="analytics-subtitle">@Model.Count() vehicles</p>
+    </div>
+    <a class="btn btn-teal" asp-controller="Garage" asp-action="AddVehicle">+ Add</a>
+</section>
+<div class="vehicle-list">
+
+    @foreach (var v in Model)
+    {
+        <div class="vehicle-card">
+
+            <div class="color-strip" style="background-color:@v.ColorHex;"></div>
+
+            <div class="vehicle-body">
+
+                <div class="vehicle-header">
+                    <h3>@v.NickName</h3>
+                    @if (v.IsDefault)
+                    {
+                        <span class="default-badge">Default</span>
+                    }
+                </div>
+
+                <div class="vehicle-info">
+                    <p><strong>@v.CarModel.Year @v.CarModel.Make @v.CarModel.Model</strong></p>
+                    <p>@v.CarModel.FuelType</p>
+                    <p>@v.CarModel.WltpMixed L/100km</p>
+                </div>
+
+                <div class="vehicle-actions">
+                    @if (!v.IsDefault)
+                    {
+                        <form method="post" asp-action="SetDefault" asp-route-id="@v.Id">
+                            <button class="btn btn-outline-secondary btn-sm">Set as Default</button>
+                        </form>
+                    }
+
+                    <a asp-action="Edit" asp-route-id="@v.Id" class="btn btn-warning btn-sm">Edit</a>
+
+                    <form method="post" asp-action="DeleteVehicle" asp-route-id="@v.Id" style="display:inline;">
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>

@@ -20,8 +20,6 @@ namespace MVCProject.ITI.DataAccessLayer.Configurations
                     Model = "Corolla",
                     Year = 2023,
                     FuelType = FuelTypeEnum.Gasoline,
-                    WltpCity = 5.5f,
-                    WltpHighway = 4.2f,
                     WltpMixed = 4.9f
                 },
                 new CarModel
@@ -31,8 +29,6 @@ namespace MVCProject.ITI.DataAccessLayer.Configurations
                     Model = "Civic",
                     Year = 2023,
                     FuelType = FuelTypeEnum.Gasoline,
-                    WltpCity = 6.2f,
-                    WltpHighway = 4.8f,
                     WltpMixed = 5.5f
                 }
             );

@@ -27,6 +27,9 @@ public class Program
         //register Services&Repos in IOC container
         builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         builder.Services.AddTransient<IEmailSender, EmailSender>();
+        builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        builder.Services.AddScoped<VehicleService>();
+        builder.Services.AddScoped<CarModelService>();
 
         //Register AutoMapper
         builder.Services.AddAutoMapper(options => options.AddProfile(new DomainProfile()));
