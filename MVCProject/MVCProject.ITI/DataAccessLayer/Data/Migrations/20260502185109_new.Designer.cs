@@ -4,6 +4,7 @@ using MVCProject.ITI.DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,13 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProject.ITI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260502185109_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("ProductVersion", "9.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -42,6 +45,10 @@ namespace MVCProject.ITI.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -93,9 +100,10 @@ namespace MVCProject.ITI.Data.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cefad2d7-0e0c-419e-8026-b9c7a9294a88",
+                            ConcurrencyStamp = "7172a7b9-f986-4fe5-9935-67d1695ab292",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
+                            FullName = "",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TRIPS.COM",
                             NormalizedUserName = "ADMIN@TRIPS.COM",
@@ -114,6 +122,9 @@ namespace MVCProject.ITI.Data.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
+                    b.Property<float?>("BatteryCapacity")
+                        .HasColumnType("real");
+
                     b.Property<int>("FuelType")
                         .HasColumnType("int");
 
@@ -125,10 +136,7 @@ namespace MVCProject.ITI.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("WltpCity")
-                        .HasColumnType("real");
-
-                    b.Property<float>("WltpHighway")
+                    b.Property<float?>("TankCapacity")
                         .HasColumnType("real");
 
                     b.Property<float>("WltpMixed")
@@ -148,8 +156,6 @@ namespace MVCProject.ITI.Data.Migrations
                             FuelType = 0,
                             Make = "Toyota",
                             Model = "Corolla",
-                            WltpCity = 5.5f,
-                            WltpHighway = 4.2f,
                             WltpMixed = 4.9f,
                             Year = 2023
                         },
@@ -159,8 +165,6 @@ namespace MVCProject.ITI.Data.Migrations
                             FuelType = 0,
                             Make = "Honda",
                             Model = "Civic",
-                            WltpCity = 6.2f,
-                            WltpHighway = 4.8f,
                             WltpMixed = 5.5f,
                             Year = 2023
                         });
@@ -175,9 +179,6 @@ namespace MVCProject.ITI.Data.Migrations
 
                     b.Property<float>("ConsumptionRate")
                         .HasColumnType("real");
-
-                    b.Property<int>("DrivingCondation")
-                        .HasColumnType("int");
 
                     b.Property<string>("Unit")
                         .IsRequired()
@@ -197,7 +198,6 @@ namespace MVCProject.ITI.Data.Migrations
                         {
                             Id = new Guid("67890123-4567-8901-2345-678901234567"),
                             ConsumptionRate = 5f,
-                            DrivingCondation = 2,
                             Unit = "L/100km",
                             VehicleId = new Guid("f9b5a7a9-2f22-4a7b-a454-077a28424294")
                         });
@@ -384,12 +384,16 @@ namespace MVCProject.ITI.Data.Migrations
                     b.Property<Guid>("CarModelId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("NickName")
+                    b.Property<string>("ColorHex")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PassengerCapacity")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NickName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -407,8 +411,9 @@ namespace MVCProject.ITI.Data.Migrations
                         {
                             Id = new Guid("f9b5a7a9-2f22-4a7b-a454-077a28424294"),
                             CarModelId = new Guid("13735163-952a-466d-8e7c-87d3dfa7263b"),
+                            ColorHex = "#800000",
+                            IsDefault = false,
                             NickName = "Admin's Corolla",
-                            PassengerCapacity = 5,
                             UserId = new Guid("46686121-d1c1-4796-993d-82d2a45a6660")
                         });
                 });
@@ -506,10 +511,12 @@ namespace MVCProject.ITI.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -552,10 +559,12 @@ namespace MVCProject.ITI.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

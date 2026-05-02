@@ -8,8 +8,10 @@ namespace MVCProject.ITI.Mapper
     {
         public DomainProfile()
         {
-            //CreateMap<Trip,TripViewModel>().ReverseMap();
-
+            CreateMap<Trip, TripCardViewModel>().
+                ForMember(dst => dst.TripTotalCost, options => options.MapFrom(src => src.TripCostResult.TotalCost))
+                .ForMember(dst=>dst.VehicleName,options=>options.MapFrom(src=>src.Vehicle.NickName))
+                .ReverseMap();
         }
     }
 }
