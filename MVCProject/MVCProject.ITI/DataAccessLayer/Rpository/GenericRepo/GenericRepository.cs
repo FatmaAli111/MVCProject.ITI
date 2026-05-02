@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using MVCProject.ITI.DataAccessLayer.Data;
-using System;
 
 namespace MvcProject.iti.DataAccessLayer.Repository.GenericRepo
 {
-    public class GenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly ApplicationDbContext _dbContext;
 
@@ -14,7 +13,7 @@ namespace MvcProject.iti.DataAccessLayer.Repository.GenericRepo
             _dbContext = dbContext;
         }
 
-        public virtual T GetById(int id)
+        public virtual T GetById(Guid id)
         {
             return _dbContext.Set<T>().Find(id);
         }
@@ -63,6 +62,7 @@ namespace MvcProject.iti.DataAccessLayer.Repository.GenericRepo
         {
             _dbContext.SaveChanges();
         }
+
         public IDbContextTransaction BeginTransaction()
         {
             return _dbContext.Database.BeginTransaction();
@@ -77,5 +77,6 @@ namespace MvcProject.iti.DataAccessLayer.Repository.GenericRepo
         {
             _dbContext.Database.RollbackTransaction();
         }
+        
     }
 }

@@ -23,7 +23,6 @@ namespace MVCProject.ITI.DataAccessLayer.Configurations
                 {
                     Id = Guid.Parse("67890123-4567-8901-2345-678901234567"),
                     VehicleId = Guid.Parse("f9b5a7a9-2f22-4a7b-a454-077a28424294"),
-                    DrivingCondation = DrivingCondationEnum.Mixed,
                     ConsumptionRate = 5.0f,
                     Unit = "L/100km"
                 }

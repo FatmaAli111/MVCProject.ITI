@@ -28,7 +28,6 @@ namespace MVCProject.ITI.DataAccessLayer.Configurations
                     UserId = Guid.Parse("46686121-d1c1-4796-993d-82d2a45a6660"),
                     CarModelId = Guid.Parse("13735163-952a-466d-8e7c-87d3dfa7263b"),
                     NickName = "Admin's Corolla",
-                    PassengerCapacity = 5
                 }
             );
         }
