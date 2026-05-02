@@ -1,8 +1,11 @@
-﻿
+﻿@{
+    Layout = "~/Views/Trip/_TripLayout.cshtml";
+    ViewData["Title"] = "Trip Complete";
+}
 <div class="page active" id="page-trip">
     <div class="topbar">
         <div class="tb-left">
-            <button class="back-btn" onclick="showHistory()">
+            <button class="back-btn" onclick="window.location='/Trip/History'">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
             <div class="tb-title">
@@ -32,7 +35,7 @@
             </div>
             <div class="hc-amount">EGP 352</div>
             <div class="hc-row">
-                <button class="plan-btn" onclick="showHistory()">
+                <button class="plan-btn" onclick="window.location='/Trip/History'">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
                     Plan Another Trip
                 </button>
