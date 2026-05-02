@@ -1,0 +1,469 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Create Account";
+    Layout = "/Views/Shared/_AppLayout.cshtml";
+}
+
+@section Styles {
+    <style>
+        .auth-bg {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .auth-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .auth-orb-1 {
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(20,184,166,0.30), transparent);
+            top: 80px;
+            left: 40px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .auth-orb-2 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(251,191,36,0.25), transparent);
+            bottom: 80px;
+            right: 40px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        .auth-orb-3 {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(13,148,136,0.12), transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            filter: blur(80px);
+            animation: pulse-glow 6s ease-in-out infinite;
+        }
+
+        .auth-main {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        .auth-inner {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .auth-logo-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-logo-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #fff;
+            position: relative;
+            box-shadow: 0 0 40px -10px rgba(20,184,166,0.5);
+        }
+
+            .auth-logo-icon .sparkle-badge {
+                position: absolute;
+                top: -6px;
+                right: -6px;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: var(--accent);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                box-shadow: 0 4px 12px rgba(251,191,36,0.5);
+            }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+            .auth-title h1 {
+                font-size: 1.9rem;
+                font-weight: 900;
+                color: var(--foreground);
+                margin-bottom: 0.25rem;
+            }
+
+            .auth-title p {
+                font-size: 0.9rem;
+                color: var(--muted-fg);
+            }
+
+        .auth-card {
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.65);
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(13,148,136,0.15);
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 6px;
+            background: var(--secondary);
+            border-radius: 14px;
+            padding: 6px;
+            margin-bottom: 1.75rem;
+        }
+
+        .auth-tab-btn {
+            flex: 1;
+            padding: 11px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            background: transparent;
+            color: var(--muted-fg);
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+            .auth-tab-btn.active {
+                color: #fff !important;
+                box-shadow: 0 4px 14px rgba(13,148,136,0.35);
+            }
+
+            .auth-tab-btn:not(.active):hover {
+                color: var(--foreground);
+            }
+
+        .input-field-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon-box {
+            position: absolute;
+            left: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(13,148,136,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: var(--primary);
+            transition: background var(--transition);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .input-wrapper:focus-within .input-icon-box {
+            background: rgba(13,148,136,0.18);
+        }
+
+        .st-input {
+            width: 100%;
+            height: 52px;
+            padding: 0 1rem 0 60px;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            color: var(--foreground);
+            transition: border-color var(--transition), box-shadow var(--transition);
+            font-family: inherit;
+        }
+
+            .st-input::placeholder {
+                color: var(--muted-fg);
+            }
+
+            .st-input:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(13,148,136,0.12);
+                background: rgba(255,255,255,0.95);
+            }
+
+            .st-input.with-toggle {
+                padding-right: 52px;
+            }
+
+        .input-toggle-btn {
+            position: absolute;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: var(--muted-fg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            transition: all var(--transition);
+            z-index: 2;
+        }
+
+            .input-toggle-btn:hover {
+                background: var(--secondary);
+                color: var(--foreground);
+            }
+
+        .st-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: 0.4rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition), box-shadow var(--transition);
+            margin-top: 0.5rem;
+        }
+
+            .btn-submit:hover {
+                transform: translateY(-2px) scale(1.02);
+                box-shadow: 0 12px 28px rgba(13,148,136,0.45);
+            }
+
+            .btn-submit:active {
+                transform: scale(0.97);
+            }
+
+        .benefits-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            color: var(--muted-fg);
+        }
+
+            .benefit-item .bi {
+                color: var(--primary);
+                font-size: 13px;
+            }
+
+        /* Validation */
+        .field-validation-error {
+            color: #dc2626;
+            font-size: 0.78rem;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .input-validation-error {
+            border-color: #dc2626 !important;
+        }
+
+        .validation-summary-errors ul {
+            background: rgba(220,38,38,0.07);
+            border: 1px solid rgba(220,38,38,0.25);
+            border-radius: 10px;
+            padding: 0.7rem 1rem 0.7rem 2rem;
+            color: #b91c1c;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+}
+
+<div class="auth-bg mesh-gradient">
+    <!-- Orbs -->
+    <div class="auth-orb auth-orb-1"></div>
+    <div class="auth-orb auth-orb-2"></div>
+    <div class="auth-orb auth-orb-3"></div>
+
+    <div class="auth-main">
+        <div class="auth-inner fade-up">
+
+            <!-- Logo -->
+            <div class="auth-logo-wrap">
+                <div class="auth-logo-icon gradient-bg">
+                    <i class="bi bi-car-front-fill"></i>
+                    <div class="sparkle-badge">
+                        <i class="bi bi-stars" style="font-size:11px; color:#3d2e05;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <div class="auth-title">
+                <h1>Join Us Today</h1>
+                <p>Create your account in seconds</p>
+            </div>
+
+            <!-- Card -->
+            <div class="auth-card">
+
+                <!-- Tab switcher -->
+                <div class="auth-tabs">
+                    <a asp-area="Identity" asp-page="/Account/Login"
+                       class="auth-tab-btn">Login</a>
+                    <a asp-area="Identity" asp-page="/Account/Register"
+                       class="auth-tab-btn active gradient-bg">Register</a>
+                </div>
+
+                <!-- Validation summary -->
+                <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
+                <!-- Form -->
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                    <div class="input-field-group">
+                        <label asp-for="Input.FullName" class="st-label">Full Name</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <input asp-for="Input.FullName"
+                                   class="st-input"
+                                   autocomplete="name"
+                                   placeholder="John Doe" />
+                        </div>
+                        <span asp-validation-for="Input.FullName" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="input-field-group">
+                        <label asp-for="Input.Email" class="st-label">Email Address</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <input asp-for="Input.Email"
+                                   class="st-input"
+                                   autocomplete="username"
+                                   placeholder="you@example.com" />
+                        </div>
+                        <span asp-validation-for="Input.Email" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="input-field-group">
+                        <label asp-for="Input.Password" class="st-label">Password</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box">
+                                <i class="bi bi-lock-fill"></i>
+                            </div>
+                            <input asp-for="Input.Password"
+                                   id="regPassword"
+                                   type="password"
+                                   class="st-input with-toggle"
+                                   autocomplete="new-password"
+                                   placeholder="Enter your password" />
+                            <button type="button" class="input-toggle-btn" onclick="togglePwd('regPassword', this)">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="Input.Password" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="input-field-group">
+                        <label asp-for="Input.ConfirmPassword" class="st-label">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box">
+                                <i class="bi bi-lock-fill"></i>
+                            </div>
+                            <input asp-for="Input.ConfirmPassword"
+                                   id="regConfirmPassword"
+                                   type="password"
+                                   class="st-input with-toggle"
+                                   autocomplete="new-password"
+                                   placeholder="Confirm your password" />
+                            <button type="button" class="input-toggle-btn" onclick="togglePwd('regConfirmPassword', this)">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="Input.ConfirmPassword" class="field-validation-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn-submit gradient-bg">
+                        Create Account
+                        <div class="shimmer"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Benefits row -->
+            <div class="benefits-row fade-up delay-3">
+                <div class="benefit-item">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    <span>Instant cost analysis</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-shield-fill-check"></i>
+                    <span>Secure &amp; private</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-rocket-fill"></i>
+                    <span>AI-powered insights</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function togglePwd(id, btn) {
+            const input = document.getElementById(id);
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            btn.querySelector('i').className = isHidden ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill';
+        }
+    </script>
+}
