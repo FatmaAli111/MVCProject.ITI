@@ -15,8 +15,8 @@
         public string Model { get; set; } = string.Empty;
         public int Year { get; set; }
         public float WltpMixed { get; set; }
-        public float TankCapacity { get; set; }
-        public float BatteryCapacity { get; set; }
+        public float? TankCapacity { get; set; } 
+        public float? BatteryCapacity { get; set; } 
 
         // Relationships ***********
         public FuelTypeEnum FuelType { get; set; }

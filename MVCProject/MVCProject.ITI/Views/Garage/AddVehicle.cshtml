@@ -99,18 +99,23 @@
         document.addEventListener("DOMContentLoaded", function () {
 
             function updateFuelUI() {
-                let fuel = document.getElementById("FuelType").value;
-
-                let tankDiv = document.getElementById("TankCapacity").closest(".col-md-6");
-                let batteryDiv = document.getElementById("batterySection");
-
-                if (fuel === "Electric") {
-                    tankDiv.style.display = "none";
-                    batteryDiv.style.display = "block";
-                } else {
-                    tankDiv.style.display = "block";
-                    batteryDiv.style.display = "none";
-                }
+             let fuel = document.getElementById("FuelType").value;
+             
+             let tankDiv = document.getElementById("TankCapacity").closest(".col-md-6");
+             let batteryDiv = document.getElementById("batterySection");
+             
+             if (fuel === "Gasoline" || fuel === "Diesel") {
+              tankDiv.style.display = "block";
+              batteryDiv.style.display = "none";
+              }
+             else if (fuel === "Electric") {
+             tankDiv.style.display = "none";
+             batteryDiv.style.display = "block";
+             }
+              else if (fuel === "Hybrid") {
+              tankDiv.style.display = "block";
+              batteryDiv.style.display = "block";
+        }
             }
 
             document.getElementById("FuelType").addEventListener("change", updateFuelUI);

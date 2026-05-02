@@ -18,7 +18,6 @@ public class VehicleService
                            .ToList();
     }
 
-    // ✔ GetById باستخدام Guid
     public Vehicle GetById(Guid id)
     {
         return _vehicleRepo.GetById(id);
@@ -36,7 +35,6 @@ public class VehicleService
         _vehicleRepo.SaveChanges();
     }
 
-    // ✔ Delete باستخدام Guid بدل Vehicle
     public void Delete(Guid id)
     {
         var vehicle = _vehicleRepo.GetById(id);
@@ -48,7 +46,6 @@ public class VehicleService
     }
     public void SetDefaultVehicle(Guid vehicleId, Guid userId)
     {
-        // 1) شيل الـ Default من كل العربيات بتاعة نفس اليوزر
         var userVehicles = _vehicleRepo.GetTableNoTracking()
                                        .Where(v => v.UserId == userId)
                                        .ToList();
@@ -59,7 +56,6 @@ public class VehicleService
             _vehicleRepo.Update(v);
         }
 
-        // 2) خلي العربية المختارة Default
         var selectedVehicle = _vehicleRepo.GetById(vehicleId);
         selectedVehicle.IsDefault = true;
 

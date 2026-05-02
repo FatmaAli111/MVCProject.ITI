@@ -11,10 +11,10 @@ namespace MVCProject.ITI.ViewModels
         public int Year { get; set; }
         public string ColorHex { get; set; } = "#800000";
         public float WltpMixed { get; set; }
-        public float TankCapacity { get; set; }
+        public float? TankCapacity { get; set; }
         public Guid VehicleId { get; set; }
         public Guid CarModelId { get; set; }
-        public float BatteryCapacity { get; set; }
+        public float? BatteryCapacity { get; set; }
         public FuelTypeEnum FuelType { get; set; }
 
     }

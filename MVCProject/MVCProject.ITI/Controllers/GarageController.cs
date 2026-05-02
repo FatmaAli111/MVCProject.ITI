@@ -45,7 +45,8 @@ public class GarageController : Controller
             Year = vm.Year,
             FuelType = vm.FuelType,
             WltpMixed = vm.WltpMixed,
-            TankCapacity = vm.TankCapacity
+            TankCapacity = vm.TankCapacity,
+            BatteryCapacity = vm.BatteryCapacity
         };
 
         _carModelService.Add(model);
@@ -102,6 +103,8 @@ public class GarageController : Controller
         model.FuelType = vm.FuelType;
         model.WltpMixed = vm.WltpMixed;
         model.TankCapacity = vm.TankCapacity;
+        model.BatteryCapacity = vm.BatteryCapacity;
+ 
 
         _carModelService.Update(model);
 
