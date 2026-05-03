@@ -10,8 +10,9 @@ namespace MVCProject.ITI.DataAccessLayer.Entities
         public Guid UserId { get; set; } = Guid.Empty;
         public Guid CarModelId { get; set; } = Guid.Empty;
         public string NickName { get; set; } = string.Empty;
-        
-        public int PassengerCapacity { get; set; }
+        public string ColorHex { get; set; } = "#800000";
+        public bool IsDefault { get; set; }
+
 
         // Relationships ***********
         public ApplicationUser User { get; set; } = null!;

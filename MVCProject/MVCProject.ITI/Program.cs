@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using MvcProject.iti.DataAccessLayer.Repository.GenericRepo;
 using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
 using MVCProject.ITI.DataAccessLayer.Rpository.TripRepo;
+
+using MVCProject.ITI.Services;
 using MVCProject.ITI.Mapper;
 using MVCProject.ITI.Serviceslayer;
 
@@ -30,6 +33,10 @@ public class Program
         //register Services&Repos in IOC container
         builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         builder.Services.AddScoped<ITripRepo,TripRepo>();
+        builder.Services.AddTransient<IEmailSender, EmailSender>();
+        builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        builder.Services.AddScoped<VehicleService>();
+        builder.Services.AddScoped<CarModelService>();
 
         //Register AutoMapper
         builder.Services.AddAutoMapper(options => options.AddProfile(new DomainProfile()));
