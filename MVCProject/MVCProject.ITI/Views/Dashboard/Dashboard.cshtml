@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<TripCardViewModel>
 @{
     Layout = "_AppLayout";
 
@@ -112,9 +112,9 @@
         </div>
 
         <div class="d-flex flex-column gap-1 mt-2">
-            @for (int i = 0; i < 3; i++)
+            @foreach(var i in Model)
             {
-                @Html.Partial("_RecentTripCardPartial")
+                @Html.Partial("_RecentTripCardPartial",i)
             }
         </div>
 </div>  <!-- ✅ أقفلي الـ container-fluid هنا -->
