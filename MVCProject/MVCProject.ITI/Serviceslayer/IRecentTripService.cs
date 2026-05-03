@@ -5,6 +5,6 @@ namespace MVCProject.ITI.Serviceslayer
 {
     public interface IRecentTripService
     {
-        Task<IEnumerable<TripCardViewModel>> GetRecentTrips();
+        Task<IEnumerable<TripCardViewModel>> GetRecentTrips(Guid id);
     }
 }

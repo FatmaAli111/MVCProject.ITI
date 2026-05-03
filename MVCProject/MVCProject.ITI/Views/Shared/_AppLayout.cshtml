@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+ 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Smart Trip</title>
@@ -10,10 +11,15 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Garage,analytics.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> 
+     <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+   <link rel="stylesheet" href="~/css/Garage,analytics.css" asp-append-version="true" /> 
     @await RenderSectionAsync("Styles", required: false)
+    <style>
+        input {
+            background-color: #ffffff !important;
+        }
+    </style>
 </head>
 <body>
 
