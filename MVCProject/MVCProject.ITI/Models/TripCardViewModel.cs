@@ -1,4 +1,5 @@
-﻿using MVCProject.ITI.DataAccessLayer.Entities;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace MVCProject.ITI.Models
 {
@@ -9,6 +10,7 @@ namespace MVCProject.ITI.Models
 
         public float DistanceKm { get; set; }
         public int DurationMinutes { get; set; }
+        [DataType(DataType.Date)]
         public DateTime TripDate { get; set; }
         public string VehicleName { get; set; } 
         public float TripTotalCost { get; set; } 
