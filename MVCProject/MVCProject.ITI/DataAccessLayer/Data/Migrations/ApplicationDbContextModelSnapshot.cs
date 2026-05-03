@@ -721,4 +721,6 @@ namespace MVCProject.ITI.Data.Migrations
 #pragma warning restore 612, 618
         }
     }
+
 }
+

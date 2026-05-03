@@ -4,6 +4,9 @@
 
     // ViewData["IsDashboard"] = "Dashboard";
 }
+@section Styles{
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+}
 
 <body>
 
@@ -24,16 +27,27 @@
         <div class="user-chip">
             <div class="chip-avatar">T</div>
             <div class="chip-info">
-                <div class="chip-name">Toyota Corolla</div>
-                <div class="chip-sub">2019 · 45L · Gasoline</div>
+                @if (ViewBag.Vehicle != null)
+                {
+                    <div class="chip-name">@ViewBag.Vehicle.NickName</div>
+                    <div class="chip-sub">@ViewBag.Vehicle.NickName</div>
+                }
+                else
+                {
+                    <div class="chip-name">No Vehicle</div>
+                    <div class="chip-sub">Add a vehicle</div>
+                }
             </div>
         </div>
+        <a asp-controller="Dashboard" asp-action="StartNewTrip" class="text-decoration-none">
 
         <div class="start-bar">
             <i class="bi bi-plus-circle-fill"></i>
             <span>Start New Trip</span>
             <i class="bi bi-chevron-right arrow-icon"></i>
         </div>
+        <</a>
+
     </div>
 
     <!-- Nav Tabs -->
@@ -112,10 +126,19 @@
         </div>
 
         <div class="d-flex flex-column gap-1 mt-2">
+            @if (!Model.Any())
+            {
+                <div style="text-align: center; margin-top: 20px;">
+                    <p>No trips yet, start your first trip!</p>
+                </div>
+            }
+            else
+            {
             @foreach(var i in Model)
             {
                 @Html.Partial("_RecentTripCardPartial",i)
             }
+}
         </div>
 </div>  <!-- ✅ أقفلي الـ container-fluid هنا -->
 
@@ -130,9 +153,9 @@
 
     <!-- Bottom Nav -->
     <div class="bottom-nav">
-        <button class="bnav-btn"><i class="bi bi-grid-fill"></i> Garage</button>
-        <button class="bnav-btn active"><i class="bi bi-plus-circle-fill"></i> New Trip</button>
-        <button class="bnav-btn"><i class="bi bi-bar-chart-fill"></i> Stats</button>
+        <a class="bnav-btn" asp-controller="Garage" asp-action="Garage"><i class="bi bi-grid-fill"></i> Garage</a>
+        <a class="bnav-btn active" asp-action="StartNewTrip"><i class="bi bi-plus-circle-fill"></i> New Trip</a>
+        <a class="bnav-btn" asp-controller="Analytics" asp-action="Analytics"><i class="bi bi-bar-chart-fill"></i> Stats</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

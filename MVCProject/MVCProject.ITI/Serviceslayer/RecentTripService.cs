@@ -17,13 +17,19 @@ namespace MVCProject.ITI.Serviceslayer
             _tripRepo = tripRepo;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<TripCardViewModel>> GetRecentTrips()
+        public async Task<IEnumerable<TripCardViewModel>> GetRecentTrips(Guid id)
         {
-            IEnumerable<Trip> RecentTrips =await _tripRepo.GetTripsWithVehicleAndCostResult();
-            if (!RecentTrips.Any())
+            if (id == Guid.Empty)
+                throw new ArgumentException("Invalid user ID");
+
+            IEnumerable<Trip> recentTrips = await _tripRepo.GetTripsWithVehicleAndCostResult(id);
+          
+            if (!recentTrips.Any())
                 return Enumerable.Empty<TripCardViewModel>();
-             IEnumerable<TripCardViewModel> RecentTripsVM = _mapper.Map<IEnumerable<TripCardViewModel>>(RecentTrips);
-            return RecentTripsVM;
+             IEnumerable<TripCardViewModel> recentTripsVM = _mapper.Map<IEnumerable<TripCardViewModel>>(recentTrips);
+            return recentTripsVM;
         }
+
+      
     }
 }

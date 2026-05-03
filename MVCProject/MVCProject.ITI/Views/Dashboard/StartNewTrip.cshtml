@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "_AppLayout";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/NewTrip.css" />
+}
+
+<div class="page">
+
+    <div class="card">
+        <div class="loc-label">From</div>
+        <div class="location-row">
+            <span class="loc-dot green"></span>
+            <input class="loc-input" placeholder="Starting location" autocomplete="off" />
+        </div>
+        <div class="loc-connector"><div class="loc-line"></div></div>
+        <div class="loc-label">To</div>
+        <div class="location-row">
+            <span class="loc-dot red"></span>
+            <input class="loc-input" placeholder="Destination" autocomplete="off" />
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-label">When do you want to leave?</div>
+        <div class="toggle-row">
+            <button type="button" class="toggle-btn active" id="btnLeaveNow" onclick="setLeaveNow()">
+                <i class="bi bi-clock"></i> Leave Now
+            </button>
+            <button type="button" class="toggle-btn" id="btnSchedule" onclick="setSchedule()">
+                <i class="bi bi-calendar3"></i> Schedule
+            </button>
+        </div>
+        <div class="schedule-input" id="scheduleInput">
+            <input type="datetime-local" />
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="vehicle-row" onclick="toggleVehicle()">
+            <div class="vehicle-icon"><i class="bi bi-car-front-fill"></i></div>
+            <div class="vehicle-info">
+                <div class="vehicle-name">Daily Driver</div>
+                <div class="vehicle-sub">Toyota Corolla • 8.5 L/100km</div>
+            </div>
+            <i class="bi bi-chevron-down chevron" id="vehicleChevron"></i>
+        </div>
+    </div>
+
+    <div class="smart-card">
+        <div class="smart-icon"><i class="bi bi-stars"></i></div>
+        <div class="smart-info">
+            <h4>Smart Trip Analysis</h4>
+            <p>Get route comparison, best time to travel &amp; ride-share comparison</p>
+        </div>
+    </div>
+
+    <div class="section-title">Popular Destinations</div>
+    <div class="chips">
+        <div class="chip" onclick="setDest(this)"><i class="bi bi-geo-alt-fill"></i><span>Cairo</span></div>
+        <div class="chip" onclick="setDest(this)"><i class="bi bi-geo-alt-fill"></i><span>Alexandria</span></div>
+        <div class="chip" onclick="setDest(this)"><i class="bi bi-geo-alt-fill"></i><span>Giza</span></div>
+        <div class="chip" onclick="setDest(this)"><i class="bi bi-geo-alt-fill"></i><span>Sharm El Sheikh</span></div>
+        <div class="chip" onclick="setDest(this)"><i class="bi bi-geo-alt-fill"></i><span>Hurghada</span></div>
+        <div class="chip" onclick="setDest(this)"><i class="bi bi-geo-alt-fill"></i><span>Luxor</span></div>
+    </div>
+
+</div>
+
+<div class="compare-bar">
+    <button class="compare-btn"><i class="bi bi-arrow-left-right"></i> Compare Routes</button>
+</div>
+
+<script>
+    function setLeaveNow() { document.getElementById('btnLeaveNow').classList.add('active'); document.getElementById('btnSchedule').classList.remove('active'); document.getElementById('scheduleInput').classList.remove('show'); }
+    function setSchedule() { document.getElementById('btnSchedule').classList.add('active'); document.getElementById('btnLeaveNow').classList.remove('active'); document.getElementById('scheduleInput').classList.add('show'); }
+    function toggleVehicle() { const ch = document.getElementById('vehicleChevron'); ch.className = ch.className.includes('down') ? 'bi bi-chevron-up chevron' : 'bi bi-chevron-down chevron'; }
+    function setDest(el) { document.querySelectorAll('.loc-input')[1].value = el.querySelector('span').textContent; }
+</script>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}

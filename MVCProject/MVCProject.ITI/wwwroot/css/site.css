@@ -24,7 +24,7 @@
     --accent: #fbbf24;
     --accent-fg: #3d2e05;
     --border: #dde8e8;
-    --input-bg: #eaf0f0;
+    --input-bg: #ffffff;
     --radius: 0.75rem;
     --shadow-sm: 0 2px 8px rgba(13,148,136,0.08);
     --shadow-md: 0 8px 24px rgba(13,148,136,0.12);
@@ -789,4 +789,7 @@ a {
         font-size: 40px;
     }
 }
-
+.page .card {
+    --bs-card-bg: #ffffff;
+    background-color: #ffffff;
+}
