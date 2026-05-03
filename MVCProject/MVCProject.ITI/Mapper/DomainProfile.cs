@@ -11,6 +11,7 @@ namespace MVCProject.ITI.Mapper
             CreateMap<Trip, TripCardViewModel>().
                 ForMember(dst => dst.TripTotalCost, options => options.MapFrom(src => src.TripCostResult.TotalCost))
                 .ForMember(dst=>dst.VehicleName,options=>options.MapFrom(src=>src.Vehicle.NickName))
+                .ForMember(dst => dst.TripDate,options=>options.MapFrom(src=>src.TripDate.Date))
                 .ReverseMap();
         }
     }

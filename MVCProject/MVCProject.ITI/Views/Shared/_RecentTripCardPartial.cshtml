@@ -5,7 +5,7 @@
     </div>
     <div class="trip-info">
         <div class="trip-route">@Model.OriginName <span class="via">to</span> @Model.DestinationName</div>
-        <div class="trip-meta">@Model.TripDate &nbsp;·&nbsp; @Model.DistanceKm km &nbsp;·&nbsp; @Model.VehicleName</div>
+        <div class="trip-meta">@Model.TripDate.ToString("yyyy-MM-dd") &nbsp;·&nbsp; @Model.DistanceKm km &nbsp;·&nbsp; @Model.VehicleName</div>
     </div>
     <div class="trip-status-area">
         <div class="trip-price">EGP @Model.TripTotalCost</div>
