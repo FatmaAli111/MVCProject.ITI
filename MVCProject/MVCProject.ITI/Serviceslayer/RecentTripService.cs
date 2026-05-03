@@ -29,5 +29,7 @@ namespace MVCProject.ITI.Serviceslayer
              IEnumerable<TripCardViewModel> recentTripsVM = _mapper.Map<IEnumerable<TripCardViewModel>>(recentTrips);
             return recentTripsVM;
         }
+
+      
     }
 }

@@ -77,3 +77,6 @@
     function toggleVehicle() { const ch = document.getElementById('vehicleChevron'); ch.className = ch.className.includes('down') ? 'bi bi-chevron-up chevron' : 'bi bi-chevron-down chevron'; }
     function setDest(el) { document.querySelectorAll('.loc-input')[1].value = el.querySelector('span').textContent; }
 </script>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}
