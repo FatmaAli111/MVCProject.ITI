@@ -29,6 +29,11 @@ public class Program
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddRazorPages();
+        builder.Services.AddControllersWithViews()
+    .AddViewOptions(options =>
+    {
+        options.HtmlHelperOptions.ClientValidationEnabled = true;
+    });
 
         //register Services&Repos in IOC container
         builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));

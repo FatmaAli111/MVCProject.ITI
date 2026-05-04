@@ -234,12 +234,6 @@ body {
   gap: 0.9rem;
 }
 
-.vehicle-card {
-  background: #fff;
-  border: 1px solid #dde6ea;
-  border-radius: 14px;
-}
-
 .vehicle-card-body {
   border-left: 6px solid transparent;
   padding: 1rem 1.1rem;
@@ -279,12 +273,6 @@ body {
   border-radius: 12px;
   padding: 0.1rem 0.45rem;
   vertical-align: middle;
-}
-
-.vehicle-actions {
-  color: #4b5563;
-  font-size: 0.9rem;
-  white-space: nowrap;
 }
 
 .vehicle-form-card {
@@ -347,44 +335,27 @@ body {
   }
 }
 
-.vehicle-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.default-badge {
-    background: #10b981;
-    color: white;
-    padding: 3px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-}
-
-.vehicle-info p {
-    margin: 0;
-    color: #555;
-}
-
-.vehicle-actions {
-    margin-top: 12px;
-    display: flex;
-    gap: 8px;
-}
 .vehicle-card {
     background: #fff;
     padding: 18px;
-    border-radius: 12px;
+    border-radius: 14px;
     margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: row;
     align-items: stretch;
     gap: 15px;
+    border: 1px solid #e5e7eb;
+    transition: 0.25s ease;
 }
 
+    .vehicle-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    }
+
 .color-strip {
-    width: 8px;
+    width: 10px;
     border-radius: 999px;
     align-self: stretch;
 }
@@ -393,11 +364,121 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-right: 5px;
+}
+
+.vehicle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .vehicle-header h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+.default-badge {
+    background: #10b981;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.vehicle-info p {
+    margin: 3px 0;
+    color: #555;
+    font-size: 0.9rem;
 }
 
 .vehicle-actions {
     margin-top: auto;
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
+    gap: 10px;
 }
+
+    .vehicle-actions button,
+    .vehicle-actions a {
+        background: #f3f4f6;
+        border: none;
+        padding: 10px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .vehicle-actions button:hover,
+        .vehicle-actions a:hover {
+            background: #e5e7eb;
+        }
+  
+.icon-btn {
+    background: #f3f4f6;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #374151;
+}
+
+    .icon-btn:hover {
+        background: #e5e7eb;
+    }
+
+    .icon-btn.edit {
+        background: #fef3c7;
+        color: #b45309;
+    }
+
+        .icon-btn.edit:hover {
+            background: #fde68a;
+        }
+
+    .icon-btn.delete {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+
+        .icon-btn.delete:hover {
+            background: #fecaca;
+        }
+
+    .icon-btn.default {
+        background: #e0fdf5;
+        color: #0d9488;
+    }
+
+  .icon-btn.default:hover {
+     background: #befae8;
+   }
+.vehicle-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 22px;
+    color: #374151;
+    flex-shrink: 0;
+    transition: 0.2s ease;
+}
+
+    .vehicle-icon:hover {
+        background: #e5e7eb;
+    }

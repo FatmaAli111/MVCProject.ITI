@@ -51,20 +51,23 @@
     </div>
 
     <!-- Nav Tabs -->
-    <div class="nav-tabs-custom">
-        <button class="nav-tab active"  data-tab="analytics">
-            <div class="tab-icon" style="background:linear-gradient(135deg,#7c3aed,#6025c4)">
-                <i class="bi bi-graph-up-arrow"></i>
-            </div>
-            Analytics
-        </button>
-        <button class="nav-tab" asp-controller="Vehicle" asp-action="AddVehicle" data-tab="garage">
-            <div class="tab-icon" style="background:linear-gradient(135deg,#f97316,#ea6c0b)">
-                <i class="bi bi-car-front-fill"></i>
-            </div>
-            <span class="tab-dot"></span>
-            Garage
-        </button>
+        <div class="nav-tabs-custom">
+
+            <a class="nav-tab active" asp-controller="Analytics" asp-action="Analytics" data-tab="analytics">
+                <div class="tab-icon" style="background:linear-gradient(135deg,#7c3aed,#6025c4)">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+                Analytics
+            </a>
+
+            <a class="nav-tab" asp-controller="Garage" asp-action="Garage" data-tab="garage">
+                <div class="tab-icon" style="background:linear-gradient(135deg,#f97316,#ea6c0b)">
+                    <i class="bi bi-car-front-fill"></i>
+                </div>
+                <span class="tab-dot"></span>
+                Garage
+            </a>
+
         <button class="nav-tab" data-tab="history">
             <div class="tab-icon" style="background:linear-gradient(135deg,#0ea5e9,#0390cf)">
                 <i class="bi bi-clock-history"></i>
