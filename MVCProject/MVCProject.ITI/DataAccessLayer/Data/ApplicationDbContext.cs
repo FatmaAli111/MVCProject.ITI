@@ -53,5 +53,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         builder.Entity<IdentityUserRole<Guid>>().HasData(
             new IdentityUserRole<Guid> { UserId = Guid.Parse("46686121-d1c1-4796-993d-82d2a45a6660"), RoleId = adminRoleId }
         );
+
+        // Seed CarModel Data
+        CarModelSeedData.Seed(builder);
     }
 }
