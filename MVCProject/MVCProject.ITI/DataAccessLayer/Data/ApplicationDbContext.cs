@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using MVCProject.ITI.DataAccessLayer.Entities;
-using System.Security.Principal;
 
 namespace MVCProject.ITI.DataAccessLayer.Data;
 
@@ -47,11 +46,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         builder.Entity<IdentityRole<Guid>>().HasData(
             new IdentityRole<Guid> { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
             new IdentityRole<Guid> { Id = userRoleId, Name = "User", NormalizedName = "USER" }
-        );
-
-        // Seed UserRole (Assign Admin to Admin User)
-        builder.Entity<IdentityUserRole<Guid>>().HasData(
-            new IdentityUserRole<Guid> { UserId = Guid.Parse("46686121-d1c1-4796-993d-82d2a45a6660"), RoleId = adminRoleId }
         );
     }
 }
