@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MVCProject.ITI.DataAccessLayer.Entities;
-using MvcProject.iti.DataAccessLayer.Repository.GenericRepo;
-using MVCProject.ITI.Serviceslayer;
-using MVCProject.ITI.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using MvcProject.iti.DataAccessLayer.Repository.GenericRepo;
+using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Models;
+using MVCProject.ITI.Serviceslayer;
 
 namespace MVCProject.ITI.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IRecentTripService _recentTripService;
@@ -28,7 +30,7 @@ namespace MVCProject.ITI.Controllers
             {
                 ApplicationUser user = await _userManager.GetUserAsync(User);
                 if (user is null)
-                    return RedirectToPage("/Account/Login", new { area = "Identity" });
+                    return Redirect("/Identity/Account/Login");
 
                 Guid id = user.Id;
                 ViewBag.Vehicle = _vechileService.GetById(id);
