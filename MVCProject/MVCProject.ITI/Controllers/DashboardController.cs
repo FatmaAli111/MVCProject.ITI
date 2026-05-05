@@ -31,7 +31,7 @@ namespace MVCProject.ITI.Controllers
                     return RedirectToPage("/Account/Login", new { area = "Identity" });
 
                 Guid id = user.Id;
-                ViewBag.Vehicle = _vechileService.GetById(id);
+                ViewBag.Vehicle =await _vechileService.GetDefaultVehicleAsync(id);
 
                 IEnumerable<TripCardViewModel> RecentTrips = await _recentTripService.GetRecentTrips(id);
                 return View(RecentTrips);
@@ -41,9 +41,25 @@ namespace MVCProject.ITI.Controllers
                 return RedirectToAction("Error","Home",ex.Message);
             }
         }
-        public IActionResult StartNewTrip()
+        public async Task<IActionResult> StartNewTripAsync()
         {
-            return View();
+            try
+            {
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                if (user is null)
+                    return RedirectToPage("/Account/Login", new { area = "Identity" });
+
+                Guid id = user.Id;
+                ViewBag.Vehicle =await _vechileService.GetDefaultVehicleAsync(id);
+
+                IEnumerable<TripCardViewModel> AllTrips = await _recentTripService.GetAllTrips();
+                ViewData["AllTrips"] = AllTrips;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", ex.Message);
+            }
         }
     }
 }
