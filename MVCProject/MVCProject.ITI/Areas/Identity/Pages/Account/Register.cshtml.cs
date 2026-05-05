@@ -65,6 +65,11 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [Phone]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -94,6 +99,7 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.FullName = Input.FullName;
+                user.PhoneNumber = Input.PhoneNumber;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -109,7 +115,6 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    // Try to send email — never crash the registration if it fails
                     try
                     {
                         await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
@@ -120,12 +125,10 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
                     catch (Exception ex)
                     {
                         _logger.LogError(ex, "Failed to send confirmation email to {Email}", Input.Email);
-                        // Continue — user was created, just email failed
                     }
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        // Redirect to a styled "check your email" page
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
@@ -137,7 +140,10 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
 
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    var message = error.Code == "DuplicateUserName"
+                        ? $"Email '{Input.Email}' is already registered. Please log in or use a different email."
+                        : error.Description;
+                    ModelState.AddModelError(string.Empty, message);
                 }
             }
 
