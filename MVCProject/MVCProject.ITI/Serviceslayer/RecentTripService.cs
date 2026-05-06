@@ -24,6 +24,7 @@ namespace MVCProject.ITI.Serviceslayer
             IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> AllTrips =
                 _tripRepo.GetTableNoTracking();
 
+
             if (!AllTrips.Any())
                 return Enumerable.Empty<TripCardViewModel>();
             IEnumerable<TripCardViewModel> recentTripsVM = _mapper.Map<IEnumerable<TripCardViewModel>>(AllTrips);

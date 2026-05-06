@@ -162,31 +162,38 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const formData = new FormData(vehicleForm);
-            const data = Object.fromEntries(formData.entries());
-            data.WltpMixed = parseFloat(data.WltpMixed);
-            data.Year = parseInt(data.Year);
-            data.PassengerCapacity = parseInt(data.PassengerCapacity);
-            data.IsOverride = isOverrideInput.value === 'true';
+            const params = new URLSearchParams();
+            params.append('VehicleId', formData.get('VehicleId'));
+            params.append('Make', formData.get('Make'));
+            params.append('Model', formData.get('Model'));
+            params.append('Year', parseInt(formData.get('Year')) || 0);
+            params.append('PassengerCapacity', parseInt(formData.get('PassengerCapacity')) || 0);
+            params.append('FuelType', parseInt(formData.get('FuelType')) || 0);
+            params.append('WltpMixed', parseFloat(formData.get('WltpMixed')) || 0);
+            params.append('CarNickname', formData.get('CarNickname') || '');
+            params.append('IsOverride', isOverrideInput.value === 'true');
 
             try {
                 const response = await fetch('/Settings/UpdateVehicleInfo', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
                         'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
                     },
-                    body: JSON.stringify(data)
+                    body: params
                 });
 
                 const result = await response.json();
-                
+
                 if (result.success) {
                     showAlert('success', result.message);
                 } else {
-                    showAlert('danger', result.message);
+                    const errorMsg = result.errors ? result.errors.join(', ') : result.message;
+                    showAlert('danger', errorMsg);
                 }
             } catch (error) {
-                showAlert('danger', 'An error occurred while updating vehicle info');
+                console.error('Error updating vehicle info:', error);
+                showAlert('danger', 'An error occurred while updating vehicle info: ' + error.message);
             }
         });
     }
