@@ -5,7 +5,6 @@
     Layout = "_AppLayout";
 }
 
-
 <section class="analytics-header">
     <div>
         <h1 class="analytics-title">Analytics</h1>
@@ -15,42 +14,60 @@
 </section>
 
 <section class="row g-3">
+
+    <!-- Total Distance -->
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-teal">km</span>
-            <div class="kpi-value">1,835 km</div>
+            <div class="kpi-value">@Model.TotalDistance km</div>
             <div class="kpi-label">Total Distance</div>
-            <div class="kpi-sub">5 trips</div>
+            <div class="kpi-sub">@Model.TripCount trips</div>
         </div>
     </div>
+
+    <!-- Total Spent -->
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-purple">$</span>
-            <div class="kpi-value">EGP 2,674.5</div>
+            <div class="kpi-value">EGP @Model.TotalSpent</div>
             <div class="kpi-label">Total Spent</div>
-            <div class="kpi-sub">Avg EGP 535/trip</div>
+            <div class="kpi-sub">
+                Avg EGP @(Model.TripCount == 0 ? 0 : (Model.TotalSpent / Model.TripCount)) / trip
+            </div>
         </div>
     </div>
+
+    <!-- Fuel Cost -->
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-amber">F</span>
-            <div class="kpi-value">EGP 1,949.25</div>
+            <div class="kpi-value">EGP @Model.FuelCost</div>
             <div class="kpi-label">Fuel Cost</div>
-            <div class="kpi-sub">73% of total</div>
+            <div class="kpi-sub">@Model.FuelPercentage% of total</div>
         </div>
     </div>
+
+    <!-- Emissions -->
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-green">CO2</span>
-            <div class="kpi-value">240.7 kg</div>
+            <div class="kpi-value">@Model.Emissions kg</div>
             <div class="kpi-label">CO2 Emissions</div>
             <div class="kpi-sub">131 g/km</div>
         </div>
     </div>
+
 </section>
 
+<!-- Monthly Spending Chart -->
 <section class="analytics-panel mt-3">
     <h3 class="panel-title">Monthly Spending</h3>
+
+    <script>
+            const monthlySpending = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlySpending));
+            console.log("Monthly Spending:", monthlySpending);
+    </script>
+
     <div class="chart chart-line">
         <div class="chart-axis-y">
             <span>2800</span>
@@ -64,20 +81,15 @@
     </div>
 </section>
 
-<section class="analytics-panel mt-3">
-    <h3 class="panel-title">Cost Breakdown</h3>
-    <div class="breakdown-wrap">
-        <div class="donut-chart"></div>
-        <div class="breakdown-legend">
-            <div class="legend-row"><span><i class="dot dot-fuel"></i>Fuel</span><strong>73%</strong></div>
-            <div class="legend-row"><span><i class="dot dot-tolls"></i>Tolls</span><strong>17%</strong></div>
-            <div class="legend-row"><span><i class="dot dot-maintenance"></i>Maintenance</span><strong>10%</strong></div>
-        </div>
-    </div>
-</section>
-
+<!-- Monthly Distance Chart -->
 <section class="analytics-panel mt-3">
     <h3 class="panel-title">Distance Traveled</h3>
+
+    <script>
+            const monthlyDistance = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyDistance));
+            console.log("Monthly Distance:", monthlyDistance);
+    </script>
+
     <div class="chart chart-bar">
         <div class="chart-axis-y">
             <span>2000 km</span>
@@ -91,18 +103,15 @@
     </div>
 </section>
 
+<!-- Cost Breakdown -->
 <section class="analytics-panel mt-3">
-    <h3 class="panel-title">Environmental Impact</h3>
-    <div class="chart chart-line">
-        <div class="chart-axis-y">
-            <span>260 kg</span>
-            <span>195 kg</span>
-            <span>130 kg</span>
-            <span>65 kg</span>
-            <span>0 kg</span>
-        </div>
-        <div class="chart-canvas">
-            <div class="line-dot line-dot-green"></div>
+    <h3 class="panel-title">Cost Breakdown</h3>
+    <div class="breakdown-wrap">
+        <div class="donut-chart"></div>
+        <div class="breakdown-legend">
+            <div class="legend-row"><span><i class="dot dot-fuel"></i>Fuel</span><strong>@Model.FuelPercentage%</strong></div>
+            <div class="legend-row"><span><i class="dot dot-tolls"></i>Tolls</span><strong>@Model.TollsPercentage%</strong></div>
+            <div class="legend-row"><span><i class="dot dot-maintenance"></i>Maintenance</span><strong>@Model.MaintenancePercentage%</strong></div>
         </div>
     </div>
 </section>

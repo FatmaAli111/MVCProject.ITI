@@ -25,6 +25,8 @@ namespace MVCProject.ITI.ViewModels
         [Range(0, 200, ErrorMessage = "Enter valid battery capacity")]
         public float? BatteryCapacity { get; set; }
         public FuelTypeEnum FuelType { get; set; }
+        public Guid UserId { get; set; } = Guid.Empty;
+
 
     }
 }

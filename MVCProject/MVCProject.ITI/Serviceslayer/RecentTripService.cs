@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using MVCProject.ITI.DataAccessLayer.Rpository.TripRepo;
 using MVCProject.ITI.ViewModels;
 
+
 namespace MVCProject.ITI.Serviceslayer
 {
     public class RecentTripService : IRecentTripService
@@ -35,7 +36,9 @@ namespace MVCProject.ITI.Serviceslayer
 
         public async Task<IEnumerable<TripCardViewModel>> GetAllTrips()
         {
-            IEnumerable<ITI.DataAccessLayer.Entities.Trip> AllTrips =  _tripRepo.GetTableNoTracking();
+            IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> AllTrips =
+                _tripRepo.GetTableNoTracking();
+
 
             if (!AllTrips.Any())
                 return Enumerable.Empty<TripCardViewModel>();
