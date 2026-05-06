@@ -22,8 +22,10 @@ public class GarageController : Controller
 
     public IActionResult Garage()
     {
-        var vehicles = _vehicleService.GetAll();
+        var userId = Guid.Parse(_userManager.GetUserId(User));
+        var vehicles = _vehicleService.GetUserVehicles(userId);
         return View(vehicles);
+
     }
 
     [HttpGet]
@@ -47,7 +49,7 @@ public class GarageController : Controller
             FuelType = vm.FuelType,
             WltpMixed = vm.WltpMixed,
             TankCapacity = vm.TankCapacity,
-            BatteryCapacity = vm.BatteryCapacity
+            BatteryCapacity = vm.BatteryCapacity,
         };
 
         _carModelService.Add(model);
