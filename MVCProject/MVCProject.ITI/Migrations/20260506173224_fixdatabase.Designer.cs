@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProject.ITI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260506114328_ReInit")]
-    partial class ReInit
+    [Migration("20260506173224_fixdatabase")]
+    partial class fixdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,7 +100,7 @@ namespace MVCProject.ITI.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "988c93e3-c67e-47eb-92d1-c4e866d13011",
+                            ConcurrencyStamp = "2d922135-7e75-45ba-9f70-26fa23466752",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
                             FullName = "",
