@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +31,7 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
         {
             if (userId == null || code == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToAction("Index", "Home");
             }
 
             var user = await _userManager.FindByIdAsync(userId);
@@ -46,16 +45,15 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
 
             if (result.Succeeded)
             {
-                StatusMessage = "Thank you for confirming your email.";
-                // Sign the user in automatically after email confirmation
                 await _signInManager.SignInAsync(user, isPersistent: false);
+                StatusMessage = "Thank you for confirming your email.";
+                return Page();
             }
             else
             {
-                StatusMessage = "Error confirming your email.";
+                StatusMessage = "Error confirming your email. The link may have expired. Please register again.";
+                return Page();
             }
-
-            return Page();
         }
     }
 }
