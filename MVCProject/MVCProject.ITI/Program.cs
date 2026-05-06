@@ -6,6 +6,7 @@ using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
 using MVCProject.ITI.Services;
 using MVCProject.ITI.Mapper;
+using MVCProject.ITI.Serviceslayer.Trip;
 
 namespace MVCProject.ITI;
 
@@ -34,6 +35,14 @@ public class Program
         //Register AutoMapper
         builder.Services.AddAutoMapper(options => options.AddProfile(new DomainProfile()));
 
+        // WeatherSevice on Trip
+        builder.Services.AddHttpClient<IWeatherService, WeatherService>();
+
+        // Route Trip Service
+        builder.Services.AddHttpClient<IRouteService, RouteService>();
+
+        // Trip Cost Services
+        builder.Services.AddScoped<ITripCostService, TripCostService>();
 
         var app = builder.Build();
 

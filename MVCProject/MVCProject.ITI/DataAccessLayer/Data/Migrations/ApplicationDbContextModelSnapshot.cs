@@ -97,7 +97,7 @@ namespace MVCProject.ITI.Data.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9d51b261-bc5f-47f2-bd9f-3a61033e2afa",
+                            ConcurrencyStamp = "6fce17ec-b58a-477d-bbb9-d31ac2eadc84",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
                             FullName = "",
@@ -358,8 +358,22 @@ namespace MVCProject.ITI.Data.Migrations
                     b.Property<float>("TotalCost")
                         .HasColumnType("real");
 
+                    b.Property<string>("TrafficCondition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("TrafficMultiplier")
+                        .HasColumnType("real");
+
                     b.Property<Guid>("TripId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("WeatherCondition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("WeatherMultiplier")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -369,6 +383,32 @@ namespace MVCProject.ITI.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("TripCostResults");
+                });
+
+            modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.TripPassenger", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("ShareAmount")
+                        .HasColumnType("real");
+
+                    b.Property<float>("SharePercentage")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("TripId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("TripPassengers");
                 });
 
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.Vehicle", b =>
@@ -616,6 +656,17 @@ namespace MVCProject.ITI.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("FuelPrice");
+
+                    b.Navigation("Trip");
+                });
+
+            modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.TripPassenger", b =>
+                {
+                    b.HasOne("MVCProject.ITI.DataAccessLayer.Entities.Trip", "Trip")
+                        .WithMany()
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Trip");
                 });

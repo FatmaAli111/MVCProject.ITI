@@ -109,3 +109,14 @@ function openMapModal() {
 }
 function closeMap() { document.getElementById('map-modal').classList.remove('open'); }
 function handleOvClick(e) { if (e.target === document.getElementById('map-modal')) closeMap(); }
+
+
+if (typeof toggleSec === 'undefined') {
+    function toggleSec(hdr) {
+        const body = hdr.nextElementSibling;
+        const chev = hdr.querySelector('.chev');
+        const open = chev.classList.contains('open');
+        if (open) { body.style.maxHeight = '0'; chev.classList.remove('open'); }
+        else { body.style.maxHeight = body.scrollHeight + 'px'; chev.classList.add('open'); }
+    }
+}

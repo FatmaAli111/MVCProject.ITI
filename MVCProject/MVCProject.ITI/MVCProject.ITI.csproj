@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-MVCProject.ITI-15491ac1-a396-4538-a7fc-97ecd4ba6aa3</UserSecretsId>
+    <OutputType>Exe</OutputType>
+    <UseAppHost>false</UseAppHost>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,10 +23,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.12" />
     <PackageReference Include="MimeKit" Version="4.16.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DataAccessLayer\Entities\" />
   </ItemGroup>
 
 </Project>

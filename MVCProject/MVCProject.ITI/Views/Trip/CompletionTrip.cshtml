@@ -1,299 +1,705 @@
 ﻿@{
     Layout = "~/Views/Trip/_TripLayout.cshtml";
     ViewData["Title"] = "Trip Complete";
+
+    // Static data for Test
+    var fromName        = "Cairo";
+    var toName          = "Alexandria";
+    var tripDate        = "2024-01-15";
+    var carName         = "Toyota Corolla";
+    var carEff          = "8.5L/100km";
+    var km              = 220f;
+    var passengerCount  = 1;
+    var isAcOn          = true;
+
+ 
+    var fuelPrice       = 13.75f;
+    var fuelEfficiency  = 8.5f;
+    var tripId = "00000000-0000-0000-0000-000000000001";
+
+    
+    var fuelLitres      = (km * fuelEfficiency) / 100f;
+    var baseCost        = fuelLitres * fuelPrice;
+    var weatherMult     = 1.0f;   // Clear weather
+    var trafficMult     = 1.0f;   // Low traffic
+    var totalCost       = (int)(baseCost * weatherMult * trafficMult);
+    var durationStr     = "2h 18m";
+    var co2Kg           = Math.Round(fuelLitres * 2.31, 1);
+    var traffic         = "Low";
+    var trafficCls      = "pill-low";
+
+    var fuelCost        = (int)(totalCost * 0.665);
+    var tollCost        = (int)(totalCost * 0.241);
+    var maintCost       = totalCost - fuelCost - tollCost;
+    var uberCost        = (int)(totalCost * 2.41);
+    var taxiCost        = (int)(totalCost * 2.13);
+    var fuelPct         = (int)((double)fuelCost / totalCost * 100);
+
+    // ( x , y ) points for Cities
+    var fromLat = 30.0444; var fromLng = 31.2357;
+    var toLat   = 31.2001; var toLng   = 29.9187;
 }
-<div class="page active" id="page-trip">
+
+<div id="page-trip">
+
     <div class="topbar">
         <div class="tb-left">
-            <button class="back-btn" onclick="window.location='/Trip/History'">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6" /></svg>
-            </button>
+            <a href="@Url.Action("History", "Trip")" class="back-btn" aria-label="Back to History">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke="currentColor">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </a>
             <div class="tb-title">
                 <h2>Trip Complete</h2>
                 <p>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" /></svg>
-                    Cairo → Alexandria
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <circle cx="12" cy="10" r="3" />
+                        <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
+                    </svg>
+                    @fromName &rarr; @toName
                 </p>
             </div>
         </div>
         <div class="tb-acts">
-            <button class="icon-btn icon-btn-teal" onclick="openMapModal()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" /><line x1="8" y1="2" x2="8" y2="18" /><line x1="16" y1="6" x2="16" y2="22" /></svg>
+            <button class="icon-btn icon-btn-teal" onclick="openMapModal()" aria-label="Open map">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                    <line x1="8" y1="2" x2="8" y2="18" />
+                    <line x1="16" y1="6" x2="16" y2="22" />
+                </svg>
             </button>
-            <button class="icon-btn icon-btn-ghost">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>
+            <button class="icon-btn icon-btn-ghost" onclick="shareTrip()" aria-label="Share trip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round">
+                    <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
             </button>
         </div>
     </div>
 
-    <div class="page-scroll">
-        <!-- HERO -->
-        <div class="hero-card" style="margin-top:14px;">
+    <div class="page-scroll" id="main-scroll">
+        <div class="hero-card">
             <div class="hc-label">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
                 Total Trip Cost
             </div>
-            <div class="hc-amount">EGP 352</div>
-            <div class="hc-row">
-                <button class="plan-btn" onclick="window.location='/Trip/History'">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
-                    Plan Another Trip
-                </button>
-                <div class="dollar-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>
-                </div>
-            </div>
+            <div class="hc-amount">EGP @totalCost</div>
             <div class="car-row">
                 <div class="car-info">
                     <div class="car-av">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+                            <rect x="1" y="3" width="15" height="13" rx="2" />
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                            <circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
+                        </svg>
                     </div>
                     <div>
-                        <div class="car-name">Toyota Corolla</div>
-                        <div class="car-sub">8.5L/100km</div>
+                        <div class="car-name">@carName</div>
+                        <div class="car-sub">@carEff</div>
                     </div>
                 </div>
                 <div class="verified">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
                     Verified
                 </div>
             </div>
         </div>
-
-        <!-- STATS -->
         <div class="stats-row">
             <div class="stat-card">
                 <div class="si" style="background:#E6FAF8;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.3" stroke-linecap="round">
+                        <circle cx="12" cy="10" r="3" />
+                        <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
+                    </svg>
                 </div>
-                <div class="sv">220</div><div class="sl">Distance</div>
+                <div class="sv">@km km</div>
+                <div class="sl">Distance</div>
             </div>
             <div class="stat-card">
                 <div class="si" style="background:#F5F3FF;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2.3" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+                    </svg>
                 </div>
-                <div class="sv" style="font-size:14px;">2h 30m</div><div class="sl">Duration</div>
+                <div class="sv" style="font-size:14px;">@durationStr</div>
+                <div class="sl">Duration</div>
             </div>
             <div class="stat-card">
                 <div class="si" style="background:#FFF7ED;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.3" stroke-linecap="round"><path d="M5 22V4a2 2 0 012-2h6a2 2 0 012 2v18" /><path d="M5 10H15" /><path d="M19 10l.92-.92a2 2 0 012.83 0L23 10v6a2 2 0 01-2 2h-2" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.3" stroke-linecap="round">
+                        <path d="M5 22V4a2 2 0 012-2h6a2 2 0 012 2v18" />
+                        <path d="M5 10H15" />
+                        <path d="M19 10l.92-.92a2 2 0 012.83 0L23 10v6a2 2 0 01-2 2h-2" />
+                    </svg>
                 </div>
-                <div class="sv">234</div><div class="sl">Fuel</div>
+                <div class="sv">@((int)fuelLitres)L</div>
+                <div class="sl">Fuel</div>
             </div>
             <div class="stat-card">
                 <div class="si" style="background:#ECFDF5;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.3" stroke-linecap="round"><path d="M12 22a10 10 0 100-20 10 10 0 000 20z" /><path d="M8.5 8.5s1-1 3.5-1 3.5 1 3.5 1" /><path d="M8.5 14.5s1 1 3.5 1 3.5-1 3.5-1" /><line x1="12" y1="6" x2="12" y2="8" /><line x1="12" y1="16" x2="12" y2="18" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.3" stroke-linecap="round">
+                        <path d="M12 22a10 10 0 100-20 10 10 0 000 20z" />
+                        <path d="M8.5 8.5s1-1 3.5-1 3.5 1 3.5 1" />
+                        <path d="M8.5 14.5s1 1 3.5 1 3.5-1 3.5-1" />
+                        <line x1="12" y1="6" x2="12" y2="8" /><line x1="12" y1="16" x2="12" y2="18" />
+                    </svg>
                 </div>
-                <div class="sv">45.2</div><div class="sl">CO₂</div>
+                <div class="sv">@co2Kg</div>
+                <div class="sl">CO&#8322;</div>
             </div>
         </div>
-
-        <!-- DRIVE VS RIDE-SHARE -->
         <div class="sc" style="animation-delay:.05s;">
             <div class="sh" onclick="toggleSec(this)">
                 <div class="sh-left">
                     <div class="sico" style="background:#E6FAF8;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round">
+                            <rect x="1" y="3" width="15" height="13" rx="2" />
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                            <circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
+                        </svg>
                     </div>
                     <div class="s-title">Drive vs Ride-Share</div>
                 </div>
-                <svg class="chev open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9" /></svg>
+                <svg class="chev open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
             </div>
-            <div class="sb" style="max-height:200px;">
+            <div class="sb" style="max-height:300px;">
                 <div class="dvr-grid">
-                    <div class="dvo best"><div class="best-badge">Best Choice</div><div class="dv-lbl" style="color:rgba(255,255,255,.8);">Your Car</div><div class="dv-price">EGP 352</div></div>
-                    <div class="dvo"><div class="dv-lbl">Uber</div><div class="dv-price">EGP 850</div><div class="dv-diff">+EGP 498</div></div>
-                    <div class="dvo"><div class="dv-lbl">Taxi</div><div class="dv-price">EGP 750</div><div class="dv-diff">+EGP 398</div></div>
+                    <div class="dvo best">
+                        <div class="best-badge">&#10003; Best Choice</div>
+                        <div class="dv-lbl">Your Car</div>
+                        <div class="dv-price">EGP @totalCost</div>
+                    </div>
+                    <div class="dvo">
+                        <div class="dv-lbl">Uber</div>
+                        <div class="dv-price">EGP @uberCost</div>
+                        <div class="dv-diff">+EGP @(uberCost - totalCost)</div>
+                    </div>
+                    <div class="dvo">
+                        <div class="dv-lbl">Taxi</div>
+                        <div class="dv-price">EGP @taxiCost</div>
+                        <div class="dv-diff">+EGP @(taxiCost - totalCost)</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- TRAFFIC + COST SPLIT -->
         <div class="two-col">
             <div class="mini-card" style="animation-delay:.1s;">
-                <div class="m-lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>Traffic</div>
-                <div class="tr-name"><svg width="11" height="11" viewBox="0 0 24 24" fill="var(--orange)"><circle cx="12" cy="12" r="10" /></svg>Medium</div>
-                <div class="tr-num">1.2x</div>
-                <div class="tr-sub">time impact</div>
+                <div class="m-lbl">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                    Traffic
+                </div>
+                <div class="tr-name" style="color:@(traffic == "Low" ? "var(--green)" : traffic == "Heavy" ? "var(--red)" : "var(--yellow)")">
+                    @traffic
+                </div>
+                <div class="tr-num">@(trafficMult)x</div>
+                <div class="tr-sub">cost impact</div>
             </div>
-            <div class="mini-card" style="animation-delay:.14s;">
-                <div class="m-lbl">Cost Split</div>
-                <div class="cs-row"><div class="cs-dot" style="background:var(--teal)"></div><div class="cs-nm">Fuel</div><div class="cs-vl">EGP 234</div></div>
-                <div class="cs-row"><div class="cs-dot" style="background:var(--purple)"></div><div class="cs-nm">Tolls</div><div class="cs-vl">EGP 85</div></div>
-                <div class="cs-row"><div class="cs-dot" style="background:var(--orange)"></div><div class="cs-nm">Maint.</div><div class="cs-vl">EGP 33</div></div>
-            </div>
-        </div>
-
-        <!-- BEST TIME TO TRAVEL -->
-        <div class="sc" style="animation-delay:.15s;">
-            <div class="sh" onclick="toggleSec(this)">
-                <div class="sh-left">
-                    <div class="sico" style="background:#F5F3FF;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                    </div>
-                    <div>
-                        <div class="s-title">Best Time to Travel</div>
-                        <div class="s-sub">AI-powered recommendations</div>
-                    </div>
+            <div class="mini-card" style="animation-delay:.15s;">
+                <div class="m-lbl">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round">
+                        <line x1="12" y1="1" x2="12" y2="23" />
+                        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                    </svg>
+                    Cost Split
                 </div>
-                <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9" /></svg>
-            </div>
-            <div class="sb" style="max-height:0;">
-                <div class="btt-ai">
-                    <div class="btt-ai-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal-dk)" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+                <div class="cs-row">
+                    <div style="display:flex;align-items:center;gap:7px;">
+                        <div class="cs-dot" style="background:#F97316;"></div>
+                        <span style="font-size:12px;font-weight:600;color:var(--soft);">Fuel</span>
                     </div>
-                    <div>
-                        <div class="btt-ai-title">AI Recommendation <span class="ai-pill">AI Powered</span></div>
-                        <div class="btt-ai-desc">Leave at <span class="ht">05:00</span> to save <span class="hg">EGP 70</span> and <span class="hg">37m</span></div>
-                    </div>
+                    <span style="font-size:13px;font-weight:800;">EGP @fuelCost</span>
                 </div>
-
-                <!-- 05:00 Best -->
-                <div class="time-row">
-                    <div class="ti" style="background:#ECFDF5;"><svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div>
-                    <div class="t-info">
-                        <div class="t-hdr"><span class="t-clock">05:00</span><span class="t-name">Early Morning</span><span class="t-bdg bdg-best">Best Choice</span></div>
-                        <div class="t-desc">Minimal traffic, fastest route times</div>
+                <div class="cs-row">
+                    <div style="display:flex;align-items:center;gap:7px;">
+                        <div class="cs-dot" style="background:#8B5CF6;"></div>
+                        <span style="font-size:12px;font-weight:600;color:var(--soft);">Tolls</span>
                     </div>
-                    <div class="t-right"><div class="t-dur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>1h 53m</div><div class="t-save ts-g">↓ Save EGP 70</div></div>
-                    <svg class="t-arr" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    <span style="font-size:13px;font-weight:800;">EGP @tollCost</span>
                 </div>
-
-                <!-- 06:30 Good -->
-                <div class="time-row">
-                    <div class="ti" style="background:#E6FAF8;"><svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /></svg></div>
-                    <div class="t-info">
-                        <div class="t-hdr"><span class="t-clock">06:30</span><span class="t-name">Sunrise</span><span class="t-bdg bdg-good">Good Option</span></div>
-                        <div class="t-desc">Light traffic starting to build</div>
+                <div class="cs-row">
+                    <div style="display:flex;align-items:center;gap:7px;">
+                        <div class="cs-dot" style="background:#3B82F6;"></div>
+                        <span style="font-size:12px;font-weight:600;color:var(--soft);">Maint.</span>
                     </div>
-                    <div class="t-right"><div class="t-dur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>2h 8m</div><div class="t-save ts-g">↓ Save EGP 42</div></div>
-                    <svg class="t-arr" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    <span style="font-size:13px;font-weight:800;">EGP @maintCost</span>
                 </div>
-
-                <!-- 08:00 Avoid -->
-                <div class="time-row avoid">
-                    <div class="ti" style="background:#FEE2E2;"><svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /></svg></div>
-                    <div class="t-info">
-                        <div class="t-hdr"><span class="t-clock">08:00</span><span class="t-name">Morning Rush</span><span class="t-bdg bdg-avoid">Avoid</span></div>
-                        <div class="t-desc">Peak rush hour, heavy congestion</div>
-                    </div>
-                    <div class="t-right"><div class="t-dur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>3h 30m</div><div class="t-save ts-r">△ Extra EGP 88</div></div>
-                    <svg class="t-arr" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6" /></svg>
-                </div>
-
-                <!-- 10:00 -->
-                <div class="time-row">
-                    <div class="ti" style="background:#FFF7ED;"><svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /></svg></div>
-                    <div class="t-info">
-                        <div class="t-hdr"><span class="t-clock">10:00</span><span class="t-name">Mid-Morning</span></div>
-                        <div class="t-desc">Moderate traffic, reasonable travel time</div>
-                    </div>
-                    <div class="t-right"><div class="t-dur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>2h 45m</div><div class="t-save ts-g">↓ Save EGP 18</div></div>
-                    <svg class="t-arr" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6" /></svg>
-                </div>
-
-                <!-- 12:00 base -->
-                <div class="time-row base-cost">
-                    <div class="ti" style="background:#FEF9C3;"><svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /></svg></div>
-                    <div class="t-info">
-                        <div class="t-hdr"><span class="t-clock">12:00</span><span class="t-name">Noon</span></div>
-                        <div class="t-desc">Lunch traffic, slightly congested</div>
-                    </div>
-                    <div class="t-right"><div class="t-dur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>2h 53m</div><div class="t-save ts-b">Base cost</div></div>
-                    <svg class="t-arr" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6" /></svg>
-                </div>
-
-                <!-- 14:00 Good -->
-                <div class="time-row">
-                    <div class="ti" style="background:#E6FAF8;"><svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /></svg></div>
-                    <div class="t-info">
-                        <div class="t-hdr"><span class="t-clock">14:00</span><span class="t-name">Afternoon</span><span class="t-bdg bdg-good">Good Option</span></div>
-                        <div class="t-desc">Post-lunch lull, good traffic flow</div>
-                    </div>
-                    <div class="t-right"><div class="t-dur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>2h 15m</div><div class="t-save ts-g">↓ Save EGP 28</div></div>
-                    <svg class="t-arr" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6" /></svg>
-                </div>
-
-                <!-- 17:00 Avoid -->
-                <div class="time-row avoid">
-                    <div class="ti" style="background:#FEE2E2;"><svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /></svg></div>
-                    <div class="t-info">
-                        <div class="t-hdr"><span class="t-clock">17:00</span><span class="t-name">Evening Rush</span><span class="t-bdg bdg-avoid">Avoid</span></div>
-                        <div class="t-desc">Peak evening rush, worst traffic</div>
-                    </div>
-                    <div class="t-right"><div class="t-dur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>3h 45m</div><div class="t-save ts-r">△ Extra EGP 106</div></div>
-                    <svg class="t-arr" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6" /></svg>
-                </div>
-                <div style="height:14px;"></div>
             </div>
         </div>
 
-        <!-- SPLIT WITH PASSENGERS -->
         <div class="sc" style="animation-delay:.2s;">
             <div class="sh" onclick="toggleSec(this)">
                 <div class="sh-left">
                     <div class="sico" style="background:#ECFDF5;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                            <path d="M16 3.13a4 4 0 010 7.75" />
+                        </svg>
                     </div>
                     <div>
                         <div class="s-title">Split with Passengers</div>
                         <div class="s-sub">Add passengers to split costs</div>
                     </div>
                 </div>
-                <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9" /></svg>
+                <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
             </div>
-            <div class="sb" style="max-height:0;">
+            <div class="sb" style="max-height:0; overflow:hidden;">
                 <div class="split-inner">
-                    <div class="si-hdr">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
-                        <span>Split with Passengers</span>
+                    <div class="sp-top-row">
+                        <span class="sp-mode-btn active" onclick="setSplitMode('equal',this)">
+                            &#9868; Equal Split
+                        </span>
+                        <span class="sp-mode-btn" onclick="setSplitMode('custom',this)">
+                            % Custom Split
+                        </span>
                     </div>
                     <div class="sp-form">
-                        <input class="sp-inp" id="pass-name-input" type="text" placeholder="Passenger name" onkeydown="if(event.key==='Enter')addPassenger()" />
+                        <input class="sp-inp" id="pass-name-input" type="text"
+                               placeholder="Passenger name"
+                               onkeydown="if(event.key==='Enter')addPassenger()" />
                         <button class="add-btn" onclick="addPassenger()">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" y1="8" x2="19" y2="14" /><line x1="22" y1="11" x2="16" y2="11" /></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke="white">
+                                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <line x1="19" y1="8" x2="19" y2="14" />
+                                <line x1="22" y1="11" x2="16" y2="11" />
+                            </svg>
                         </button>
                     </div>
+                    <div class="driver-row">
+                        <div class="pi-left">
+                            <div class="p-av driver-av">Y</div>
+                            <div>
+                                <div class="p-name">You (Driver)</div>
+                                <div class="p-role">Organizing the trip</div>
+                            </div>
+                        </div>
+                        <div class="p-share-info">
+                            <div class="p-share-amt" id="driver-amount">EGP @totalCost</div>
+                            <div class="p-share-pct" id="driver-pct">100%</div>
+                        </div>
+                    </div>
                     <div class="sp-empty" id="sp-empty">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke="var(--border)">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                            <path d="M16 3.13a4 4 0 010 7.75" />
+                        </svg>
                         <p>Add passengers to split the trip cost</p>
                     </div>
                     <div class="pass-list" id="pass-list"></div>
-                    <div class="sp-summary" id="sp-summary">
-                        <p>Each person pays <strong id="sp-amount">EGP 176</strong></p>
+                    <div class="sp-summary" id="sp-summary" style="display:none;">
+                        <div class="sp-sum-row">
+                            <span>Total Cost</span>
+                            <span>EGP <strong id="sp-total">@totalCost</strong></span>
+                        </div>
+                        <div class="sp-sum-row teal">
+                            <span>Your Share</span>
+                            <span>EGP <strong id="sp-your-share">@totalCost</strong></span>
+                        </div>
+                        <div class="sp-sum-row teal">
+                            <span>You'll Collect</span>
+                            <span>EGP <strong id="sp-collect">0</strong></span>
+                        </div>
+                    </div>
+                    <div class="sp-actions" id="sp-actions" style="display:none;">
+                        <button class="sp-copy-btn" onclick="copySplit()">&#10697; Copy</button>
+                        <button class="sp-share-btn" onclick="shareSplit()">&#8679; Share</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SMART INSIGHTS -->
         <div class="sc" style="animation-delay:.25s;">
             <div class="sh" onclick="toggleSec(this)">
                 <div class="sh-left">
                     <div class="sico" style="background:#FFF7ED;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.3" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
                     </div>
                     <div class="s-title">Smart Insights</div>
                 </div>
-                <svg class="chev open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9" /></svg>
+                <svg class="chev open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
             </div>
             <div class="sb" style="max-height:200px;">
                 <div class="insight-wrap">
                     <div class="ins-item">
                         <div class="ins-ico" style="background:var(--teal-lt);">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dk)" stroke-width="2.5" stroke-linecap="round"><path d="M5 22V4a2 2 0 012-2h6a2 2 0 012 2v18" /><path d="M5 10H15" /><path d="M19 10l.92-.92a2 2 0 012.83 0L23 10v6a2 2 0 01-2 2h-2" /></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dk)" stroke-width="2.5" stroke-linecap="round">
+                                <path d="M5 22V4a2 2 0 012-2h6a2 2 0 012 2v18" />
+                                <path d="M5 10H15" />
+                                <path d="M19 10l.92-.92a2 2 0 012.83 0L23 10v6a2 2 0 01-2 2h-2" />
+                            </svg>
                         </div>
-                        <div class="ins-txt">66% of your cost is fuel</div>
+                        <div class="ins-txt">@fuelPct% of your cost is fuel</div>
                     </div>
                     <div class="ins-item">
                         <div class="ins-ico" style="background:var(--green-lt);">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                                <circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg>
                         </div>
-                        <div class="ins-txt">Driving saves you EGP 498 vs Uber</div>
+                        <div class="ins-txt">Driving saves you EGP @(uberCost - totalCost) vs Uber</div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div style="height:80px;"></div>
+
+        <div class="fab-wrap">
+            <a href="@Url.Action("Index", "Home")" class="cta-main">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+                Plan Another Trip
+            </a>
+        </div>
+
+        <div class="modal-ov" id="map-modal" onclick="handleOvClick(event)">
+            <div class="modal-box">
+                <div class="modal-hdr">
+                    <div class="modal-ttl">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-dk)" stroke-width="2.2" stroke-linecap="round">
+                            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                            <line x1="8" y1="2" x2="8" y2="18" />
+                            <line x1="16" y1="6" x2="16" y2="22" />
+                        </svg>
+                        Route Map — @fromName &rarr; @toName
+                    </div>
+                    <button class="modal-close" onclick="closeMap()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke="var(--soft)">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="modal-map"></div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+    .fab-wrap { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:300; width:calc(100% - 28px); max-width:500px; }
+    .fab-wrap .cta-main { width:100%; background:linear-gradient(135deg,#34D9C3 0%,#0D9488 100%); color:#fff; border:none; border-radius:999px; font-size:15px; font-weight:800; padding:16px 24px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 6px 24px rgba(13,148,136,.40); text-decoration:none; transition:transform .22s,box-shadow .22s; }
+    .fab-wrap .cta-main:hover { transform:translateY(-2px); box-shadow:0 10px 32px rgba(13,148,136,.5); }
+
+    .sp-top-row { display:flex; gap:10px; padding:14px 18px 0; }
+    .sp-mode-btn { flex:1; text-align:center; padding:9px; border-radius:999px; font-size:13px; font-weight:700; cursor:pointer; border:2px solid var(--border); color:var(--soft); transition:all .2s; }
+    .sp-mode-btn.active { background:var(--teal-dk); color:#fff; border-color:var(--teal-dk); }
+
+    .driver-row { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--teal-lt); border-radius:12px; margin:10px 18px 0; }
+    .driver-av { width:34px; height:34px; border-radius:50%; background:var(--teal-dk); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; }
+    .p-role { font-size:11px; color:var(--muted); margin-top:2px; }
+    .p-share-info { text-align:right; }
+    .p-share-amt { font-size:15px; font-weight:800; color:var(--teal-dk); }
+    .p-share-pct { font-size:11px; color:var(--muted); }
+
+    .sp-summary { padding:14px 18px; border-top:1px solid var(--border); margin-top:10px; }
+    .sp-sum-row { display:flex; justify-content:space-between; font-size:13px; color:var(--soft); margin-bottom:6px; }
+    .sp-sum-row.teal strong { color:var(--teal-dk); }
+
+    .sp-actions { display:flex; gap:10px; padding:0 18px 16px; }
+    .sp-copy-btn { flex:1; padding:11px; border-radius:999px; border:2px solid var(--border); background:transparent; font-weight:700; font-size:13px; cursor:pointer; }
+    .sp-share-btn { flex:1; padding:11px; border-radius:999px; background:var(--teal-dk); color:#fff; border:none; font-weight:700; font-size:13px; cursor:pointer; }
+
+    .pass-item { display:flex; align-items:center; justify-content:space-between; padding:10px 18px; border-bottom:1px solid var(--border); }
+    .pi-left { display:flex; align-items:center; gap:10px; }
+    .p-av { width:34px; height:34px; border-radius:50%; background:var(--teal-lt); display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--teal-dk); }
+    .p-name { font-size:14px; font-weight:700; }
+    .p-share { font-size:12px; color:var(--muted); }
+    .p-del { background:none; border:none; cursor:pointer; padding:4px; }
+
+    .custom-pct-input { width:60px; border:1px solid var(--border); border-radius:8px; padding:4px 8px; font-size:13px; text-align:center; }
+</style>
+
+<script>
+    const TOTAL = @totalCost;
+    const FROM_NAME = "@fromName";
+    const TO_NAME = "@toName";
+    const FROM_LAT = @fromLat.ToString("F4");
+    const FROM_LNG = @fromLng.ToString("F4");
+    const TO_LAT = @toLat.ToString("F4");
+    const TO_LNG = @toLng.ToString("F4");
+    const TRIP_ID = "@tripId";
+
+    // ── Section Toggle ───────────────────────────────────
+    function toggleSec(hdr) {
+        const body = hdr.nextElementSibling;
+        const chev = hdr.querySelector('.chev');
+        const open = chev.classList.contains('open');
+        if (open) { body.style.maxHeight = '0'; chev.classList.remove('open'); }
+        else { body.style.maxHeight = body.scrollHeight + 300 + 'px'; chev.classList.add('open'); }
+    }
+
+    // ── Split Mode ───────────────────────────────────────
+    let splitMode = 'equal';
+    function setSplitMode(mode, btn) {
+        splitMode = mode;
+        document.querySelectorAll('.sp-mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPassengers();
+    }
+
+    // ── Passengers ───────────────────────────────────────
+    let passengers = [];
+
+    async function addPassenger() {
+        const inp = document.getElementById('pass-name-input');
+        const name = inp.value.trim();
+        if (!name) return;
+        passengers.push({ name, pct: 0 });
+        inp.value = '';
+        renderPassengers();
+        expandSb();
+        await savePassengersToDB(); 
+    }
+
+    function removePassenger(i) {
+        passengers.splice(i, 1);
+        renderPassengers();
+        expandSb();
+    }
+
+    function expandSb() {
+        const sb = document.getElementById('sp-empty').closest('.sb');
+        if (sb) setTimeout(() => { sb.style.maxHeight = sb.scrollHeight + 400 + 'px'; }, 20);
+    }
+
+    function renderPassengers() {
+        const empty     = document.getElementById('sp-empty');
+        const list      = document.getElementById('pass-list');
+        const sum       = document.getElementById('sp-summary');
+        const actions   = document.getElementById('sp-actions');
+        const driverAmt = document.getElementById('driver-amount');
+        const driverPct = document.getElementById('driver-pct');
+
+        if (passengers.length === 0) {
+            empty.style.display   = 'flex';
+            list.innerHTML        = '';
+            sum.style.display     = 'none';
+            actions.style.display = 'none';
+            driverAmt.textContent = 'EGP ' + TOTAL;
+            driverPct.textContent = '100%';
+            return;
+        }
+
+        empty.style.display   = 'none';
+        sum.style.display     = 'block';
+        actions.style.display = 'flex';
+
+        const total = passengers.length + 1; 
+
+        if (splitMode === 'equal') {
+            const each        = Math.round(TOTAL / total);
+            const driverShare = TOTAL - (each * passengers.length);
+            const pct         = Math.round(100 / total);
+
+            driverAmt.textContent = 'EGP ' + driverShare;
+            driverPct.textContent = pct + '%';
+
+            list.innerHTML = passengers.map((p, i) => `
+                <div class="pass-item">
+                    <div class="pi-left">
+                        <div class="p-av">${p.name[0].toUpperCase()}</div>
+                        <div>
+                            <div class="p-name">${p.name}</div>
+                            <div class="p-share">EGP ${each}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <div style="text-align:right;">
+                            <div style="font-weight:800;font-size:14px;">EGP ${each}</div>
+                            <div style="font-size:11px;color:var(--muted);">${pct}%</div>
+                        </div>
+                        <button class="p-del" onclick="removePassenger(${i})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" width="15" height="15">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6l-1 14H6L5 6"/>
+                                <path d="M10 11v6M14 11v6"/>
+                                <path d="M9 6V4h6v2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>`).join('');
+
+            document.getElementById('sp-your-share').textContent = driverShare;
+            document.getElementById('sp-collect').textContent    = each * passengers.length;
+            document.getElementById('sp-total').textContent      = TOTAL;
+
+        } else {
+            // ── Custom Split ─────────────────────────────────
+            
+            if (passengers.every(p => p.pct === 0)) {
+                const equalPct = Math.floor(100 / total);
+                passengers.forEach(p => p.pct = equalPct);
+            }
+
+            const passengersTotalPct = passengers.reduce((s, p) => s + p.pct, 0);
+            const driverPctVal       = Math.max(0, 100 - passengersTotalPct);
+            const driverShareVal     = Math.round(TOTAL * driverPctVal / 100);
+
+            driverAmt.textContent = 'EGP ' + driverShareVal;
+            driverPct.textContent = driverPctVal + '%';
+
+            list.innerHTML = passengers.map((p, i) => {
+                const amt = Math.round(TOTAL * p.pct / 100);
+                return `
+                <div class="pass-item">
+                    <div class="pi-left">
+                        <div class="p-av">${p.name[0].toUpperCase()}</div>
+                        <div>
+                            <div class="p-name">${p.name}</div>
+                            <div class="p-share">EGP ${amt}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <input class="custom-pct-input" type="number" min="0" max="100"
+                               value="${p.pct}"
+                               oninput="updatePct(${i}, this.value)" />
+                        <span style="font-size:13px;font-weight:700;">%</span>
+                        <button class="p-del" onclick="removePassenger(${i})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" width="15" height="15">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6l-1 14H6L5 6"/>
+                                <path d="M10 11v6M14 11v6"/>
+                                <path d="M9 6V4h6v2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+
+            document.getElementById('sp-your-share').textContent = driverShareVal;
+            document.getElementById('sp-collect').textContent    = TOTAL - driverShareVal;
+            document.getElementById('sp-total').textContent      = TOTAL;
+        }
+    }
+
+    function updatePct(i, val) {
+        passengers[i].pct = parseInt(val) || 0;
+        renderPassengers();
+        expandSb();
+    }
+
+    // ── Save Passengers to DB ────────────────────────────
+    async function savePassengersToDB() {
+        // Trip Id for test ( start new Trip)
+        if (!TRIP_ID || TRIP_ID === "00000000-0000-0000-0000-000000000001") return;
+
+        try {
+            await fetch('/Trip/SavePassengers', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    tripId: TRIP_ID,
+                    passengers: passengers.map(p => ({
+                        name: p.name,
+                        shareAmount: splitMode === 'equal'
+                            ? Math.round(TOTAL / (passengers.length + 1))
+                            : Math.round(TOTAL * p.pct / 100),
+                        sharePercentage: splitMode === 'equal'
+                            ? Math.round(100 / (passengers.length + 1))
+                            : p.pct
+                    }))
+                })
+            });
+        } catch (err) {
+            console.error('Failed to save passengers:', err);
+        }
+    }
+
+    // ── Copy & Share ─────────────────────────────────────
+    function copySplit() {
+        const lines = [
+            `Trip: ${FROM_NAME} → ${TO_NAME}`,
+            `Total: EGP ${TOTAL}`,
+            '---',
+            `You (Driver): ${document.getElementById('driver-amount').textContent}`
+        ];
+        passengers.forEach(p => {
+            const amt = splitMode === 'equal'
+                ? Math.round(TOTAL / (passengers.length + 1))
+                : Math.round(TOTAL * p.pct / 100);
+            lines.push(`${p.name}: EGP ${amt}`);
+        });
+        navigator.clipboard.writeText(lines.join('\n'))
+            .then(() => alert('Copied to clipboard!'));
+    }
+
+    function shareSplit() {
+        const text = `Trip ${FROM_NAME} → ${TO_NAME} | Total: EGP ${TOTAL}`;
+        if (navigator.share)
+            navigator.share({ title: 'Trip Split', text, url: window.location.href });
+        else
+            navigator.clipboard.writeText(text).then(() => alert('Link copied!'));
+    }
+
+    // ── Map Modal ────────────────────────────────────────
+    let modalMap = null;
+    function openMapModal() {
+        document.getElementById('map-modal').classList.add('open');
+        setTimeout(() => {
+            if (!modalMap) {
+                modalMap = L.map('modal-map').setView([FROM_LAT, FROM_LNG], 7);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap'
+                }).addTo(modalMap);
+                const ico = L.divIcon({
+                    className: '',
+                    html: `<div style="width:28px;height:28px;background:#2DD4BF;border-radius:50%;border:3px solid #fff;
+                                box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;">
+                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round">
+                               <circle cx="12" cy="10" r="3"/>
+                               <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z"/>
+                             </svg></div>`,
+                    iconSize: [28, 28], iconAnchor: [14, 28]
+                });
+                const c = L.latLng(FROM_LAT, FROM_LNG);
+                const a = L.latLng(TO_LAT,   TO_LNG);
+                L.marker(c, { icon: ico }).addTo(modalMap).bindPopup(`<b>${FROM_NAME}</b>`);
+                L.marker(a, { icon: ico }).addTo(modalMap).bindPopup(`<b>${TO_NAME}</b>`);
+                L.polyline([c, a], { color: '#2DD4BF', weight: 4, dashArray: '10,7', opacity: .9 }).addTo(modalMap);
+                modalMap.fitBounds([c, a], { padding: [48, 48] });
+            } else {
+                modalMap.invalidateSize();
+            }
+        }, 220);
+    }
+    function closeMap()      { document.getElementById('map-modal').classList.remove('open'); }
+    function handleOvClick(e){ if (e.target === document.getElementById('map-modal')) closeMap(); }
+
+    // ── Share Trip ───────────────────────────────────────
+    function shareTrip() {
+        if (navigator.share)
+            navigator.share({ title: 'Trip Complete', text: `${FROM_NAME} → ${TO_NAME} — EGP ${TOTAL}`, url: window.location.href });
+        else
+            navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
+    }
+</script>

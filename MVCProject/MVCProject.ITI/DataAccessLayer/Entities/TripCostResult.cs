@@ -10,6 +10,12 @@
         public float CostPerKm { get; set; } = 0;
         public float CostPerPassenger { get; set; } = 0;
         public DateTime CalculatedAt { get; set; }
+        public string WeatherCondition { get; set; } = string.Empty;
+        // "Clear", "Rain", "Hot", "Wind"
+        public string TrafficCondition { get; set; } = string.Empty;
+        // "Low", "Medium", "Heavy"
+        public float WeatherMultiplier { get; set; } = 1.0f;
+        public float TrafficMultiplier { get; set; } = 1.0f;
 
         // Relationships ***********
         public Trip Trip { get; set; } = null!;

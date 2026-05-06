@@ -27,6 +27,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<FuelPrice> FuelPrices { get; set; }
     public DbSet<TripCostResult> TripCostResults { get; set; }
     public DbSet<FuelEfficiencyProfile> FuelEfficiencyProfiles { get; set; }
+    public DbSet<TripPassenger> TripPassengers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
