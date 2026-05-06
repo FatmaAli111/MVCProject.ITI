@@ -8,13 +8,16 @@
         <h1 class="analytics-title">My Garage</h1>
         <p class="analytics-subtitle">@Model.Count() vehicles</p>
     </div>
-    <a class="btn btn-teal" asp-controller="Garage" asp-action="AddVehicle">+ Add</a>
+    <a class="btn btn-teal" asp-controller="Garage" asp-action="AddVehicle">+ Add Vehicle</a>
 </section>
 <div class="vehicle-list">
 
     @foreach (var v in Model)
     {
         <div class="vehicle-card">
+            <div class="vehicle-icon">
+                <i class="fa-solid fa-car-side"></i>
+            </div>
 
             <div class="color-strip" style="background-color:@v.ColorHex;"></div>
 
@@ -38,14 +41,20 @@
                     @if (!v.IsDefault)
                     {
                         <form method="post" asp-action="SetDefault" asp-route-id="@v.Id">
-                            <button class="btn btn-outline-secondary btn-sm">Set as Default</button>
+                            <button class="icon-btn default" title="Set as Default">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
                         </form>
                     }
 
-                    <a asp-action="Edit" asp-route-id="@v.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@v.Id" class="icon-btn edit" title="Edit">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
 
                     <form method="post" asp-action="DeleteVehicle" asp-route-id="@v.Id" style="display:inline;">
-                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <button class="icon-btn delete" title="Delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
                     </form>
                 </div>
 

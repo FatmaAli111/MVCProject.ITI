@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using MVCProject.ITI.DataAccessLayer.Entities;
-using System.Security.Principal;
 
 namespace MVCProject.ITI.DataAccessLayer.Data;
 

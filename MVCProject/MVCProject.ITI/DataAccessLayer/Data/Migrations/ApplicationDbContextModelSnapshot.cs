@@ -789,13 +789,6 @@ namespace MVCProject.ITI.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
-                            RoleId = new Guid("d6e87f16-7788-4f10-9c1c-0c3f09f023ea")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

@@ -789,7 +789,48 @@ a {
         font-size: 40px;
     }
 }
+
 .page .card {
     --bs-card-bg: #ffffff;
     background-color: #ffffff;
 }
+
+/* ── Nav Auth Buttons ───────────────────────────────────────── */
+.btn-auth {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 1.1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: none;
+    line-height: 1;
+}
+
+.btn-auth-outline {
+    background: transparent;
+    border: 1.5px solid rgba(13,148,136,0.4);
+    color: var(--primary);
+}
+
+    .btn-auth-outline:hover {
+        background: rgba(13,148,136,0.08);
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+
+.btn-auth-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(13,148,136,0.3);
+}
+
+    .btn-auth-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(13,148,136,0.4);
+        color: #fff;
+    }

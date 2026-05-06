@@ -55,17 +55,6 @@
         @RenderBody()
     </main>
 
-    <!-- ── Footer ──────────────────────────────────────────── -->
-    <footer class="st-footer">
-        <div class="container">
-            <span>
-                &copy; @DateTime.Now.Year
-                <strong style="color:var(--primary)">Smart Trip Cost Analyzer</strong>
-                — Know the real cost of every journey.
-            </span>
-        </div>
-    </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -174,16 +174,13 @@
         }
 
         @@media (max-width: 600px) {
-            .features-grid
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-        {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .stats-row {
-            gap: 1.5rem;
-        }
-
+            .stats-row {
+                gap: 1.5rem;
+            }
         }
 
         .feat-card {
@@ -313,6 +310,7 @@
     <div class="landing-orb landing-orb-3"></div>
 
     <!-- Main content -->
+    <!-- Main content -->
     <div class="landing-content">
 
         <!-- Logo -->
@@ -359,45 +357,91 @@
             </div>
         </div>
 
-        <!-- Feature cards -->
-        <div class="features-grid fade-up delay-4">
-            <div class="feat-card">
-                <div class="feat-icon" style="background: linear-gradient(135deg,#0d9488,#14b8a6);">
-                    <i class="bi bi-fuel-pump-fill"></i>
-                </div>
-                <div class="feat-label">Fuel Costs</div>
-                <div class="feat-desc">Real-time pricing</div>
-            </div>
-            <div class="feat-card">
-                <div class="feat-icon" style="background: linear-gradient(135deg,#3b82f6,#6366f1);">
-                    <i class="bi bi-map-fill"></i>
-                </div>
-                <div class="feat-label">Route Compare</div>
-                <div class="feat-desc">3 route options</div>
-            </div>
-            <div class="feat-card">
-                <div class="feat-icon" style="background: linear-gradient(135deg,#f97316,#fbbf24);">
-                    <i class="bi bi-people-fill"></i>
-                </div>
-                <div class="feat-label">Cost Split</div>
-                <div class="feat-desc">Carpool savings</div>
-            </div>
-            <div class="feat-card">
-                <div class="feat-icon" style="background: linear-gradient(135deg,#10b981,#0d9488);">
-                    <i class="bi bi-graph-up-arrow"></i>
-                </div>
-                <div class="feat-label">Analytics</div>
-                <div class="feat-desc">Smart insights</div>
-            </div>
+        @* FIX 5: Feature cards now link to Register (guest) or Dashboard (logged-in user).
+           Added id="features" so the navbar "Features" anchor link scrolls here correctly. *@
+        <div id="features" class="features-grid fade-up delay-4">
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("Dashboard", "Dashboard")" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#0d9488,#14b8a6);">
+                        <i class="bi bi-fuel-pump-fill"></i>
+                    </div>
+                    <div class="feat-label">Fuel Costs</div>
+                    <div class="feat-desc">Real-time pricing</div>
+                </a>
+                <a href="@Url.Action("Dashboard", "Dashboard")" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#3b82f6,#6366f1);">
+                        <i class="bi bi-map-fill"></i>
+                    </div>
+                    <div class="feat-label">Route Compare</div>
+                    <div class="feat-desc">3 route options</div>
+                </a>
+                <a href="@Url.Action("Dashboard", "Dashboard")" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#f97316,#fbbf24);">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="feat-label">Cost Split</div>
+                    <div class="feat-desc">Carpool savings</div>
+                </a>
+                <a href="@Url.Action("Analytics", "Analytics")" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#10b981,#0d9488);">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <div class="feat-label">Analytics</div>
+                    <div class="feat-desc">Smart insights</div>
+                </a>
+            }
+            else
+            {
+                <a asp-area="Identity" asp-page="/Account/Login" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#0d9488,#14b8a6);">
+                        <i class="bi bi-fuel-pump-fill"></i>
+                    </div>
+                    <div class="feat-label">Fuel Costs</div>
+                    <div class="feat-desc">Real-time pricing</div>
+                </a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#3b82f6,#6366f1);">
+                        <i class="bi bi-map-fill"></i>
+                    </div>
+                    <div class="feat-label">Route Compare</div>
+                    <div class="feat-desc">3 route options</div>
+                </a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#f97316,#fbbf24);">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="feat-label">Cost Split</div>
+                    <div class="feat-desc">Carpool savings</div>
+                </a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="feat-card" style="text-decoration:none;">
+                    <div class="feat-icon" style="background: linear-gradient(135deg,#10b981,#0d9488);">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <div class="feat-label">Analytics</div>
+                    <div class="feat-desc">Smart insights</div>
+                </a>
+            }
         </div>
 
-        <!-- CTA -->
+        @* CTA button: goes to Register for guests, Dashboard for logged-in users *@
         <div class="cta-row fade-up delay-5">
-            <a asp-area="Identity" asp-page="/Account/Register" class="btn-get-started gradient-bg">
-                <span style="position:relative;z-index:1;">Get Started Free</span>
-                <i class="bi bi-arrow-right" style="position:relative;z-index:1;"></i>
-                <div class="shimmer"></div>
-            </a>
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("Dashboard", "Dashboard")" class="btn-get-started gradient-bg">
+                    <span style="position:relative;z-index:1;">Go to Dashboard</span>
+                    <i class="bi bi-arrow-right" style="position:relative;z-index:1;"></i>
+                    <div class="shimmer"></div>
+                </a>
+            }
+            else
+            {
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn-get-started gradient-bg">
+                    <span style="position:relative;z-index:1;">Get Started Free</span>
+                    <i class="bi bi-arrow-right" style="position:relative;z-index:1;"></i>
+                    <div class="shimmer"></div>
+                </a>
+            }
         </div>
 
     </div>
@@ -417,14 +461,12 @@
             function update(now) {
                 const elapsed = now - start;
                 const progress = Math.min(elapsed / duration, 1);
-                // easeOut
                 const ease = 1 - Math.pow(1 - progress, 3);
                 const current = Math.round(ease * target);
                 el.textContent = current.toLocaleString() + suffix;
                 if (progress < 1) requestAnimationFrame(update);
             }
 
-            // Start when element is visible
             const observer = new IntersectionObserver(entries => {
                 if (entries[0].isIntersecting) {
                     requestAnimationFrame(update);
