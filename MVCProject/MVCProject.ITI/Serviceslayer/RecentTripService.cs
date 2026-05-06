@@ -20,7 +20,7 @@ namespace MVCProject.ITI.Serviceslayer
 
         public async Task<IEnumerable<TripCardViewModel>> GetAllTrips()
         {
-            IEnumerable<Trip> AllTrips =  _tripRepo.GetTableNoTracking();
+            IEnumerable<ITI.DataAccessLayer.Entities.Trip> AllTrips =  _tripRepo.GetTableNoTracking();
 
             if (!AllTrips.Any())
                 return Enumerable.Empty<TripCardViewModel>();
