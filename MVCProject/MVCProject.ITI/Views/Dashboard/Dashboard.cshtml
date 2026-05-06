@@ -90,13 +90,14 @@
             <span class="section-label">Your Stats</span>
             <a asp-action="Analytics" asp-controller="Analytics" class="see-all">See all &rsaquo;</a>
         </div>
-        <div class="row g-2">
+        @if (@ViewBag.analytics!=null)
+       { <div class="row g-2">
             <div class="col-4">
                 <div class="stat-card">
                     <div class="stat-icon" style="background:linear-gradient(135deg,#3bbfad,#259183)">
                         <i class="bi bi-map-fill"></i>
                     </div>
-                    <div class="stat-value" data-target="1835">0</div>
+                        <div class="stat-value" data-target="@ViewBag.analytics.TotalDistance">0</div>
                     <div class="stat-unit">km</div>
                     <div class="stat-label">Total Distance</div>
                 </div>
@@ -106,7 +107,7 @@
                     <div class="stat-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a)">
                         <i class="bi bi-wallet2"></i>
                     </div>
-                    <div class="stat-value" data-target="2675">0</div>
+                        <div class="stat-value" data-target="@ViewBag.analytics.TotalSpent">0</div>
                     <div class="stat-unit" style="color:var(--green)">EGP</div>
                     <div class="stat-label">Total Spent</div>
                 </div>
@@ -116,13 +117,13 @@
                     <div class="stat-icon" style="background:linear-gradient(135deg,#f97316,#ea6c0b)">
                         <i class="bi bi-wind"></i>
                     </div>
-                    <div class="stat-value" data-target="241">0</div>
+                        <div class="stat-value" data-target="@ViewBag.analytics.Emissions">0</div>
                     <div class="stat-unit" style="color:#f97316">kg</div>
                     <div class="stat-label">CO₂ Saved</div>
                 </div>
             </div>
         </div>
-
+        }
         <div class="d-flex justify-content-between align-items-center mt-section">
             <span class="section-label">Recent Trips</span>
             <a asp-action="History" asp-controller="Trip" class="see-all">View all &rsaquo;</a>
@@ -146,13 +147,13 @@
 </div>  <!-- ✅ أقفلي الـ container-fluid هنا -->
 
     <!-- FABs -->
-    <div class="fab-stack">
-        <button class="fab active" title="Filters"><i class="bi bi-sliders2"></i></button>
-        <button class="fab" title="Compass"><i class="bi bi-compass"></i></button>
-        <button class="fab" title="List"><i class="bi bi-list-ul"></i></button>
-        <button class="fab" title="Bookmark"><i class="bi bi-bookmark"></i></button>
-        <a class="fab" asp-controller="Settings" asp-action="Index" title="Settings"><i class="bi bi-gear"></i></a>
-    </div>
+    @* <div class="fab-stack"> *@
+    @*     <button class="fab active" title="Filters"><i class="bi bi-sliders2"></i></button> *@
+    @*     <button class="fab" title="Compass"><i class="bi bi-compass"></i></button> *@
+    @*     <button class="fab" title="List"><i class="bi bi-list-ul"></i></button> *@
+    @*     <button class="fab" title="Bookmark"><i class="bi bi-bookmark"></i></button> *@
+    @*     <a class="fab" asp-controller="Settings" asp-action="Index" title="Settings"><i class="bi bi-gear"></i></a> *@
+    @* </div> *@
 
     <!-- Bottom Nav -->
     <div class="bottom-nav">

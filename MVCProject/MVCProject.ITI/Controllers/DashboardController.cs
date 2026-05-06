@@ -16,13 +16,17 @@ namespace MVCProject.ITI.Controllers
         private readonly IRecentTripService _recentTripService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly VehicleService _vechileService;
+        private readonly IAnalyticsService _analyticsService;
 
         public DashboardController(IRecentTripService recentTripService
-            ,UserManager<ApplicationUser> userManager, VehicleService vechileService)
+            ,UserManager<ApplicationUser> userManager
+            , VehicleService vechileService
+            , IAnalyticsService analyticsService)
         {
             _recentTripService = recentTripService;
             _userManager = userManager;
             _vechileService = vechileService;
+            _analyticsService = analyticsService;
         }
         public async Task<IActionResult> DashboardAsync()
         {
@@ -35,6 +39,7 @@ namespace MVCProject.ITI.Controllers
 
                 Guid id = user.Id;
                 ViewBag.Vehicle =await _vechileService.GetDefaultVehicleAsync(id);
+                ViewBag.analytics= await _analyticsService.calcAnalytics(id);
 
                 IEnumerable<TripCardViewModel> RecentTrips = await _recentTripService.GetRecentTrips(id);
                 return View(RecentTrips);
