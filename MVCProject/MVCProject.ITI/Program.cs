@@ -65,6 +65,7 @@ public class Program
         builder.Services.AddTransient<IEmailSender, EmailSender>();
         builder.Services.AddScoped<VehicleService>();
         builder.Services.AddScoped<CarModelService>();
+        builder.Services.AddTransient<IAnalyticsService, AnalyticsService>();
 
         builder.Services.AddAutoMapper(options => options.AddProfile(new DomainProfile()));
 

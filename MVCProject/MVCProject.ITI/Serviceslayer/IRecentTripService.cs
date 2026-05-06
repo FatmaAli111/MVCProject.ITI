@@ -1,5 +1,6 @@
 ﻿using MVCProject.ITI.DataAccessLayer.Entities;
 using MVCProject.ITI.Models;
+using MVCProject.ITI.ViewModels;
 
 namespace MVCProject.ITI.Serviceslayer
 {
@@ -7,6 +8,6 @@ namespace MVCProject.ITI.Serviceslayer
     {
         Task<IEnumerable<TripCardViewModel>> GetRecentTrips(Guid id);
         Task<IEnumerable<TripCardViewModel>> GetAllTrips();
-
+        Task AddTrip(NewTripViewModel newTripViewModel);
     }
 }

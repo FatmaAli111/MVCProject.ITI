@@ -4,6 +4,7 @@ using MVCProject.ITI.Models;
 using AutoMapper;
 using System.Collections.Generic;
 using MVCProject.ITI.DataAccessLayer.Rpository.TripRepo;
+using MVCProject.ITI.ViewModels;
 
 
 namespace MVCProject.ITI.Serviceslayer
@@ -17,6 +18,20 @@ namespace MVCProject.ITI.Serviceslayer
         {
             _tripRepo = tripRepo;
             _mapper = mapper;
+        }
+
+        public async Task AddTrip(NewTripViewModel newTripViewModel)
+        {
+            var newTrip = _mapper.Map<ITI.DataAccessLayer.Entities.Trip>(newTripViewModel);
+            try
+            {
+                _tripRepo.Add(newTrip);
+                _tripRepo.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<TripCardViewModel>> GetAllTrips()
@@ -43,6 +58,7 @@ namespace MVCProject.ITI.Serviceslayer
              IEnumerable<TripCardViewModel> recentTripsVM = _mapper.Map<IEnumerable<TripCardViewModel>>(recentTrips);
             return recentTripsVM;
         }
+        
 
       
     }
