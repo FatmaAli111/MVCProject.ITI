@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MVCProject.ITI.Migrations
 {
     /// <inheritdoc />
-    public partial class Reinit : Migration
+    public partial class ReInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -338,33 +338,8 @@ namespace MVCProject.ITI.Migrations
                 columns: new[] { "Id", "BatteryCapacity", "FuelType", "Make", "Model", "TankCapacity", "WltpMixed", "Year" },
                 values: new object[,]
                 {
-                    { new Guid("079318b7-6e4e-4f33-87b6-e2a7e7ed27e4"), 90f, 2, "Mercedes", "EQE", null, 18f, 2023 },
                     { new Guid("13735163-952a-466d-8e7c-87d3dfa7263b"), null, 0, "Toyota", "Corolla", null, 4.9f, 2023 },
-                    { new Guid("179318b7-6e4e-4f33-87b6-e2a7e7ed27e5"), null, 0, "Volkswagen", "Golf", 50f, 5.4f, 2023 },
-                    { new Guid("279318b7-6e4e-4f33-87b6-e2a7e7ed27d6"), null, 0, "Honda", "Civic", null, 5.5f, 2023 },
-                    { new Guid("279318b7-6e4e-4f33-87b6-e2a7e7ed27e6"), 82f, 2, "Volkswagen", "ID.4", null, 17.5f, 2023 },
-                    { new Guid("379318b7-6e4e-4f33-87b6-e2a7e7ed27d7"), null, 3, "Toyota", "Camry", 55f, 5.8f, 2023 },
-                    { new Guid("379318b7-6e4e-4f33-87b6-e2a7e7ed27e7"), null, 1, "Volkswagen", "Passat", 66f, 5.2f, 2023 },
-                    { new Guid("479318b7-6e4e-4f33-87b6-e2a7e7ed27d8"), null, 3, "Toyota", "RAV4", 55f, 6.2f, 2023 },
-                    { new Guid("479318b7-6e4e-4f33-87b6-e2a7e7ed27e8"), null, 0, "Ford", "Focus", 52f, 5.6f, 2023 },
-                    { new Guid("579318b7-6e4e-4f33-87b6-e2a7e7ed27d9"), null, 3, "Toyota", "Prius", 43f, 4f, 2023 },
-                    { new Guid("579318b7-6e4e-4f33-87b6-e2a7e7ed27e9"), null, 0, "Ford", "Mustang", 61f, 10.5f, 2023 },
-                    { new Guid("679318b7-6e4e-4f33-87b6-e2a7e7ed27da"), null, 0, "Toyota", "Corolla", 50f, 5.1f, 2022 },
-                    { new Guid("679318b7-6e4e-4f33-87b6-e2a7e7ed27ea"), 62f, 2, "Nissan", "Leaf", null, 17f, 2023 },
-                    { new Guid("779318b7-6e4e-4f33-87b6-e2a7e7ed27db"), null, 0, "Toyota", "Corolla", 50f, 4.8f, 2024 },
-                    { new Guid("779318b7-6e4e-4f33-87b6-e2a7e7ed27eb"), null, 0, "Nissan", "Altima", 56f, 6.8f, 2023 },
-                    { new Guid("879318b7-6e4e-4f33-87b6-e2a7e7ed27dc"), null, 0, "Honda", "Civic", 47f, 5.7f, 2022 },
-                    { new Guid("879318b7-6e4e-4f33-87b6-e2a7e7ed27ec"), null, 3, "Hyundai", "Elantra", 50f, 6f, 2023 },
-                    { new Guid("979318b7-6e4e-4f33-87b6-e2a7e7ed27dd"), null, 0, "Honda", "Civic", 47f, 5.3f, 2024 },
-                    { new Guid("979318b7-6e4e-4f33-87b6-e2a7e7ed27ed"), 77f, 2, "Hyundai", "Ioniq 5", null, 18.5f, 2023 },
-                    { new Guid("a79318b7-6e4e-4f33-87b6-e2a7e7ed27de"), null, 3, "Honda", "Accord", 48f, 6f, 2023 },
-                    { new Guid("a79318b7-6e4e-4f33-87b6-e2a7e7ed27ee"), null, 3, "Kia", "Sportage", 54f, 6.5f, 2023 },
-                    { new Guid("b79318b7-6e4e-4f33-87b6-e2a7e7ed27df"), null, 3, "Honda", "CR-V", 53f, 6.8f, 2023 },
-                    { new Guid("b79318b7-6e4e-4f33-87b6-e2a7e7ed27ef"), 77f, 2, "Kia", "EV6", null, 18f, 2023 },
-                    { new Guid("c79318b7-6e4e-4f33-87b6-e2a7e7ed27e0"), null, 1, "BMW", "3 Series", 59f, 5.9f, 2023 },
-                    { new Guid("d79318b7-6e4e-4f33-87b6-e2a7e7ed27e1"), null, 0, "BMW", "3 Series", 59f, 6.5f, 2023 },
-                    { new Guid("e79318b7-6e4e-4f33-87b6-e2a7e7ed27e2"), 84f, 2, "BMW", "i4", null, 16.5f, 2023 },
-                    { new Guid("f79318b7-6e4e-4f33-87b6-e2a7e7ed27e3"), null, 1, "Mercedes", "C-Class", 66f, 6.2f, 2023 }
+                    { new Guid("279318b7-6e4e-4f33-87b6-e2a7e7ed27d6"), null, 0, "Honda", "Civic", null, 5.5f, 2023 }
                 });
 
             migrationBuilder.InsertData(
@@ -377,23 +352,9 @@ namespace MVCProject.ITI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { new Guid("d6e87f16-7788-4f10-9c1c-0c3f09f023ea"), null, "Admin", "ADMIN" },
-                    { new Guid("f6e87f16-7788-4f10-9c1c-0c3f09f023eb"), null, "User", "USER" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("46686121-d1c1-4796-993d-82d2a45a6660"), 0, "a215a5ed-ed8e-415b-b9b0-33ac7aa13b28", "admin@trips.com", true, "", false, null, "ADMIN@TRIPS.COM", "ADMIN@TRIPS.COM", "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==", null, false, "f0883b27-c1d1-4e63-9993-82d2a45a6660", false, "admin@trips.com" });
-
-            migrationBuilder.InsertData(
-                table: "UserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("d6e87f16-7788-4f10-9c1c-0c3f09f023ea"), new Guid("46686121-d1c1-4796-993d-82d2a45a6660") });
+                values: new object[] { new Guid("46686121-d1c1-4796-993d-82d2a45a6660"), 0, "988c93e3-c67e-47eb-92d1-c4e866d13011", "admin@trips.com", true, "", false, null, "ADMIN@TRIPS.COM", "ADMIN@TRIPS.COM", "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==", null, false, "f0883b27-c1d1-4e63-9993-82d2a45a6660", false, "admin@trips.com" });
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
