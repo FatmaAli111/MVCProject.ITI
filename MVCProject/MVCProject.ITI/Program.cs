@@ -8,6 +8,7 @@ using MVCProject.ITI.DataAccessLayer.Entities;
 using MVCProject.ITI.DataAccessLayer.Rpository.TripRepo;
 using MVCProject.ITI.Services;
 using MVCProject.ITI.Mapper;
+using MVCProject.ITI.Serviceslayer.Trip;
 using MVCProject.ITI.Serviceslayer;
 
 namespace MVCProject.ITI;
@@ -66,6 +67,15 @@ public class Program
         builder.Services.AddScoped<CarModelService>();
 
         builder.Services.AddAutoMapper(options => options.AddProfile(new DomainProfile()));
+
+        // WeatherSevice on Trip
+        builder.Services.AddHttpClient<IWeatherService, WeatherService>();
+
+        // Route Trip Service
+        builder.Services.AddHttpClient<IRouteService, RouteService>();
+
+        // Trip Cost Services
+        builder.Services.AddScoped<ITripCostService, TripCostService>();
         builder.Services.AddScoped<IRecentTripService, RecentTripService>();
         builder.Services.AddScoped<IUserSettingsService, UserSettingsService>();
 

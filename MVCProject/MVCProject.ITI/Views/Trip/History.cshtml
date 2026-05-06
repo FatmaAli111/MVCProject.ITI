@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Trip/_TripLayout.cshtml";
+    ViewData["Title"] = "Trip History";
+
+
+    // Static data for Test
+    var trips = new[]
+    {
+        new { From="Cairo", To="Alexandria",     Date="2024-01-15", Km=220, Traffic="Medium", Cost=272  },
+        new { From="Cairo", To="Giza Pyramids",  Date="2024-01-12", Km=25,  Traffic="Low",    Cost=31   },
+        new { From="Cairo", To="Sharm El Sheikh",Date="2024-01-08", Km=480, Traffic="Heavy",  Cost=594  },
+        new { From="Cairo", To="Hurghada",       Date="2024-01-05", Km=460, Traffic="Low",    Cost=532  },
+        new { From="Cairo", To="Luxor",          Date="2023-12-28", Km=670, Traffic="Medium", Cost=774  },
+    };
+    int count = trips.Length;
+}
+
+<div id="page-history">
+    <div class="topbar">
+        <div class="tb-left">
+            <button class="back-btn" onclick="history.back()" aria-label="Back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+            <div class="tb-title">
+                <h2>Trip History</h2>
+                <p>@count trip@(count != 1 ? "s" : "") recorded</p>
+            </div>
+        </div>
+        <div class="tb-acts">
+            <button class="icon-btn icon-btn-ghost" aria-label="Search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="page-scroll">
+        <div class="history-list">
+            @if (count == 0)
+            {
+                <div style="text-align:center;padding:60px 20px;color:var(--muted);">
+                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.4" stroke-linecap="round" style="margin-bottom:14px;">
+                        <circle cx="12" cy="10" r="3" />
+                        <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
+                    </svg>
+                    <p style="font-size:15px;font-weight:700;color:var(--soft);">No trips yet</p>
+                    <p style="font-size:13px;margin-top:4px;">Your completed trips will appear here.</p>
+                </div>
+            }
+            else
+            {
+                @for (int i = 0; i < trips.Length; i++)
+                {
+                    var t = trips[i];
+                    string pillCls = t.Traffic == "Low" ? "pill-low" :
+                                     t.Traffic == "Heavy" ? "pill-heavy" : "pill-medium";
+                    <a href="@Url.Action("CompletionTrip", "Trip")" class="h-item"
+                       style="animation-delay:@(i * 0.06)s; text-decoration:none; color:inherit;">
+                        <div class="h-av">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke="var(--teal-dk)">
+                                <circle cx="12" cy="10" r="3" />
+                                <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
+                            </svg>
+                        </div>
+                        <div class="h-info">
+                            <div class="h-route">@t.From &rarr; @t.To</div>
+                            <div class="h-meta">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
+                                </svg>
+                                @t.Date &nbsp; @t.Km km &nbsp;
+                                <span class="t-pill @pillCls">@t.Traffic</span>
+                            </div>
+                        </div>
+                        <div style="text-align:right;margin-left:14px;">
+                            <div class="h-cost">@t.Cost</div>
+                            <div class="h-unit">EGP</div>
+                        </div>
+                        <div class="h-acts">
+                            <button class="arr-btn" tabindex="-1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke="var(--muted)">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>
