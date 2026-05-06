@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace MVCProject.ITI.Data.Migrations
+namespace MVCProject.ITI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260505213809_AddTripPassenger")]
-    partial class AddTripPassenger
+    [Migration("20260506021344_Reinit")]
+    partial class Reinit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,7 +100,7 @@ namespace MVCProject.ITI.Data.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de0eed32-7ace-4ae3-9133-17643a3031e9",
+                            ConcurrencyStamp = "a215a5ed-ed8e-415b-b9b0-33ac7aa13b28",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
                             FullName = "",
@@ -166,6 +166,256 @@ namespace MVCProject.ITI.Data.Migrations
                             Make = "Honda",
                             Model = "Civic",
                             WltpMixed = 5.5f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("379318b7-6e4e-4f33-87b6-e2a7e7ed27d7"),
+                            FuelType = 3,
+                            Make = "Toyota",
+                            Model = "Camry",
+                            TankCapacity = 55f,
+                            WltpMixed = 5.8f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("479318b7-6e4e-4f33-87b6-e2a7e7ed27d8"),
+                            FuelType = 3,
+                            Make = "Toyota",
+                            Model = "RAV4",
+                            TankCapacity = 55f,
+                            WltpMixed = 6.2f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("579318b7-6e4e-4f33-87b6-e2a7e7ed27d9"),
+                            FuelType = 3,
+                            Make = "Toyota",
+                            Model = "Prius",
+                            TankCapacity = 43f,
+                            WltpMixed = 4f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("679318b7-6e4e-4f33-87b6-e2a7e7ed27da"),
+                            FuelType = 0,
+                            Make = "Toyota",
+                            Model = "Corolla",
+                            TankCapacity = 50f,
+                            WltpMixed = 5.1f,
+                            Year = 2022
+                        },
+                        new
+                        {
+                            Id = new Guid("779318b7-6e4e-4f33-87b6-e2a7e7ed27db"),
+                            FuelType = 0,
+                            Make = "Toyota",
+                            Model = "Corolla",
+                            TankCapacity = 50f,
+                            WltpMixed = 4.8f,
+                            Year = 2024
+                        },
+                        new
+                        {
+                            Id = new Guid("879318b7-6e4e-4f33-87b6-e2a7e7ed27dc"),
+                            FuelType = 0,
+                            Make = "Honda",
+                            Model = "Civic",
+                            TankCapacity = 47f,
+                            WltpMixed = 5.7f,
+                            Year = 2022
+                        },
+                        new
+                        {
+                            Id = new Guid("979318b7-6e4e-4f33-87b6-e2a7e7ed27dd"),
+                            FuelType = 0,
+                            Make = "Honda",
+                            Model = "Civic",
+                            TankCapacity = 47f,
+                            WltpMixed = 5.3f,
+                            Year = 2024
+                        },
+                        new
+                        {
+                            Id = new Guid("a79318b7-6e4e-4f33-87b6-e2a7e7ed27de"),
+                            FuelType = 3,
+                            Make = "Honda",
+                            Model = "Accord",
+                            TankCapacity = 48f,
+                            WltpMixed = 6f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("b79318b7-6e4e-4f33-87b6-e2a7e7ed27df"),
+                            FuelType = 3,
+                            Make = "Honda",
+                            Model = "CR-V",
+                            TankCapacity = 53f,
+                            WltpMixed = 6.8f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("c79318b7-6e4e-4f33-87b6-e2a7e7ed27e0"),
+                            FuelType = 1,
+                            Make = "BMW",
+                            Model = "3 Series",
+                            TankCapacity = 59f,
+                            WltpMixed = 5.9f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("d79318b7-6e4e-4f33-87b6-e2a7e7ed27e1"),
+                            FuelType = 0,
+                            Make = "BMW",
+                            Model = "3 Series",
+                            TankCapacity = 59f,
+                            WltpMixed = 6.5f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("e79318b7-6e4e-4f33-87b6-e2a7e7ed27e2"),
+                            BatteryCapacity = 84f,
+                            FuelType = 2,
+                            Make = "BMW",
+                            Model = "i4",
+                            WltpMixed = 16.5f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("f79318b7-6e4e-4f33-87b6-e2a7e7ed27e3"),
+                            FuelType = 1,
+                            Make = "Mercedes",
+                            Model = "C-Class",
+                            TankCapacity = 66f,
+                            WltpMixed = 6.2f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("079318b7-6e4e-4f33-87b6-e2a7e7ed27e4"),
+                            BatteryCapacity = 90f,
+                            FuelType = 2,
+                            Make = "Mercedes",
+                            Model = "EQE",
+                            WltpMixed = 18f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("179318b7-6e4e-4f33-87b6-e2a7e7ed27e5"),
+                            FuelType = 0,
+                            Make = "Volkswagen",
+                            Model = "Golf",
+                            TankCapacity = 50f,
+                            WltpMixed = 5.4f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("279318b7-6e4e-4f33-87b6-e2a7e7ed27e6"),
+                            BatteryCapacity = 82f,
+                            FuelType = 2,
+                            Make = "Volkswagen",
+                            Model = "ID.4",
+                            WltpMixed = 17.5f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("379318b7-6e4e-4f33-87b6-e2a7e7ed27e7"),
+                            FuelType = 1,
+                            Make = "Volkswagen",
+                            Model = "Passat",
+                            TankCapacity = 66f,
+                            WltpMixed = 5.2f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("479318b7-6e4e-4f33-87b6-e2a7e7ed27e8"),
+                            FuelType = 0,
+                            Make = "Ford",
+                            Model = "Focus",
+                            TankCapacity = 52f,
+                            WltpMixed = 5.6f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("579318b7-6e4e-4f33-87b6-e2a7e7ed27e9"),
+                            FuelType = 0,
+                            Make = "Ford",
+                            Model = "Mustang",
+                            TankCapacity = 61f,
+                            WltpMixed = 10.5f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("679318b7-6e4e-4f33-87b6-e2a7e7ed27ea"),
+                            BatteryCapacity = 62f,
+                            FuelType = 2,
+                            Make = "Nissan",
+                            Model = "Leaf",
+                            WltpMixed = 17f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("779318b7-6e4e-4f33-87b6-e2a7e7ed27eb"),
+                            FuelType = 0,
+                            Make = "Nissan",
+                            Model = "Altima",
+                            TankCapacity = 56f,
+                            WltpMixed = 6.8f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("879318b7-6e4e-4f33-87b6-e2a7e7ed27ec"),
+                            FuelType = 3,
+                            Make = "Hyundai",
+                            Model = "Elantra",
+                            TankCapacity = 50f,
+                            WltpMixed = 6f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("979318b7-6e4e-4f33-87b6-e2a7e7ed27ed"),
+                            BatteryCapacity = 77f,
+                            FuelType = 2,
+                            Make = "Hyundai",
+                            Model = "Ioniq 5",
+                            WltpMixed = 18.5f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("a79318b7-6e4e-4f33-87b6-e2a7e7ed27ee"),
+                            FuelType = 3,
+                            Make = "Kia",
+                            Model = "Sportage",
+                            TankCapacity = 54f,
+                            WltpMixed = 6.5f,
+                            Year = 2023
+                        },
+                        new
+                        {
+                            Id = new Guid("b79318b7-6e4e-4f33-87b6-e2a7e7ed27ef"),
+                            BatteryCapacity = 77f,
+                            FuelType = 2,
+                            Make = "Kia",
+                            Model = "EV6",
+                            WltpMixed = 18f,
                             Year = 2023
                         });
                 });
@@ -388,6 +638,32 @@ namespace MVCProject.ITI.Data.Migrations
                     b.ToTable("TripCostResults");
                 });
 
+            modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.TripPassenger", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("ShareAmount")
+                        .HasColumnType("real");
+
+                    b.Property<float>("SharePercentage")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("TripId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("TripPassengers");
+                });
+
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.Vehicle", b =>
                 {
                     b.Property<Guid>("Id")
@@ -525,12 +801,10 @@ namespace MVCProject.ITI.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -573,12 +847,10 @@ namespace MVCProject.ITI.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -633,6 +905,17 @@ namespace MVCProject.ITI.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("FuelPrice");
+
+                    b.Navigation("Trip");
+                });
+
+            modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.TripPassenger", b =>
+                {
+                    b.HasOne("MVCProject.ITI.DataAccessLayer.Entities.Trip", "Trip")
+                        .WithMany()
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Trip");
                 });

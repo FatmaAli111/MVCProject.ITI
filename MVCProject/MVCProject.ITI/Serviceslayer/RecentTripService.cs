@@ -22,7 +22,7 @@ namespace MVCProject.ITI.Serviceslayer
             if (id == Guid.Empty)
                 throw new ArgumentException("Invalid user ID");
 
-            IEnumerable<Trip> recentTrips = await _tripRepo.GetTripsWithVehicleAndCostResult(id);
+            IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> recentTrips = await _tripRepo.GetTripsWithVehicleAndCostResult(id);
           
             if (!recentTrips.Any())
                 return Enumerable.Empty<TripCardViewModel>();

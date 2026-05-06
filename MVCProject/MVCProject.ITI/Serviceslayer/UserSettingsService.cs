@@ -11,14 +11,14 @@ namespace MVCProject.ITI.Serviceslayer
         private readonly IGenericRepository<ApplicationUser> _userRepo;
         private readonly IGenericRepository<Vehicle> _vehicleRepo;
         private readonly IGenericRepository<CarModel> _carModelRepo;
-        private readonly IGenericRepository<Trip> _tripRepo;
+        private readonly IGenericRepository<MVCProject.ITI.DataAccessLayer.Entities.Trip> _tripRepo;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public UserSettingsService(
             IGenericRepository<ApplicationUser> userRepo,
             IGenericRepository<Vehicle> vehicleRepo,
             IGenericRepository<CarModel> carModelRepo,
-            IGenericRepository<Trip> tripRepo,
+            IGenericRepository<MVCProject.ITI.DataAccessLayer.Entities.Trip> tripRepo,
             UserManager<ApplicationUser> userManager)
         {
             _userRepo = userRepo;
