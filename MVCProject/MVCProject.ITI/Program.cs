@@ -43,6 +43,7 @@ public class Program
 
         //Register Services
         builder.Services.AddScoped<IRecentTripService, RecentTripService>();
+        builder.Services.AddScoped<IUserSettingsService, UserSettingsService>();
 
         var app = builder.Build();
 
