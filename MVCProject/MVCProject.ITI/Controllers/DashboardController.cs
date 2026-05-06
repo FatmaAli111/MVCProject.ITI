@@ -20,7 +20,7 @@ namespace MVCProject.ITI.Controllers
             _userManager = userManager;
             _vechileService = vechileService;
         }
-
+        [HttpGet]
         public async Task<IActionResult> DashboardAsync()
         {
 
@@ -41,6 +41,7 @@ namespace MVCProject.ITI.Controllers
                 return RedirectToAction("Error","Home",ex.Message);
             }
         }
+        [HttpGet]
         public async Task<IActionResult> StartNewTripAsync()
         {
             try

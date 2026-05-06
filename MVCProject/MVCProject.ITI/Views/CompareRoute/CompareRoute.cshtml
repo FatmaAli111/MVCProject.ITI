@@ -1,0 +1,411 @@
+﻿@section Styles{
+<link href="~/css/CompareRoute.css" rel="stylesheet" />
+
+}
+@{
+    Layout = "_AppLayout";
+}
+<body>
+
+<div class="page">
+  <!-- Scrollable body -->
+  <div class="body">
+
+    <!-- Quick comparison -->
+    <div class="quick-bar">
+      <div class="quick-bar-head">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+        </svg>
+        Quick Comparison
+      </div>
+      <p>Time difference: 5h 3m vs 9h 18m &nbsp;·&nbsp; Cost difference: EGP 555 vs EGP 681</p>
+    </div>
+
+    <!-- ── Card 1: Highway (Fastest) ── -->
+    <div class="route-card active" id="card-0" onclick="selectCard(0)">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="badges">
+            <span class="badge b-fastest">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Fastest
+            </span>
+          </div>
+          <div class="card-name">Highway Route (Fastest)</div>
+          <div class="card-traffic">Low traffic</div>
+        </div>
+        <div class="card-total">
+          <div class="amount">EGP 681</div>
+          <div class="label">total cost</div>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/>
+          </svg>
+          <span class="metric-val">405 km</span>
+          <span class="metric-label">Distance</span>
+        </div>
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l3.5 3.5"/>
+          </svg>
+          <span class="metric-val">5h 3m</span>
+          <span class="metric-label">Duration</span>
+        </div>
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 22V8l9-6 9 6v14"/><path d="M9 22v-6h6v6"/>
+          </svg>
+          <span class="metric-val">EGP 430</span>
+          <span class="metric-label">Fuel</span>
+        </div>
+      </div>
+
+      <div class="cost-block">
+        <div class="cost-row"><span>Fuel Cost</span><span class="val">EGP 430</span></div>
+        <div class="cost-row"><span>Toll Fees</span><span class="val">EGP 190</span></div>
+        <div class="cost-row total"><span>Total</span><span class="val">EGP 681</span></div>
+      </div>
+
+      <div class="info-pills">
+        <div class="info-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M9 12h6M12 9v6"/>
+          </svg>
+          2 toll points
+        </div>
+        <div class="info-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          1 fuel station
+        </div>
+      </div>
+
+      <div class="details-toggle" onclick="toggleDetails(event, 0)">
+        <div class="left">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          View details &amp; explanation
+        </div>
+        <svg class="chevron" id="chev-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="expand-body" id="exp-0">
+        <div class="expand-inner">
+          <div class="expand-row"><span>Route via Cairo Ring Road + Suez Hwy</span><span></span></div>
+          <div class="expand-row"><span>Fuel consumption est. 35.1L  EGP 12.25/L</span><span class="mono">EGP 430</span></div>
+          <div class="expand-row"><span>Toll point 1: Suez Road Gate</span><span class="mono">EGP 110</span></div>
+          <div class="expand-row"><span>Toll point 2: Ring Road Gate</span><span class="mono">EGP 80</span></div>
+        </div>
+      </div>
+
+      <div class="selected-banner" id="sel-0">
+        <div class="check-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+          Route selected
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Card 2: Scenic (Cheapest) ── -->
+    <div class="route-card" id="card-1" onclick="selectCard(1)">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="badges">
+            <span class="badge b-cheapest">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10l4-4 4 4M8 14l4 4 4-4"/></svg>
+              Cheapest
+            </span>
+            <span class="badge b-tolls">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>
+              Least Tolls
+            </span>
+          </div>
+          <div class="card-name">Scenic Route (Cheapest)</div>
+          <div class="card-traffic">Medium traffic</div>
+        </div>
+        <div class="card-total">
+          <div class="amount">EGP 555</div>
+          <div class="label">total cost</div>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/>
+          </svg>
+          <span class="metric-val">466 km</span>
+          <span class="metric-label">Distance</span>
+        </div>
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l3.5 3.5"/>
+          </svg>
+          <span class="metric-val">9h 18m</span>
+          <span class="metric-label">Duration</span>
+        </div>
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 22V8l9-6 9 6v14"/><path d="M9 22v-6h6v6"/>
+          </svg>
+          <span class="metric-val">EGP 445</span>
+          <span class="metric-label">Fuel</span>
+        </div>
+      </div>
+
+      <div class="cost-block">
+        <div class="cost-row"><span>Fuel Cost</span><span class="val">EGP 445</span></div>
+        <div class="cost-row"><span>Toll Fees</span><span class="val">EGP 75</span></div>
+        <div class="cost-row total"><span>Total</span><span class="val">EGP 555</span></div>
+      </div>
+
+      <div class="info-pills">
+        <div class="info-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M9 12h6M12 9v6"/>
+          </svg>
+          1 toll point
+        </div>
+        <div class="info-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          1 fuel station
+        </div>
+      </div>
+
+      <div class="details-toggle" onclick="toggleDetails(event, 1)">
+        <div class="left">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          View details &amp; explanation
+        </div>
+        <svg class="chevron" id="chev-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="expand-body" id="exp-1">
+        <div class="expand-inner">
+          <div class="expand-row"><span>Route via Delta Road + Ismailia Desert Rd</span><span></span></div>
+          <div class="expand-row"><span>Fuel consumption est. 36.3L  EGP 12.25/L</span><span class="mono">EGP 445</span></div>
+          <div class="expand-row"><span>Toll point 1: Ismailia Gate</span><span class="mono">EGP 75</span></div>
+        </div>
+      </div>
+
+      <div class="selected-banner" id="sel-1" style="display:none"></div>
+    </div>
+
+    <!-- ── Card 3: Alternative (Balanced) ── -->
+    <div class="route-card" id="card-2" onclick="selectCard(2)">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="badges"></div>
+          <div class="card-name">Alternative Route (Balanced)</div>
+          <div class="card-traffic">Low traffic</div>
+        </div>
+        <div class="card-total">
+          <div class="amount">EGP 606</div>
+          <div class="label">total cost</div>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/>
+          </svg>
+          <span class="metric-val">437 km</span>
+          <span class="metric-label">Distance</span>
+        </div>
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l3.5 3.5"/>
+          </svg>
+          <span class="metric-val">6h 43m</span>
+          <span class="metric-label">Duration</span>
+        </div>
+        <div class="metric">
+          <svg class="metric-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 22V8l9-6 9 6v14"/><path d="M9 22v-6h6v6"/>
+          </svg>
+          <span class="metric-val">EGP 465</span>
+          <span class="metric-label">Fuel</span>
+        </div>
+      </div>
+
+      <div class="cost-block">
+        <div class="cost-row"><span>Fuel Cost</span><span class="val">EGP 465</span></div>
+        <div class="cost-row"><span>Toll Fees</span><span class="val">EGP 75</span></div>
+        <div class="cost-row total"><span>Total</span><span class="val">EGP 606</span></div>
+      </div>
+
+      <div class="info-pills">
+        <div class="info-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M9 12h6M12 9v6"/>
+          </svg>
+          1 toll point
+        </div>
+        <div class="info-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          1 fuel station
+        </div>
+      </div>
+
+      <div class="details-toggle" onclick="toggleDetails(event, 2)">
+        <div class="left">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          View details &amp; explanation
+        </div>
+        <svg class="chevron" id="chev-2" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="expand-body" id="exp-2">
+        <div class="expand-inner">
+          <div class="expand-row"><span>Route via Agricultural Road + Bypass</span><span></span></div>
+          <div class="expand-row"><span>Fuel consumption est. 37.9L  EGP 12.25/L</span><span class="mono">EGP 465</span></div>
+          <div class="expand-row"><span>Toll point 1: Bypass Gate</span><span class="mono">EGP 75</span></div>
+        </div>
+      </div>
+
+      <div class="selected-banner" id="sel-2" style="display:none"></div>
+    </div>
+
+    <!-- ── Route Summary ── -->
+    <div class="summary-card">
+      <div class="summary-title">
+        <div class="icon-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        Route Summary
+      </div>
+      <div class="summary-row">
+        <span class="sr-label">Fastest Route</span>
+        <span class="sr-val">5h 3m</span>
+      </div>
+      <div class="summary-row">
+        <span class="sr-label">Time savings (fastest vs slowest)</span>
+        <span class="sr-val green">4h 15m</span>
+      </div>
+      <div class="summary-row">
+        <span class="sr-label">Cheapest Route</span>
+        <span class="sr-val">EGP 555</span>
+      </div>
+      <div class="summary-row">
+        <span class="sr-label">Cost savings (cheapest vs most expensive)</span>
+        <span class="sr-val green">EGP 126</span>
+      </div>
+      <div class="summary-row">
+        <span class="sr-label">Cost Range</span>
+        <span class="sr-val">EGP 126</span>
+      </div>
+    </div>
+
+  </div><!-- end .body -->
+
+  <!-- Fixed CTA -->
+  <div class="cta-wrap">
+    <div class="cta-inner">
+      <button class="cta-btn" id="cta-btn" onclick="handleCta(event)">
+        Use Selected Route
+      </button>
+    </div>
+  </div>
+
+</div><!-- end .page -->
+
+<script>
+  let activeCard = 0;
+
+  const routeNames = [
+    'Highway Route (Fastest) — EGP 681',
+    'Scenic Route (Cheapest) — EGP 555',
+    'Alternative Route (Balanced) — EGP 606'
+  ];
+
+  const selBanners = [
+    `<div class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg> Route selected</div>`,
+    `<div class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg> Route selected</div>`,
+    `<div class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg> Route selected</div>`
+  ];
+
+  function selectCard(idx) {
+    if (activeCard === idx) return;
+
+    // deactivate old
+    const oldCard = document.getElementById('card-' + activeCard);
+    const oldBanner = document.getElementById('sel-' + activeCard);
+    oldCard.classList.remove('active');
+    oldBanner.style.display = 'none';
+
+    // activate new
+    activeCard = idx;
+    const newCard = document.getElementById('card-' + idx);
+    const newBanner = document.getElementById('sel-' + idx);
+    newCard.classList.add('active');
+    newBanner.innerHTML = selBanners[idx];
+    newBanner.style.display = 'flex';
+    newBanner.style.justifyContent = 'space-between';
+    newBanner.style.alignItems = 'center';
+
+    // scroll into view smoothly
+    newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // reset CTA
+    const btn = document.getElementById('cta-btn');
+    btn.textContent = 'Use Selected Route';
+    btn.classList.remove('confirmed');
+  }
+
+  function toggleDetails(e, idx) {
+    e.stopPropagation();
+    const body = document.getElementById('exp-' + idx);
+    const chev = document.getElementById('chev-' + idx);
+    body.classList.toggle('open');
+    chev.classList.toggle('open');
+  }
+
+  function handleCta(e) {
+    const btn = e.currentTarget;
+
+    // ripple effect
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.left = (e.clientX - rect.left) + 'px';
+    ripple.style.top  = (e.clientY - rect.top)  + 'px';
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+
+    btn.classList.add('confirmed');
+    btn.textContent = '✓  Route Confirmed';
+    setTimeout(() => {
+      btn.classList.remove('confirmed');
+      btn.textContent = 'Use Selected Route';
+    }, 2500);
+  }
+</script>
+</body>
