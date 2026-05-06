@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace MVCProject.ITI.Migrations
+namespace MVCProject.ITI.DataAccessLayer.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260506215710_Test")]
-    partial class Test
+    [Migration("20260506235222_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,14 +100,14 @@ namespace MVCProject.ITI.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "83c44b9d-4e86-46e4-9bd7-dd3303f55ffa",
+                            ConcurrencyStamp = "b23a7d9b-056b-4e4f-b570-930d05cad0e0",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
-                            FullName = "",
+                            FullName = "Admin User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TRIPS.COM",
                             NormalizedUserName = "ADMIN@TRIPS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPLGqFdsdjd6ybIdvmSKlkO7oWZ+M6//8CLYWNgfzQM4gTa8mhjZvzA53irJ/xbfbA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "f0883b27-c1d1-4e63-9993-82d2a45a6660",
                             TwoFactorEnabled = false,

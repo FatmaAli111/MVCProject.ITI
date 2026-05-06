@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace MVCProject.ITI.Migrations
+namespace MVCProject.ITI.DataAccessLayer.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Test : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -354,7 +354,7 @@ namespace MVCProject.ITI.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("46686121-d1c1-4796-993d-82d2a45a6660"), 0, "83c44b9d-4e86-46e4-9bd7-dd3303f55ffa", "admin@trips.com", true, "", false, null, "ADMIN@TRIPS.COM", "ADMIN@TRIPS.COM", "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==", null, false, "f0883b27-c1d1-4e63-9993-82d2a45a6660", false, "admin@trips.com" });
+                values: new object[] { new Guid("46686121-d1c1-4796-993d-82d2a45a6660"), 0, "b23a7d9b-056b-4e4f-b570-930d05cad0e0", "admin@trips.com", true, "Admin User", false, null, "ADMIN@TRIPS.COM", "ADMIN@TRIPS.COM", "AQAAAAIAAYagAAAAEPLGqFdsdjd6ybIdvmSKlkO7oWZ+M6//8CLYWNgfzQM4gTa8mhjZvzA53irJ/xbfbA==", null, false, "f0883b27-c1d1-4e63-9993-82d2a45a6660", false, "admin@trips.com" });
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
