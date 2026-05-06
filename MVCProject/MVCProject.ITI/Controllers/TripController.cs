@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
@@ -22,6 +23,8 @@ namespace MVCProject.ITI.Controllers
     }
 
     // ── Controller ────────────────────────────────────────────────────────────
+    [Authorize]
+
     public class TripController : Controller
     {
         private readonly IWeatherService _weatherService;

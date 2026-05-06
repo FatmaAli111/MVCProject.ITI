@@ -17,6 +17,17 @@ namespace MVCProject.ITI.Serviceslayer
             _tripRepo = tripRepo;
             _mapper = mapper;
         }
+
+        public async Task<IEnumerable<TripCardViewModel>> GetAllTrips()
+        {
+            IEnumerable<ITI.DataAccessLayer.Entities.Trip> AllTrips =  _tripRepo.GetTableNoTracking();
+
+            if (!AllTrips.Any())
+                return Enumerable.Empty<TripCardViewModel>();
+            IEnumerable<TripCardViewModel> recentTripsVM = _mapper.Map<IEnumerable<TripCardViewModel>>(AllTrips);
+            return recentTripsVM;
+        }
+
         public async Task<IEnumerable<TripCardViewModel>> GetRecentTrips(Guid id)
         {
             if (id == Guid.Empty)

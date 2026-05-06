@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MVCProject.ITI.DataAccessLayer.Entities;
 using MVCProject.ITI.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
+[Authorize]
 public class GarageController : Controller
 {
     private readonly VehicleService _vehicleService;
