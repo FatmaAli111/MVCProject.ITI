@@ -66,4 +66,12 @@ public class VehicleService
 
         _vehicleRepo.SaveChanges();
     }
+    public async Task<Vehicle> GetDefaultVehicleAsync(Guid id)
+    {
+        
+            Vehicle vehicle = _vehicleRepo.GetTableNoTracking().Include(v=>v.CarModel).Where(v=>v.UserId==id)
+            .FirstOrDefault(v => v.IsDefault == true);
+       
+        return vehicle;
+    }
 }
