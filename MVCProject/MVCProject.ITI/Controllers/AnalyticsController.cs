@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.ITI.DataAccessLayer.Data;
@@ -7,6 +8,8 @@ using MVCProject.ITI.ViewModels;
 
 namespace MVCProject.ITI.Controllers
 {
+    [Authorize]
+
     public class AnalyticsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
