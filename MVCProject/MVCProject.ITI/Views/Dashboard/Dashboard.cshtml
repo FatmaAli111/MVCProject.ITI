@@ -68,12 +68,12 @@
                 Garage
             </a>
 
-        <button class="nav-tab" data-tab="history">
+        <a asp-action="History" asp-controller="Trip" class="nav-tab" data-tab="history">
             <div class="tab-icon" style="background:linear-gradient(135deg,#0ea5e9,#0390cf)">
                 <i class="bi bi-clock-history"></i>
             </div>
             History
-        </button>
+        </a>
         <a class="nav-tab" asp-controller="Settings" asp-action="Index" data-tab="settings">
             <div class="tab-icon" style="background:linear-gradient(135deg,#4f46e5,#3d35cc)">
                 <i class="bi bi-gear-fill"></i>
@@ -88,7 +88,7 @@
         <!-- Stats -->
         <div class="d-flex justify-content-between align-items-center mt-section mb-2">
             <span class="section-label">Your Stats</span>
-            <a href="#" class="see-all">See all &rsaquo;</a>
+            <a asp-action="Analytics" asp-controller="Analytics" class="see-all">See all &rsaquo;</a>
         </div>
         <div class="row g-2">
             <div class="col-4">
@@ -125,7 +125,7 @@
 
         <div class="d-flex justify-content-between align-items-center mt-section">
             <span class="section-label">Recent Trips</span>
-            <a href="#" class="see-all">View all &rsaquo;</a>
+            <a asp-action="History" asp-controller="Trip" class="see-all">View all &rsaquo;</a>
         </div>
 
         <div class="d-flex flex-column gap-1 mt-2">

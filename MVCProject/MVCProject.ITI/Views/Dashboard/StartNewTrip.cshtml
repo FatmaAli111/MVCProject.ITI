@@ -6,7 +6,7 @@
 @section Styles {
 <link rel="stylesheet" href="~/css/NewTrip.css" />
 }
-<form asp-action="CompareRoute" asp-controller="Trip" method="post">
+<form asp-action="StartNewTrip" asp-controller="Dashboard" method="post">
     <div class="page">
         <div class="card">
             <div class="loc-label">From</div>
@@ -78,7 +78,7 @@
     </div>
     <div class="compare-bar">
         <button type="submit" class="compare-btn">
-            <i class="bi bi-arrow-left-right"></i> Compare Routes
+            <i class="bi bi-arrow-left-right"></i> Start Trip
         </button>
     </div>
 </form>

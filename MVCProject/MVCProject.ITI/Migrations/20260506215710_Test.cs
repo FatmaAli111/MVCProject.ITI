@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MVCProject.ITI.Migrations
 {
     /// <inheritdoc />
-    public partial class fixdatabase : Migration
+    public partial class Test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -354,7 +354,7 @@ namespace MVCProject.ITI.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("46686121-d1c1-4796-993d-82d2a45a6660"), 0, "2d922135-7e75-45ba-9f70-26fa23466752", "admin@trips.com", true, "", false, null, "ADMIN@TRIPS.COM", "ADMIN@TRIPS.COM", "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==", null, false, "f0883b27-c1d1-4e63-9993-82d2a45a6660", false, "admin@trips.com" });
+                values: new object[] { new Guid("46686121-d1c1-4796-993d-82d2a45a6660"), 0, "83c44b9d-4e86-46e4-9bd7-dd3303f55ffa", "admin@trips.com", true, "", false, null, "ADMIN@TRIPS.COM", "ADMIN@TRIPS.COM", "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==", null, false, "f0883b27-c1d1-4e63-9993-82d2a45a6660", false, "admin@trips.com" });
 
             migrationBuilder.InsertData(
                 table: "Vehicles",

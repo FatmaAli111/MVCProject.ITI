@@ -97,7 +97,7 @@ namespace MVCProject.ITI.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2d922135-7e75-45ba-9f70-26fa23466752",
+                            ConcurrencyStamp = "83c44b9d-4e86-46e4-9bd7-dd3303f55ffa",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
                             FullName = "",

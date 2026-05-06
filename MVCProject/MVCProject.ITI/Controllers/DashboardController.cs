@@ -5,6 +5,8 @@ using MvcProject.iti.DataAccessLayer.Repository.GenericRepo;
 using MVCProject.ITI.DataAccessLayer.Entities;
 using MVCProject.ITI.Models;
 using MVCProject.ITI.Serviceslayer;
+using MVCProject.ITI.ViewModels;
+using System;
 
 namespace MVCProject.ITI.Controllers
 {
@@ -22,7 +24,6 @@ namespace MVCProject.ITI.Controllers
             _userManager = userManager;
             _vechileService = vechileService;
         }
-        [HttpGet]
         public async Task<IActionResult> DashboardAsync()
         {
 
@@ -61,8 +62,39 @@ namespace MVCProject.ITI.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", ex.Message);
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> StartNewTripAsync(NewTripViewModel newTripViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    ApplicationUser user = await _userManager.GetUserAsync(User);
+                    if (user is null)
+                        return RedirectToPage("/Account/Login", new { area = "Identity" });
+
+                    Guid id = user.Id;
+                    var vehicle=await _vechileService.GetDefaultVehicleAsync(id);
+                    newTripViewModel.UserId = id;
+                    if(vehicle!=null)
+                    newTripViewModel.VehicleId = vehicle.Id;
+                    else
+                        return RedirectToAction("Error", "Home", new { message = "You Should Set Vehicle" });
+                    await _recentTripService.AddTrip(newTripViewModel);
+
+                }
+                catch (Exception ex)
+                {
+                    //return RedirectToAction("Error", "Home", new { message = ex.Message });
+                    throw;
+                }
+            }
+            return RedirectToAction("History", "Trip");
+        }
+
     }
 }
