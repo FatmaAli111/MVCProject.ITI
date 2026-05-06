@@ -156,7 +156,7 @@
                             <div class="mb-3">
                                 <label for="PassengerCapacity" class="form-label fw-semibold">Passenger Capacity</label>
                                 <select class="form-select" id="PassengerCapacity" name="PassengerCapacity" required>
-                                    @for (int i = 1; i <= 8; i++)
+                                    @for (int i = 1; i <= 20; i++)
                                     {
                                         if (i == Model.VehicleInfo.PassengerCapacity)
                                         {
@@ -174,33 +174,33 @@
                             <div class="mb-4">
                                 <label for="FuelType" class="form-label fw-semibold">Fuel Type</label>
                                 <select class="form-select" id="FuelType" name="FuelType" required>
-                                    @if (Model.VehicleInfo.FuelType.ToString() == "Gasoline")
+                                    @if ((int)Model.VehicleInfo.FuelType == 0)
                                     {
-                                        <option value="Gasoline" selected>Gasoline</option>
-                                        <option value="Diesel">Diesel</option>
-                                        <option value="Electric">Electric</option>
-                                        <option value="Hybrid">Hybrid</option>
+                                        <option value="0" selected>Gasoline</option>
+                                        <option value="1">Diesel</option>
+                                        <option value="2">Electric</option>
+                                        <option value="3">Hybrid</option>
                                     }
-                                    else if (Model.VehicleInfo.FuelType.ToString() == "Diesel")
+                                    else if ((int)Model.VehicleInfo.FuelType == 1)
                                     {
-                                        <option value="Gasoline">Gasoline</option>
-                                        <option value="Diesel" selected>Diesel</option>
-                                        <option value="Electric">Electric</option>
-                                        <option value="Hybrid">Hybrid</option>
+                                        <option value="0">Gasoline</option>
+                                        <option value="1" selected>Diesel</option>
+                                        <option value="2">Electric</option>
+                                        <option value="3">Hybrid</option>
                                     }
-                                    else if (Model.VehicleInfo.FuelType.ToString() == "Electric")
+                                    else if ((int)Model.VehicleInfo.FuelType == 2)
                                     {
-                                        <option value="Gasoline">Gasoline</option>
-                                        <option value="Diesel">Diesel</option>
-                                        <option value="Electric" selected>Electric</option>
-                                        <option value="Hybrid">Hybrid</option>
+                                        <option value="0">Gasoline</option>
+                                        <option value="1">Diesel</option>
+                                        <option value="2" selected>Electric</option>
+                                        <option value="3">Hybrid</option>
                                     }
                                     else
                                     {
-                                        <option value="Gasoline">Gasoline</option>
-                                        <option value="Diesel">Diesel</option>
-                                        <option value="Electric">Electric</option>
-                                        <option value="Hybrid" selected>Hybrid</option>
+                                        <option value="0">Gasoline</option>
+                                        <option value="1">Diesel</option>
+                                        <option value="2">Electric</option>
+                                        <option value="3" selected>Hybrid</option>
                                     }
                                 </select>
                                 <div class="invalid-feedback">Please select fuel type</div>
