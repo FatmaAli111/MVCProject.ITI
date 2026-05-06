@@ -41,10 +41,13 @@ namespace MVCProject.ITI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateProfile(ProfileViewModel profile)
+        public async Task<IActionResult> UpdateProfile([FromBody] ProfileViewModel profile)
         {
             if (!ModelState.IsValid)
-                return Json(new { success = false, message = "Invalid data" });
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Invalid data", errors = errors });
+            }
 
             var userId = Guid.Parse(_userManager.GetUserId(User) ?? Guid.Empty.ToString());
             var result = await _userSettingsService.UpdateProfileAsync(userId, profile);

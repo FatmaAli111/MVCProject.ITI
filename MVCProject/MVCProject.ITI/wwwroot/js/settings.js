@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.success) {
                     showAlert('success', result.message);
                 } else {
-                    showAlert('danger', result.message);
+                    const errorMsg = result.errors ? result.errors.join(', ') : result.message;
+                    showAlert('danger', errorMsg);
                 }
             } catch (error) {
                 showAlert('danger', 'An error occurred while updating profile');

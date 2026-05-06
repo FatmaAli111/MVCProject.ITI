@@ -52,8 +52,8 @@ namespace MVCProject.ITI.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "CarModelId", "NickName", "UserId" },
-                values: new object[] { new Guid("f9b5a7a9-2f22-4a7b-a454-077a28424294"), new Guid("13735163-952a-466d-8e7c-87d3dfa7263b"), "Admin's Corolla", new Guid("46686121-d1c1-4796-993d-82d2a45a6660") });
+                columns: new[] { "Id", "CarModelId", "NickName", "PassengerCapacity", "UserId" },
+                values: new object[] { new Guid("f9b5a7a9-2f22-4a7b-a454-077a28424294"), new Guid("13735163-952a-466d-8e7c-87d3dfa7263b"), "Admin's Corolla", 5, new Guid("46686121-d1c1-4796-993d-82d2a45a6660") });
 
             migrationBuilder.InsertData(
                 table: "FuelEfficiencyProfiles",
@@ -73,6 +73,11 @@ namespace MVCProject.ITI.Data.Migrations
                 table: "Cars",
                 keyColumn: "Id",
                 keyValue: new Guid("279318b7-6e4e-4f33-87b6-e2a7e7ed27d6"));
+
+            migrationBuilder.DeleteData(
+                table: "Cars",
+                keyColumn: "Id",
+                keyValue: new Guid("13735163-952a-466d-8e7c-87d3dfa7263b"));
 
             migrationBuilder.DeleteData(
                 table: "FuelEfficiencyProfiles",
