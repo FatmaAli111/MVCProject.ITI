@@ -20,7 +20,7 @@ namespace MVCProject.ITI.Serviceslayer
 
         public async Task<IEnumerable<TripCardViewModel>> GetAllTrips()
         {
-            IEnumerable<Trip> AllTrips =  _tripRepo.GetTableNoTracking();
+            IEnumerable<ITI.DataAccessLayer.Entities.Trip> AllTrips =  _tripRepo.GetTableNoTracking();
 
             if (!AllTrips.Any())
                 return Enumerable.Empty<TripCardViewModel>();
@@ -33,7 +33,7 @@ namespace MVCProject.ITI.Serviceslayer
             if (id == Guid.Empty)
                 throw new ArgumentException("Invalid user ID");
 
-            IEnumerable<Trip> recentTrips = await _tripRepo.GetTripsWithVehicleAndCostResult(id);
+            IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> recentTrips = await _tripRepo.GetTripsWithVehicleAndCostResult(id);
           
             if (!recentTrips.Any())
                 return Enumerable.Empty<TripCardViewModel>();

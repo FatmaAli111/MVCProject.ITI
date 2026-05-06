@@ -25,7 +25,7 @@
         .auth-orb-1 {
             width: 160px;
             height: 160px;
-            background: radial-gradient(circle, rgba(20,184,166,0.30), transparent);
+            background: radial-gradient(circle,rgba(20,184,166,.30),transparent);
             top: 80px;
             left: 40px;
             animation: float 8s ease-in-out infinite;
@@ -34,7 +34,7 @@
         .auth-orb-2 {
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(251,191,36,0.25), transparent);
+            background: radial-gradient(circle,rgba(251,191,36,.25),transparent);
             bottom: 80px;
             right: 40px;
             animation: float 10s ease-in-out infinite reverse;
@@ -43,7 +43,7 @@
         .auth-orb-3 {
             width: 320px;
             height: 320px;
-            background: radial-gradient(circle, rgba(13,148,136,0.12), transparent);
+            background: radial-gradient(circle,rgba(13,148,136,.12),transparent);
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
@@ -83,7 +83,7 @@
             font-size: 36px;
             color: #fff;
             position: relative;
-            box-shadow: 0 0 40px -10px rgba(20,184,166,0.5);
+            box-shadow: 0 0 40px -10px rgba(20,184,166,.5);
         }
 
             .auth-logo-icon .sparkle-badge {
@@ -98,7 +98,7 @@
                 align-items: center;
                 justify-content: center;
                 font-size: 12px;
-                box-shadow: 0 4px 12px rgba(251,191,36,0.5);
+                box-shadow: 0 4px 12px rgba(251,191,36,.5);
             }
 
         .auth-title {
@@ -110,22 +110,22 @@
                 font-size: 1.9rem;
                 font-weight: 900;
                 color: var(--foreground);
-                margin-bottom: 0.25rem;
+                margin-bottom: .25rem;
             }
 
             .auth-title p {
-                font-size: 0.9rem;
+                font-size: .9rem;
                 color: var(--muted-fg);
             }
 
         .auth-card {
-            background: rgba(255,255,255,0.88);
+            background: rgba(255,255,255,.88);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.65);
+            border: 1px solid rgba(255,255,255,.65);
             border-radius: 28px;
             padding: 2rem;
-            box-shadow: 0 20px 60px rgba(13,148,136,0.15);
+            box-shadow: 0 20px 60px rgba(13,148,136,.15);
         }
 
         .auth-tabs {
@@ -143,7 +143,7 @@
             border: none;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 0.92rem;
+            font-size: .92rem;
             cursor: pointer;
             transition: all var(--transition);
             background: transparent;
@@ -155,7 +155,7 @@
 
             .auth-tab-btn.active {
                 color: #fff !important;
-                box-shadow: 0 4px 14px rgba(13,148,136,0.35);
+                box-shadow: 0 4px 14px rgba(13,148,136,.35);
             }
 
             .auth-tab-btn:not(.active):hover {
@@ -178,7 +178,7 @@
             width: 38px;
             height: 38px;
             border-radius: 10px;
-            background: rgba(13,148,136,0.10);
+            background: rgba(13,148,136,.10);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -190,7 +190,7 @@
         }
 
         .input-wrapper:focus-within .input-icon-box {
-            background: rgba(13,148,136,0.18);
+            background: rgba(13,148,136,.18);
         }
 
         .st-input {
@@ -199,10 +199,10 @@
             padding: 0 1rem 0 60px;
             border: 2px solid var(--border);
             border-radius: 14px;
-            background: rgba(255,255,255,0.6);
-            font-size: 0.95rem;
+            background: rgba(255,255,255,.6);
+            font-size: .95rem;
             color: var(--foreground);
-            transition: border-color var(--transition), box-shadow var(--transition);
+            transition: border-color var(--transition),box-shadow var(--transition);
             font-family: inherit;
         }
 
@@ -213,8 +213,8 @@
             .st-input:focus {
                 outline: none;
                 border-color: var(--primary);
-                box-shadow: 0 0 0 3px rgba(13,148,136,0.12);
-                background: rgba(255,255,255,0.95);
+                box-shadow: 0 0 0 3px rgba(13,148,136,.12);
+                background: rgba(255,255,255,.95);
             }
 
             .st-input.with-toggle {
@@ -246,10 +246,10 @@
 
         .st-label {
             display: block;
-            font-size: 0.82rem;
+            font-size: .82rem;
             font-weight: 600;
             color: var(--foreground);
-            margin-bottom: 0.4rem;
+            margin-bottom: .4rem;
         }
 
         .btn-submit {
@@ -263,17 +263,17 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: transform var(--transition), box-shadow var(--transition);
-            margin-top: 0.5rem;
+            transition: transform var(--transition),box-shadow var(--transition);
+            margin-top: .5rem;
         }
 
             .btn-submit:hover {
                 transform: translateY(-2px) scale(1.02);
-                box-shadow: 0 12px 28px rgba(13,148,136,0.45);
+                box-shadow: 0 12px 28px rgba(13,148,136,.45);
             }
 
             .btn-submit:active {
-                transform: scale(0.97);
+                transform: scale(.97);
             }
 
         .benefits-row {
@@ -288,7 +288,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.78rem;
+            font-size: .78rem;
             color: var(--muted-fg);
         }
 
@@ -297,10 +297,9 @@
                 font-size: 13px;
             }
 
-        /* Validation */
         .field-validation-error {
             color: #dc2626;
-            font-size: 0.78rem;
+            font-size: .78rem;
             display: block;
             margin-top: 4px;
         }
@@ -310,19 +309,18 @@
         }
 
         .validation-summary-errors ul {
-            background: rgba(220,38,38,0.07);
-            border: 1px solid rgba(220,38,38,0.25);
+            background: rgba(220,38,38,.07);
+            border: 1px solid rgba(220,38,38,.25);
             border-radius: 10px;
-            padding: 0.7rem 1rem 0.7rem 2rem;
+            padding: .7rem 1rem .7rem 2rem;
             color: #b91c1c;
-            font-size: 0.85rem;
+            font-size: .85rem;
             margin-bottom: 1rem;
         }
     </style>
 }
 
 <div class="auth-bg mesh-gradient">
-    <!-- Orbs -->
     <div class="auth-orb auth-orb-1"></div>
     <div class="auth-orb auth-orb-2"></div>
     <div class="auth-orb auth-orb-3"></div>
@@ -330,7 +328,6 @@
     <div class="auth-main">
         <div class="auth-inner fade-up">
 
-            <!-- Logo -->
             <div class="auth-logo-wrap">
                 <div class="auth-logo-icon gradient-bg">
                     <i class="bi bi-car-front-fill"></i>
@@ -340,39 +337,25 @@
                 </div>
             </div>
 
-            <!-- Title -->
             <div class="auth-title">
-                <h1>Join Us Today</h1>
-                <p>Create your account in seconds</p>
+                <h1>Create Account</h1>
+                <p>Join Smart Trip and start saving on every journey</p>
             </div>
 
-            <!-- Card -->
             <div class="auth-card">
-
-                <!-- Tab switcher -->
                 <div class="auth-tabs">
-                    <a asp-area="Identity" asp-page="/Account/Login"
-                       class="auth-tab-btn">Login</a>
-                    <a asp-area="Identity" asp-page="/Account/Register"
-                       class="auth-tab-btn active gradient-bg">Register</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="auth-tab-btn">Login</a>
+                    <a asp-area="Identity" asp-page="/Account/Register" class="auth-tab-btn active gradient-bg">Register</a>
                 </div>
 
-                <!-- Validation summary -->
                 <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
 
-                <!-- Form -->
-                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-
+                <form id="registerForm" method="post">
                     <div class="input-field-group">
                         <label asp-for="Input.FullName" class="st-label">Full Name</label>
                         <div class="input-wrapper">
-                            <div class="input-icon-box">
-                                <i class="bi bi-person-fill"></i>
-                            </div>
-                            <input asp-for="Input.FullName"
-                                   class="st-input"
-                                   autocomplete="name"
-                                   placeholder="John Doe" />
+                            <div class="input-icon-box"><i class="bi bi-person-fill"></i></div>
+                            <input asp-for="Input.FullName" class="st-input" autocomplete="name" placeholder="Your full name" />
                         </div>
                         <span asp-validation-for="Input.FullName" class="field-validation-error"></span>
                     </div>
@@ -380,32 +363,27 @@
                     <div class="input-field-group">
                         <label asp-for="Input.Email" class="st-label">Email Address</label>
                         <div class="input-wrapper">
-                            <div class="input-icon-box">
-                                <i class="bi bi-envelope-fill"></i>
-                            </div>
-                            <input asp-for="Input.Email"
-                                   class="st-input"
-                                   autocomplete="username"
-                                   placeholder="you@example.com" />
+                            <div class="input-icon-box"><i class="bi bi-envelope-fill"></i></div>
+                            <input asp-for="Input.Email" class="st-input" autocomplete="email" placeholder="you@example.com" />
                         </div>
                         <span asp-validation-for="Input.Email" class="field-validation-error"></span>
                     </div>
 
                     <div class="input-field-group">
+                        <label asp-for="Input.PhoneNumber" class="st-label">Phone Number</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon-box"><i class="bi bi-telephone-fill"></i></div>
+                            <input asp-for="Input.PhoneNumber" class="st-input" autocomplete="tel" placeholder="+20 1XX XXX XXXX" type="tel" />
+                        </div>
+                        <span asp-validation-for="Input.PhoneNumber" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="input-field-group">
                         <label asp-for="Input.Password" class="st-label">Password</label>
                         <div class="input-wrapper">
-                            <div class="input-icon-box">
-                                <i class="bi bi-lock-fill"></i>
-                            </div>
-                            <input asp-for="Input.Password"
-                                   id="regPassword"
-                                   type="password"
-                                   class="st-input with-toggle"
-                                   autocomplete="new-password"
-                                   placeholder="Enter your password" />
-                            <button type="button" class="input-toggle-btn" onclick="togglePwd('regPassword', this)">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
+                            <div class="input-icon-box"><i class="bi bi-lock-fill"></i></div>
+                            <input asp-for="Input.Password" id="regPassword" type="password" class="st-input with-toggle" autocomplete="new-password" placeholder="At least 6 characters" />
+                            <button type="button" class="input-toggle-btn" onclick="togglePwd('regPassword',this)"><i class="bi bi-eye-fill"></i></button>
                         </div>
                         <span asp-validation-for="Input.Password" class="field-validation-error"></span>
                     </div>
@@ -413,18 +391,9 @@
                     <div class="input-field-group">
                         <label asp-for="Input.ConfirmPassword" class="st-label">Confirm Password</label>
                         <div class="input-wrapper">
-                            <div class="input-icon-box">
-                                <i class="bi bi-lock-fill"></i>
-                            </div>
-                            <input asp-for="Input.ConfirmPassword"
-                                   id="regConfirmPassword"
-                                   type="password"
-                                   class="st-input with-toggle"
-                                   autocomplete="new-password"
-                                   placeholder="Confirm your password" />
-                            <button type="button" class="input-toggle-btn" onclick="togglePwd('regConfirmPassword', this)">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
+                            <div class="input-icon-box"><i class="bi bi-shield-lock-fill"></i></div>
+                            <input asp-for="Input.ConfirmPassword" id="regConfirmPassword" type="password" class="st-input with-toggle" autocomplete="new-password" placeholder="Repeat your password" />
+                            <button type="button" class="input-toggle-btn" onclick="togglePwd('regConfirmPassword',this)"><i class="bi bi-eye-fill"></i></button>
                         </div>
                         <span asp-validation-for="Input.ConfirmPassword" class="field-validation-error"></span>
                     </div>
@@ -436,20 +405,10 @@
                 </form>
             </div>
 
-            <!-- Benefits row -->
             <div class="benefits-row fade-up delay-3">
-                <div class="benefit-item">
-                    <i class="bi bi-lightning-charge-fill"></i>
-                    <span>Instant cost analysis</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="bi bi-shield-fill-check"></i>
-                    <span>Secure &amp; private</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="bi bi-rocket-fill"></i>
-                    <span>AI-powered insights</span>
-                </div>
+                <div class="benefit-item"><i class="bi bi-lightning-charge-fill"></i><span>Instant cost analysis</span></div>
+                <div class="benefit-item"><i class="bi bi-shield-fill-check"></i><span>Secure &amp; private</span></div>
+                <div class="benefit-item"><i class="bi bi-rocket-fill"></i><span>AI-powered insights</span></div>
             </div>
 
         </div>
@@ -457,7 +416,7 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="~/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml" />
     <script>
         function togglePwd(id, btn) {
             const input = document.getElementById(id);

@@ -46,37 +46,40 @@
             <span>Start New Trip</span>
             <i class="bi bi-chevron-right arrow-icon"></i>
         </div>
-        <</a>
+        </a>
 
     </div>
 
     <!-- Nav Tabs -->
-    <div class="nav-tabs-custom">
-        <button class="nav-tab active"  data-tab="analytics">
-            <div class="tab-icon" style="background:linear-gradient(135deg,#7c3aed,#6025c4)">
-                <i class="bi bi-graph-up-arrow"></i>
-            </div>
-            Analytics
-        </button>
-        <button class="nav-tab" asp-controller="Vehicle" asp-action="AddVehicle" data-tab="garage">
-            <div class="tab-icon" style="background:linear-gradient(135deg,#f97316,#ea6c0b)">
-                <i class="bi bi-car-front-fill"></i>
-            </div>
-            <span class="tab-dot"></span>
-            Garage
-        </button>
+        <div class="nav-tabs-custom">
+
+            <a class="nav-tab active" asp-controller="Analytics" asp-action="Analytics" data-tab="analytics">
+                <div class="tab-icon" style="background:linear-gradient(135deg,#7c3aed,#6025c4)">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+                Analytics
+            </a>
+
+            <a class="nav-tab" asp-controller="Garage" asp-action="Garage" data-tab="garage">
+                <div class="tab-icon" style="background:linear-gradient(135deg,#f97316,#ea6c0b)">
+                    <i class="bi bi-car-front-fill"></i>
+                </div>
+                <span class="tab-dot"></span>
+                Garage
+            </a>
+
         <button class="nav-tab" data-tab="history">
             <div class="tab-icon" style="background:linear-gradient(135deg,#0ea5e9,#0390cf)">
                 <i class="bi bi-clock-history"></i>
             </div>
             History
         </button>
-        <button class="nav-tab" data-tab="settings">
+        <a class="nav-tab" asp-controller="Settings" asp-action="Index" data-tab="settings">
             <div class="tab-icon" style="background:linear-gradient(135deg,#4f46e5,#3d35cc)">
                 <i class="bi bi-gear-fill"></i>
             </div>
             Settings
-        </button>
+        </a>
     </div>
 
     <!-- Main content -->
@@ -148,7 +151,7 @@
         <button class="fab" title="Compass"><i class="bi bi-compass"></i></button>
         <button class="fab" title="List"><i class="bi bi-list-ul"></i></button>
         <button class="fab" title="Bookmark"><i class="bi bi-bookmark"></i></button>
-        <button class="fab" title="Settings"><i class="bi bi-gear"></i></button>
+        <a class="fab" asp-controller="Settings" asp-action="Index" title="Settings"><i class="bi bi-gear"></i></a>
     </div>
 
     <!-- Bottom Nav -->
@@ -192,10 +195,12 @@
 
         /* ── FAB toggle ── */
         document.querySelectorAll('.fab').forEach(fab => {
-          fab.addEventListener('click', function() {
-            document.querySelectorAll('.fab').forEach(f => f.classList.remove('active'));
-            this.classList.add('active');
-          });
+          if (!fab.hasAttribute('href')) {
+            fab.addEventListener('click', function() {
+              document.querySelectorAll('.fab').forEach(f => f.classList.remove('active'));
+              this.classList.add('active');
+            });
+          }
         });
 
         /* ── Count-up animation for stats ── */
