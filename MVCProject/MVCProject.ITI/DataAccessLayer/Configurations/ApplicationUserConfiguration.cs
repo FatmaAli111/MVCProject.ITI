@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MVCProject.ITI.DataAccessLayer.Entities;
 
@@ -25,8 +26,12 @@ namespace MVCProject.ITI.DataAccessLayer.Configurations
                 NormalizedEmail = "ADMIN@TRIPS.COM",
                 EmailConfirmed = true,
                 SecurityStamp = "f0883b27-c1d1-4e63-9993-82d2a45a6660", // Hardcoded Guid instead of Guid.NewGuid()
-                PasswordHash = "AQAAAAIAAYagAAAAEJ6Y8+qHjG/f/8+7G1Ww0W5f6+9Q5f6+9Q5f6+9Q5f6+9Q==" // Default Password: Password123!
+                FullName = "Admin User" // Add your other missing properties here (AcOnByDefault, etc.)
             };
+
+            // Generate the hash for your new password here
+            var hasher = new PasswordHasher<ApplicationUser>();
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, "Password123!");
 
             builder.HasData(adminUser);
 
