@@ -15,11 +15,19 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        // if the user is already logged in
+        if (User.Identity?.IsAuthenticated == true)
+            return RedirectToAction("Dashboard", "Dashboard");
+
         return View();
     }
 
     public IActionResult Privacy()
     {
+        //  redirect authenticated users too
+        if (User.Identity?.IsAuthenticated == true)
+            return RedirectToAction("Dashboard", "Dashboard");
+
         return View();
     }
 

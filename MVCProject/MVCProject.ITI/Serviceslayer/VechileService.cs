@@ -11,21 +11,18 @@ public class VehicleService
         _vehicleRepo = vehicleRepo;
     }
 
-    public IEnumerable<Vehicle> GetAll()
+    public IEnumerable<Vehicle> GetUserVehicles(Guid userId)
     {
         return _vehicleRepo.GetTableNoTracking()
                            .Include(v => v.CarModel)
+                           .Where(v => v.UserId == userId)
                            .ToList();
     }
-
     public Vehicle GetById(Guid id)
     {
         return _vehicleRepo.GetById(id);
     }
-    public Vehicle? GetByUserId(Guid id)
-    {
-        return _vehicleRepo.GetTableNoTracking().FirstOrDefault(v=>v.Id==id);
-    }
+  
     public void Add(Vehicle vehicle)
     {
         _vehicleRepo.Add(vehicle);
