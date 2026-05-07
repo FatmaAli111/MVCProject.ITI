@@ -22,6 +22,8 @@ namespace MVCProject.ITI.Serviceslayer
 
         public async Task AddTrip(NewTripViewModel newTripViewModel)
         {
+            if (newTripViewModel.LeaveNow == true)
+                newTripViewModel.ScheduledTime = DateTime.Now;
             var newTrip = _mapper.Map<ITI.DataAccessLayer.Entities.Trip>(newTripViewModel);
             try
             {
@@ -34,10 +36,10 @@ namespace MVCProject.ITI.Serviceslayer
             }
         }
 
-        public async Task<IEnumerable<TripCardViewModel>> GetAllTrips()
+        public async Task<IEnumerable<TripCardViewModel>> GetAllTrips(Guid userId)
         {
             IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> AllTrips =
-                _tripRepo.GetTableNoTracking();
+                _tripRepo.GetTableNoTracking().Where(t=>t.UserId== userId);
 
 
             if (!AllTrips.Any())

@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Models;
+using MVCProject.ITI.Serviceslayer;
 using MVCProject.ITI.Serviceslayer.Trip;
 
 namespace MVCProject.ITI.Controllers
@@ -31,25 +34,44 @@ namespace MVCProject.ITI.Controllers
         private readonly IRouteService _routeService;
         private readonly ITripCostService _costService;
         private readonly ApplicationDbContext _context;
-       
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IRecentTripService _recentTripService;
 
         public TripController(
             IWeatherService weatherService,
             IRouteService routeService,
             ITripCostService costService,
-            ApplicationDbContext context)
+            ApplicationDbContext context
+            , UserManager<ApplicationUser> userManager
+            , VehicleService vechileService
+            , IRecentTripService recentTripService)
         {
             _weatherService = weatherService;
             _routeService = routeService;
             _costService = costService;
             _context = context;
+            _userManager = userManager;
+            _recentTripService = recentTripService;
         }
 
         // GET /Trip/History
-        public IActionResult History()
+        public async Task<IActionResult> History()
         {
-            // test for waiting insertion in DB
-            return View();
+            try
+            {
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                if (user is null)
+                    return Redirect("/Identity/Account/Login");
+
+                Guid id = user.Id;
+                
+                IEnumerable<TripCardViewModel> Alltrips = await _recentTripService.GetAllTrips(id);
+                return View(Alltrips);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", ex.Message);
+            }
         }
 
         // GET /Trip/CompletionTrip

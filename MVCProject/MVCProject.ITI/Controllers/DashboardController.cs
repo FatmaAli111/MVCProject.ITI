@@ -61,7 +61,7 @@ namespace MVCProject.ITI.Controllers
                 Guid id = user.Id;
                 ViewBag.Vehicle =await _vechileService.GetDefaultVehicleAsync(id);
 
-                IEnumerable<TripCardViewModel> AllTrips = await _recentTripService.GetAllTrips();
+                IEnumerable<TripCardViewModel> AllTrips = await _recentTripService.GetAllTrips(id);
                 ViewData["AllTrips"] = AllTrips;
                 return View();
             }
