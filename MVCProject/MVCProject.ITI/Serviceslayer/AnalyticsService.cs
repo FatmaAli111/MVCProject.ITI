@@ -35,7 +35,7 @@ namespace MVCProject.ITI.Serviceslayer
                 vm.MonthlySpending = trips
                 .GroupBy(t => t.TripDate.Month)
                 .OrderBy(g => g.Key)
-                .Select(g => (double)g.Sum(t => t.TripCostResult!.TotalCost))
+                .Select(g => (double)g.Sum(t => t.TripCostResult?.TotalCost ?? 0))
                 .ToList();
 
 
