@@ -81,6 +81,19 @@ namespace MVCProject.ITI.Controllers
             return View();
         }
 
+        // POST /Trip/ToggleFavorite
+        [HttpPost]
+        public async Task<IActionResult> ToggleFavorite(Guid tripId)
+        {
+            var trip = await _context.Trips.FindAsync(tripId);
+            if (trip == null)
+                return Json(new { success = false, message = "Trip not found" });
+
+            trip.IsFavorite = !trip.IsFavorite;
+            await _context.SaveChangesAsync();
+            return Json(new { success = true, isFavorite = trip.IsFavorite });
+        }
+
         // POST /Trip/SavePassengers
         // Take Passengers from Javasscript and Save them in DB
         [HttpPost]

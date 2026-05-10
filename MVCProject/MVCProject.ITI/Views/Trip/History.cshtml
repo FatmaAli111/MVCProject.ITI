@@ -20,6 +20,41 @@
 @section Styles{
     <link rel="stylesheet" href="~/css/trip-style.css" />
     <link rel="stylesheet" href="~/css/trip-completion-extras.css" />
+    <style>
+        .fav-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--muted);
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+        .fav-btn:hover {
+            background: rgba(0,0,0,0.05);
+            transform: scale(1.1);
+        }
+        .fav-btn.active {
+            color: #ff4757;
+        }
+        .fav-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        .h-item {
+            position: relative;
+        }
+        .fav-container {
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
 }
 <div id="page-history">
     <div class="topbar">
@@ -65,41 +100,77 @@
                     @* string pillCls = "Heavy"; *@
                     @* t.Traffic == "Low" ? "pill-low" : *@
                     @*                      t.Traffic == "Heavy" ? "pill-heavy" : "pill-medium"; *@
-                    <a href="@Url.Action("CompletionTrip", "Trip")" class="h-item"
-                       style="animation-delay:@(5 * 0.06)s; text-decoration:none; color:inherit;">
-                        <div class="h-av">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke="var(--teal-dk)">
-                                <circle cx="12" cy="10" r="3" />
-                                <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
-                            </svg>
-                        </div>
-                        <div class="h-info">
-                            <div class="h-route">@t.OriginName &rarr; @t.DestinationName</div>
-                            <div class="h-meta">
-                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                                    <line x1="16" y1="2" x2="16" y2="6" />
-                                    <line x1="8" y1="2" x2="8" y2="6" />
-                                    <line x1="3" y1="10" x2="21" y2="10" />
+                    <div class="h-item" style="animation-delay:@(5 * 0.06)s; position: relative;">
+                        <a href="@Url.Action("CompletionTrip", "Trip", new { id = t.Id })" 
+                           style="text-decoration:none; color:inherit; display:flex; align-items:center; flex:1; width: 100%;">
+                            <div class="h-av">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke="var(--teal-dk)">
+                                    <circle cx="12" cy="10" r="3" />
+                                    <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
                                 </svg>
-                                @t.TripDate.ToString(("yyyy-MM-dd")) &nbsp; @t.DistanceKm km &nbsp;
-                                @* <span class="t-pill @pillCls">@pillCls</span> *@
                             </div>
-                        </div>
-                        <div style="text-align:right;margin-left:14px;">
-                            <div class="h-cost">@t.TripTotalCost</div>
-                            <div class="h-unit">EGP</div>
-                        </div>
-                        <div class="h-acts">
-                            <button class="arr-btn" tabindex="-1">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke="var(--muted)">
-                                    <polyline points="9 18 15 12 9 6" />
-                                </svg>
-                            </button>
-                        </div>
-                    </a>
+                            <div class="h-info">
+                                <div class="h-route">@t.OriginName &rarr; @t.DestinationName</div>
+                                <div class="h-meta">
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg>
+                                    @t.TripDate.ToString(("yyyy-MM-dd")) &nbsp; @t.DistanceKm km &nbsp;
+                                </div>
+                            </div>
+                            <div class="fav-container">
+                                <button type="button" class="fav-btn @(t.IsFavorite ? "active" : "")" 
+                                        onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite(this, '@t.Id')" 
+                                        aria-label="Toggle Favorite">
+                                    <svg viewBox="0 0 24 24" fill="@(t.IsFavorite ? "currentColor" : "none")" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.84-8.84 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div style="text-align:right;margin-left:8px;">
+                                <div class="h-cost">@t.TripTotalCost</div>
+                                <div class="h-unit">EGP</div>
+                            </div>
+                            <div class="h-acts">
+                                <button class="arr-btn" tabindex="-1">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke="var(--muted)">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </a>
+                    </div>
                 }
             }
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        async function toggleFavorite(btn, tripId) {
+            try {
+                const response = await fetch(`/Trip/ToggleFavorite?tripId=${tripId}`, {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                    }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        btn.classList.toggle('active', result.isFavorite);
+                        const svgPath = btn.querySelector('svg');
+                        svgPath.setAttribute('fill', result.isFavorite ? 'currentColor' : 'none');
+                    }
+                }
+            } catch (error) {
+                console.error('Error toggling favorite:', error);
+            }
+        }
+    </script>
+}

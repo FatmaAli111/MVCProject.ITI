@@ -920,6 +920,43 @@ body {
     background-color: #0d9488 !important;
     border-radius: 0 4px 4px 0 !important;
 }
+
+/* ── Favorite Button in Trip Cards ── */
+.fav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--muted);
+    transition: color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.fav-btn:hover {
+    background: rgba(0,0,0,0.05);
+    transform: scale(1.1);
+}
+
+.fav-btn.active {
+    color: #ff4757;
+}
+
+.fav-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.fav-container {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
 /* ── Modern Slim Navbar ── */
 .st-navbar {
     background: rgba(255, 255, 255, 0.8) !important;

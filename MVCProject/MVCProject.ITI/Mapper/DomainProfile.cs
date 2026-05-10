@@ -10,10 +10,12 @@ namespace MVCProject.ITI.Mapper
     {
         public DomainProfile()
         {
-            CreateMap<Trip, TripCardViewModel>().
-                ForMember(dst => dst.TripTotalCost, options => options.MapFrom(src => src.TripCostResult.TotalCost))
-                .ForMember(dst=>dst.VehicleName,options=>options.MapFrom(src=>src.Vehicle.NickName))
-                .ForMember(dst => dst.TripDate,options=>options.MapFrom(src=>src.TripDate.Date))
+            CreateMap<Trip, TripCardViewModel>()
+                .ForMember(dst => dst.TripTotalCost, options => options.MapFrom(src => src.TripCostResult.TotalCost))
+                .ForMember(dst => dst.VehicleName, options => options.MapFrom(src => src.Vehicle.NickName))
+                .ForMember(dst => dst.TripDate, options => options.MapFrom(src => src.TripDate.Date))
+                .ForMember(dst => dst.Id, options => options.MapFrom(src => src.Id))
+                .ForMember(dst => dst.IsFavorite, options => options.MapFrom(src => src.IsFavorite))
                 .ReverseMap();
 
             CreateMap<ApplicationUser, ProfileViewModel>()
