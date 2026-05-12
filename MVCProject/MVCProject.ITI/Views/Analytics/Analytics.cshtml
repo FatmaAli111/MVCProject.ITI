@@ -19,7 +19,7 @@
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-teal">km</span>
-            <div class="kpi-value">@Model.TotalDistance km</div>
+            <div class="kpi-value">@Model.TotalDistance.ToString("0.00") km</div>
             <div class="kpi-label">Total Distance</div>
             <div class="kpi-sub">@Model.TripCount trips</div>
         </div>
@@ -29,7 +29,7 @@
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-purple">$</span>
-            <div class="kpi-value">EGP @Model.TotalSpent</div>
+            <div class="kpi-value">EGP @Model.TotalSpent.ToString("0.00")</div>
             <div class="kpi-label">Total Spent</div>
             <div class="kpi-sub">
                 Avg EGP @(Model.TripCount == 0 ? 0 : (Model.TotalSpent / Model.TripCount)) / trip
@@ -41,7 +41,7 @@
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-amber">F</span>
-            <div class="kpi-value">EGP @Model.FuelCost</div>
+            <div class="kpi-value">EGP @Model.FuelCost.ToString("0.00")</div>
             <div class="kpi-label">Fuel Cost</div>
             <div class="kpi-sub">@Model.FuelPercentage% of total</div>
         </div>
@@ -51,7 +51,7 @@
     <div class="col-lg-6">
         <div class="analytics-kpi">
             <span class="kpi-icon kpi-icon-green">CO2</span>
-            <div class="kpi-value">@Model.Emissions kg</div>
+            <div class="kpi-value">@Model.Emissions.ToString("0.00") kg</div>
             <div class="kpi-label">CO2 Emissions</div>
             <div class="kpi-sub">131 g/km</div>
         </div>

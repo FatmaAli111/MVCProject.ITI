@@ -17,11 +17,10 @@
         public bool IsAcOn { get; set; }
         public DateTime TripDate { get; set; }
         public DateTime CreatedAt { get; set; }
-
-        // Relationships ***********
         public ApplicationUser User { get; set; } = null!;
         public Vehicle Vehicle { get; set; } = null!;
         public TripCostResult? TripCostResult { get; set; } = null!;
+        public List<TripPassenger> TripPassengers { get; set; } = new();
 
     }
 }

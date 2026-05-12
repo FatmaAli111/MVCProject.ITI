@@ -66,6 +66,7 @@ public class Program
         builder.Services.AddScoped<VehicleService>();
         builder.Services.AddScoped<CarModelService>();
         builder.Services.AddTransient<IAnalyticsService, AnalyticsService>();
+        builder.Services.AddScoped<ITripService, TripService>();
 
         builder.Services.AddAutoMapper(options => options.AddProfile(new DomainProfile()));
 

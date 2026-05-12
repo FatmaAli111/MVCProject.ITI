@@ -26,12 +26,15 @@ namespace MVCProject.ITI.Controllers
         private readonly IRouteService _routeService;
         private readonly ITripCostService _costService;
         private readonly ApplicationDbContext _context;
+        private readonly ITripService _tripService;
 
-        public TripController(IRouteService routeService, ITripCostService costService, ApplicationDbContext context)
+        public TripController(IRouteService routeService, ITripCostService costService, ApplicationDbContext context, ITripService tripService)
         {
             _routeService = routeService;
             _costService = costService;
             _context = context;
+            _tripService = tripService;
+
         }
 
         [HttpGet]
@@ -89,40 +92,6 @@ namespace MVCProject.ITI.Controllers
             }
         }
 
-        public async Task<IActionResult> CompletionTrip(Guid id)
-        {
-            var trip = await _context.Trips
-                .Include(t => t.Vehicle)
-                .Include(t => t.TripCostResult)
-                .FirstOrDefaultAsync(t => t.Id == id);
-
-            if (trip == null) return NotFound();
-
-            var routes = await _routeService.GetRoutesAsync(trip.OriginName, trip.DestinationName);
-            var bestRoute = routes.FirstOrDefault();
-
-            return View(new CompletionTripViewModel
-            {
-                TripId = trip.Id,
-                FromName = trip.OriginName,
-                ToName = trip.DestinationName,
-                DistanceKm = trip.DistanceKm,
-                DurationMinutes = trip.DurationMinutes,
-                TripDate = trip.TripDate,
-                FromLat = bestRoute?.StartLat ?? 0,
-                FromLng = bestRoute?.StartLng ?? 0,
-                ToLat = bestRoute?.EndLat ?? 0,
-                ToLng = bestRoute?.EndLng ?? 0,
-                CarName = trip.Vehicle?.NickName ?? "Vehicle",
-                TotalCost = trip.TripCostResult?.TotalCost ?? 0,
-                FuelConsumed = trip.TripCostResult?.FuelConsumed ?? 0,
-                TrafficCondition = trip.TripCostResult?.TrafficCondition ?? "Normal",
-                WeatherCondition = trip.TripCostResult?.WeatherCondition ?? "Clear",
-                FuelCost = (trip.TripCostResult?.FuelConsumed ?? 0) * 18.5,
-                MaintenanceCost = trip.DistanceKm * 0.75
-            });
-        }
-
         [HttpPost]
         public async Task<IActionResult> ToggleFavorite(Guid tripId)
         {
@@ -133,15 +102,6 @@ namespace MVCProject.ITI.Controllers
             trip.IsFavorite = !trip.IsFavorite;
             await _context.SaveChangesAsync();
             return Json(new { success = true, isFavorite = trip.IsFavorite });
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SavePassengers([FromBody] SavePassengersRequest request)
-        {
-            if (request.TripId == Guid.Empty)
-                return Json(new { success = false, message = "Invalid Trip Id" });
-
-            return Json(new { success = true });
         }
 
         [HttpPost]
@@ -164,6 +124,32 @@ namespace MVCProject.ITI.Controllers
                 .OrderByDescending(t => t.CreatedAt)
                 .ToListAsync();
             return View(history);
+
         }
+
+        public async Task<IActionResult> CompletionTrip(Guid id)
+        {
+
+            var vm = await _tripService.GetCompletionTripAsync(id);
+
+            if (vm == null)
+                return NotFound();
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveSplit([FromBody] SplitTripViewModel vm)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var result = await _tripService.SaveTripSplitAsync(vm, userId);
+
+            if (!result)
+                return BadRequest(new { success = false });
+
+            return Ok(new { success = true });
+        }
+       
     }
 }

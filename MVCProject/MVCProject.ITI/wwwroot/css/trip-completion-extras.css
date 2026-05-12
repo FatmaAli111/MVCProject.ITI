@@ -1,4 +1,176 @@
-﻿/* ── SPLIT IMAGE GALLERY ─────────────────────────────────────── */
+﻿
+.split-container {
+    margin-top: 20px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.split-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.split-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.split-sub {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.chev {
+    transition: transform 0.3s ease;
+}
+
+.sb {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.split-inner {
+    padding-top: 15px;
+}
+
+.sp-mode-btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #64748b;
+    transition: all 0.25s ease;
+}
+
+    .sp-mode-btn.active {
+        background: #2dd4bf;
+        border-color: #2dd4bf;
+        color: white;
+    }
+
+.sp-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.sp-inp {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+}
+
+.add-btn {
+    width: 48px;
+    border-radius: 10px;
+    background: #2dd4bf;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.pass-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.p-av {
+    width: 36px;
+    height: 36px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.p-share-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pct-inp {
+    width: 60px;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1.5px solid #e2e8f0;
+}
+
+.sp-summary {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f0fdfa;
+}
+
+.sp-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.sp-Save-btn, .sp-copy-btn, .sp-share-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.sp-Save-btn, .sp-share-btn {
+    background: #2dd4bf;
+    color: white;
+}
+
+.sp-Save-btn:hover, .sp-share-btn:hover {
+    background: #1ba89f;
+}
+
+.sp-copy-btn {
+    background: #e2e8f0;
+}
+
+.sp-copy-btn:hover {
+    background: #cbd5e1;
+}
+
+.save-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border-radius: 4px;
+}
+
+    .save-btn:hover {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+    }
+
+/*******************************************************/
+/* ── SPLIT IMAGE GALLERY ─────────────────────────────────────── */
 .img-split-wrap {
     margin: 12px 14px;
     animation: slideUp .4s ease both;
@@ -220,4 +392,174 @@
     .cta-main:active {
         transform: translateY(0);
         box-shadow: 0 4px 16px rgba(13,148,136,.3);
+    }
+:root {
+    --teal: #2DD4BF;
+    --bg: #F8FAFB;
+    --text: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --orange: #F97316;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    margin: 0;
+    color: var(--text);
+}
+
+.page-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.hero-banner {
+    background: var(--teal);
+    border-radius: 24px;
+    padding: 60px 40px;
+    color: white;
+    margin-bottom: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .hero-banner .amount {
+        font-size: 64px;
+        font-weight: 900;
+        margin: 10px 0;
+    }
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-box {
+    background: white;
+    padding: 35px 20px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+    .stat-box b {
+        font-size: 32px;
+        display: block;
+        margin-bottom: 5px;
+        color: var(--text);
+    }
+
+.detail-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid var(--border);
+    margin-bottom: 30px;
+}
+
+.split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.info-item {
+    background: #F9FAFB;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #F1F5F9;
+}
+
+.plan-btn {
+    background: var(--teal);
+    color: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    border: none;
+    font-weight: 800;
+    display: block;
+    margin: 30px auto;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+}
+
+#mapPopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    width: 90%;
+    height: 85%;
+    background: white;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid white;
+}
+
+.close-map {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 2100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.sb {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease;
+}
+
+    .sb.open {
+        max-height: 1000px; /* رقم كبير يكفي المحتوى */
+    }
+
+.chev {
+    transition: transform .3s ease;
+}
+
+    .chev.rotated {
+        transform: rotate(180deg);
     }

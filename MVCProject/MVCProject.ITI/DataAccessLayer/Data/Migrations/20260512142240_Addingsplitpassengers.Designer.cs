@@ -4,6 +4,7 @@ using MVCProject.ITI.DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProject.ITI.DataAccessLayer.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260512142240_Addingsplitpassengers")]
+    partial class Addingsplitpassengers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,14 +100,14 @@ namespace MVCProject.ITI.DataAccessLayer.Data.Migrations
                         {
                             Id = new Guid("46686121-d1c1-4796-993d-82d2a45a6660"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8a42f85-f4f1-4836-9437-0b42ef3e8715",
+                            ConcurrencyStamp = "7ff4f428-f08b-4fa7-b3ad-56f855f816dc",
                             Email = "admin@trips.com",
                             EmailConfirmed = true,
                             FullName = "Admin User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TRIPS.COM",
                             NormalizedUserName = "ADMIN@TRIPS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN1piYDx3CjftcjAxr96qA7Ybz6C907ZpZdkF0F3oQfIYgTako8Hg9S/owmTk7zpYw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEByZEhQ71Szcs520Kans43pdJHRw7yCnDgDEPVb+45vQ9ky5N3u5MAn0Px8jfpjmzA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "f0883b27-c1d1-4e63-9993-82d2a45a6660",
                             TwoFactorEnabled = false,
@@ -638,7 +641,7 @@ namespace MVCProject.ITI.DataAccessLayer.Data.Migrations
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.TripPassenger", b =>
                 {
                     b.HasOne("MVCProject.ITI.DataAccessLayer.Entities.Trip", "Trip")
-                        .WithMany("TripPassengers")
+                        .WithMany()
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -736,8 +739,6 @@ namespace MVCProject.ITI.DataAccessLayer.Data.Migrations
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.Trip", b =>
                 {
                     b.Navigation("TripCostResult");
-
-                    b.Navigation("TripPassengers");
                 });
 
             modelBuilder.Entity("MVCProject.ITI.DataAccessLayer.Entities.Vehicle", b =>

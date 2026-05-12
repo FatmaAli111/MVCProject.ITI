@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MVCProject.ITI.ViewModels
 {
@@ -33,5 +34,6 @@ namespace MVCProject.ITI.ViewModels
     public double TaxiCost { get; set; }
     public double WeatherMultiplier { get; set; } = 1.0;
     public double TrafficMultiplier { get; set; } = 1.0;
-}
+        public List<PassengerSplitVM> Passengers { get; set; } = new();
+    }
 }
