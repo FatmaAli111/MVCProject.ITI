@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -121,6 +121,27 @@ namespace MVCProject.ITI.Controllers
                 FuelCost = (trip.TripCostResult?.FuelConsumed ?? 0) * 18.5,
                 MaintenanceCost = trip.DistanceKm * 0.75
             });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleFavorite(Guid tripId)
+        {
+            var trip = await _context.Trips.FindAsync(tripId);
+            if (trip == null)
+                return Json(new { success = false, message = "Trip not found" });
+
+            trip.IsFavorite = !trip.IsFavorite;
+            await _context.SaveChangesAsync();
+            return Json(new { success = true, isFavorite = trip.IsFavorite });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SavePassengers([FromBody] SavePassengersRequest request)
+        {
+            if (request.TripId == Guid.Empty)
+                return Json(new { success = false, message = "Invalid Trip Id" });
+
+            return Json(new { success = true });
         }
 
         [HttpPost]
