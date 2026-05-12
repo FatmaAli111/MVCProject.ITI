@@ -1,4 +1,10 @@
-﻿using MVCProject.ITI.Models.Trip;
+﻿using Microsoft.EntityFrameworkCore;
+using MVCProject.ITI.DataAccessLayer.Data;
+using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Models.Trip;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MVCProject.ITI.Serviceslayer.Trip
 {
@@ -6,103 +12,65 @@ namespace MVCProject.ITI.Serviceslayer.Trip
     {
         private readonly IWeatherService _weather;
         private readonly IRouteService _routes;
+        private readonly ApplicationDbContext _context;
+        private const decimal FuelPricePerLiter = 18.5m;
+        private const decimal MaintenanceCostPerKm = 0.75m;
 
-        public TripCostService(IWeatherService weather, IRouteService routes)
+        public TripCostService(IWeatherService weather, IRouteService routes, ApplicationDbContext context)
         {
             _weather = weather;
             _routes = routes;
+            _context = context;
         }
 
-        public async Task<TripCostCalculation> CalculateAsync(
-            string origin,
-            string destination,
-            float distanceKm,
-            float fuelPricePerLiter,
-            float fuelEfficiencyL100km,
-            int passengerCount,
-            bool isAcOn)
+        public async Task<TripCostResult> CalculateTripCostAsync(Guid vehicleId, string origin, string destination, bool isAcOn, DateTime tripDateTime)
         {
-            // firstly we post the both API and work on them together
-            // without waiting response of each other
-            var weatherTask = _weather.GetWeatherAsync(destination);
-            var routesTask = _routes.GetRoutesAsync(origin, destination);
-            await Task.WhenAll(weatherTask, routesTask);
+            var weather = await _weather.GetWeatherAsync(destination);
+            var routes = await _routes.GetRoutesAsync(origin, destination);
+            var bestRoute = routes.FirstOrDefault();
 
-            var weather = await weatherTask;
-            var routes = await routesTask;
+            if (bestRoute == null) throw new Exception("No route found");
 
-            // we now choose the best route -> best route = lowest traffic and shortest duration
-            var bestRoute = routes
-                .OrderBy(r => r.TrafficCondition == "Low" ? 0 :
-                              r.TrafficCondition == "Medium" ? 1 : 2)
-                .ThenBy(r => r.DurationMinutes)
-                .FirstOrDefault() ?? new RouteOption
-                {
-                    Summary = "Default Route",
-                    DistanceKm = distanceKm,
-                    DurationMinutes = (int)(distanceKm / 80 * 60),
-                    TrafficCondition = "Medium"
-                };
+            float consumptionRate = 8.0f;
+            if (isAcOn) consumptionRate += 1.5f;
 
+            float totalFuelLiters = (bestRoute.DistanceKm / 100.0f) * consumptionRate;
+            decimal fuelCost = (decimal)totalFuelLiters * FuelPricePerLiter;
+            decimal maintenanceCost = (decimal)bestRoute.DistanceKm * MaintenanceCostPerKm;
 
-            // Calculate Weather Multiplier / AC -> Air Conditioning
-            // if it found the wather is ( hot | windy | rainy )
-            // and the AC is on → it will consume more fuel
-           
-            float weatherMult = 1.0f;
-            if (weather.IsHot && isAcOn)
-                weatherMult = 1.20f;   // +20% -> AC in hot weather
-            else if (weather.IsRainy)
-                weatherMult = 1.15f;   // +15% -> Rainy weather
-            else if (weather.IsWindy)
-                weatherMult = 1.10f;   // +10% -> Windy weather
-            else if (weather.IsHot)
-                weatherMult = 1.05f;   // +5% -> Hot weather
+            var trafficInfo = GetTrafficFactor(tripDateTime);
+            var weatherMult = GetWeatherMultiplier(weather);
+            decimal totalCost = (fuelCost + maintenanceCost) * (decimal)(trafficInfo.multiplier * weatherMult);
 
-            // Calculate Traffic Multiplier
-            // traffic cause the car to stop and go which increases fuel consumption,
-            // especially in heavy traffic
-       
-            float trafficMult = bestRoute.TrafficCondition switch
+            return new TripCostResult
             {
-                "Low" => 1.00f,   // no traffic = no increase
-                "Medium" => 1.10f,   // medium traffic = +10%
-                "Heavy" => 1.25f,   // heavy traffic = +25%
-                _ => 1.10f
-            };
-
-            // ───- Calaculation Of The Cost ─────   
-
-            
-            // feulLiters = (distanceKm * fuelEfficiencyL100km) / 100
-            float fuelLiters = (bestRoute.DistanceKm * fuelEfficiencyL100km)
-                               / 100f;
-
-            // main cost of feul
-            float baseCost = fuelLiters * fuelPricePerLiter;
-
-            // final cost after applying all multipliers
-            float totalCost = baseCost * weatherMult * trafficMult;
-
-
-            // cost depend on the passangers
-            int safePassengers = Math.Max(1, passengerCount);
-            float costPerPassenger = totalCost / safePassengers;
-            float costPerKm = totalCost / bestRoute.DistanceKm;
-
-            return new TripCostCalculation
-            {
+                Id = Guid.NewGuid(),
+                FuelConsumed = (float)Math.Round(totalFuelLiters, 2),
                 TotalCost = (float)Math.Round(totalCost, 2),
-                CostPerKm = (float)Math.Round(costPerKm, 2),
-                CostPerPassenger = (float)Math.Round(costPerPassenger, 2),
-                FuelConsumed = (float)Math.Round(fuelLiters, 2),
-                WeatherMultiplier = weatherMult,
-                TrafficMultiplier = trafficMult,
-                WeatherCondition = weather.Condition,
-                TrafficCondition = bestRoute.TrafficCondition,
-                AvailableRoutes = routes,
-                SelectedRoute = bestRoute
+                CostPerKm = (float)Math.Round(totalCost / (decimal)bestRoute.DistanceKm, 2),
+                CalculatedAt = DateTime.Now,
+                WeatherCondition = weather?.Condition ?? "Normal",
+                TrafficCondition = trafficInfo.label,
+                WeatherMultiplier = (float)weatherMult,
+                TrafficMultiplier = (float)trafficInfo.multiplier,
+                FuelPriceId = _context.FuelPrices.OrderByDescending(p => p.RecordedDate).FirstOrDefault()?.Id ?? Guid.Empty
             };
+        }
+
+        private (string label, double multiplier) GetTrafficFactor(DateTime dt)
+        {
+            var hour = dt.Hour;
+            if ((hour >= 7 && hour < 10) || (hour >= 16 && hour < 19)) return ("Heavy", 1.25);
+            if (hour >= 23 || hour < 6) return ("Low", 0.95);
+            return ("Medium", 1.0);
+        }
+
+        private double GetWeatherMultiplier(WeatherResult weather)
+        {
+            if (weather == null) return 1.0;
+            var cond = weather.Condition.ToLower();
+            if (cond.Contains("rain") || cond.Contains("storm")) return 1.15;
+            return 1.0;
         }
     }
 }

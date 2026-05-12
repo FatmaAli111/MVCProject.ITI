@@ -1,154 +1,148 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
-using MVCProject.ITI.Models;
-using MVCProject.ITI.Serviceslayer;
 using MVCProject.ITI.Serviceslayer.Trip;
+using MVCProject.ITI.ViewModels;
+using System.Security.Claims;
 
 namespace MVCProject.ITI.Controllers
 {
-    // ── Request Models ────────────────────────────────────────────────────────
-    // ( SavePassengersRequest - PassengerItem ) for saving data in javascript to DB
-    public class SavePassengersRequest
+    public class NewTripRequest
     {
-        public Guid TripId { get; set; }
-        public List<PassengerItem> Passengers { get; set; } = new();
+        public string From { get; set; } = string.Empty;
+        public string To { get; set; } = string.Empty;
+        public Guid VehicleId { get; set; }
+        public bool IsAcOn { get; set; }
+        public bool LeaveNow { get; set; }
+        public DateTime? ScheduledTime { get; set; }
     }
 
-    public class PassengerItem
-    {
-        public string Name { get; set; } = string.Empty;
-        public float ShareAmount { get; set; }
-        public float SharePercentage { get; set; }
-    }
-
-    // ── Controller ────────────────────────────────────────────────────────────
     [Authorize]
-
     public class TripController : Controller
     {
-        private readonly IWeatherService _weatherService;
         private readonly IRouteService _routeService;
         private readonly ITripCostService _costService;
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IRecentTripService _recentTripService;
 
-        public TripController(
-            IWeatherService weatherService,
-            IRouteService routeService,
-            ITripCostService costService,
-            ApplicationDbContext context
-            , UserManager<ApplicationUser> userManager
-            , VehicleService vechileService
-            , IRecentTripService recentTripService)
+        public TripController(IRouteService routeService, ITripCostService costService, ApplicationDbContext context)
         {
-            _weatherService = weatherService;
             _routeService = routeService;
             _costService = costService;
             _context = context;
-            _userManager = userManager;
-            _recentTripService = recentTripService;
         }
 
-        // GET /Trip/History
-        public async Task<IActionResult> History()
+        [HttpGet]
+        public async Task<IActionResult> StartNewTrip()
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim)) return RedirectToAction("Login", "Account");
+            var userId = Guid.Parse(userIdClaim);
+            var vehicles = await _context.Vehicles.Where(v => v.UserId == userId).ToListAsync();
+            var viewModel = new NewTripViewModel
+            {
+                AvailableVehicles = vehicles.Select(v => new SelectListItem { Value = v.Id.ToString(), Text = v.NickName }).ToList()
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StartTrip([FromBody] NewTripRequest request)
         {
             try
             {
-                ApplicationUser user = await _userManager.GetUserAsync(User);
-                if (user is null)
-                    return Redirect("/Identity/Account/Login");
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = Guid.Parse(userIdClaim);
+                var costResult = await _costService.CalculateTripCostAsync(request.VehicleId, request.From, request.To, request.IsAcOn, request.LeaveNow ? DateTime.Now : request.ScheduledTime ?? DateTime.Now);
 
-                Guid id = user.Id;
-                
-                IEnumerable<TripCardViewModel> Alltrips = await _recentTripService.GetAllTrips(id);
-                return View(Alltrips);
+                var routes = await _routeService.GetRoutesAsync(request.From, request.To);
+                var bestRoute = routes.First();
+
+                var trip = new Trip
+                {
+                    UserId = userId,
+                    VehicleId = request.VehicleId,
+                    OriginName = request.From,
+                    DestinationName = request.To,
+                    DistanceKm = bestRoute.DistanceKm,
+                    DurationMinutes = bestRoute.DurationMinutes,
+                    IsAcOn = request.IsAcOn,
+                    PassengerCount = 1,
+                    TripDate = DateTime.Now,
+                    CreatedAt = DateTime.Now
+                };
+
+                _context.Trips.Add(trip);
+                await _context.SaveChangesAsync();
+
+                costResult.TripId = trip.Id;
+                _context.TripCostResults.Add(costResult);
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, redirectUrl = Url.Action("CompletionTrip", new { id = trip.Id }) });
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", ex.Message);
+                return Json(new { success = false, message = ex.Message });
             }
         }
 
-        // GET /Trip/CompletionTrip
-        public IActionResult CompletionTrip()
+        public async Task<IActionResult> CompletionTrip(Guid id)
         {
-            // test for waiting insertion in DB
-            return View();
-        }
+            var trip = await _context.Trips
+                .Include(t => t.Vehicle)
+                .Include(t => t.TripCostResult)
+                .FirstOrDefaultAsync(t => t.Id == id);
 
-        // POST /Trip/SavePassengers
-        // Take Passengers from Javasscript and Save them in DB
-        [HttpPost]
-        public async Task<IActionResult> SavePassengers(
-            [FromBody] SavePassengersRequest request)
-        {
-            // Not Saving Trip Id if it's not assigned
-            if (request.TripId == Guid.Empty)
-                return Json(new { success = false, message = "Invalid Trip Id" });
+            if (trip == null) return NotFound();
 
-            // Delete Old Passengers In The Trip if it found
-            var existing = _context.TripPassengers
-                .Where(p => p.TripId == request.TripId);
-            _context.TripPassengers.RemoveRange(existing);
+            var routes = await _routeService.GetRoutesAsync(trip.OriginName, trip.DestinationName);
+            var bestRoute = routes.FirstOrDefault();
 
-            // Add New Passengers
-            foreach (var p in request.Passengers)
+            return View(new CompletionTripViewModel
             {
-                _context.TripPassengers.Add(new TripPassenger
-                {
-                    Id = Guid.NewGuid(),
-                    TripId = request.TripId,
-                    Name = p.Name,
-                    ShareAmount = p.ShareAmount,
-                    SharePercentage = p.SharePercentage
-                });
-            }
+                TripId = trip.Id,
+                FromName = trip.OriginName,
+                ToName = trip.DestinationName,
+                DistanceKm = trip.DistanceKm,
+                DurationMinutes = trip.DurationMinutes,
+                TripDate = trip.TripDate,
+                FromLat = bestRoute?.StartLat ?? 0,
+                FromLng = bestRoute?.StartLng ?? 0,
+                ToLat = bestRoute?.EndLat ?? 0,
+                ToLng = bestRoute?.EndLng ?? 0,
+                CarName = trip.Vehicle?.NickName ?? "Vehicle",
+                TotalCost = trip.TripCostResult?.TotalCost ?? 0,
+                FuelConsumed = trip.TripCostResult?.FuelConsumed ?? 0,
+                TrafficCondition = trip.TripCostResult?.TrafficCondition ?? "Normal",
+                WeatherCondition = trip.TripCostResult?.WeatherCondition ?? "Clear",
+                FuelCost = (trip.TripCostResult?.FuelConsumed ?? 0) * 18.5,
+                MaintenanceCost = trip.DistanceKm * 0.75
+            });
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteTrip(Guid id)
+        {
+            var trip = await _context.Trips.FindAsync(id);
+            if (trip == null) return Json(new { success = false });
+            _context.Trips.Remove(trip);
             await _context.SaveChangesAsync();
             return Json(new { success = true });
         }
 
-        // ── Test Actions  ───────────
-
-        public async Task<IActionResult> TestWeather()
+        public async Task<IActionResult> History()
         {
-            var result = await _weatherService.GetWeatherAsync("Cairo");
-            return Content($"Temp: {result.TemperatureC}°C | " +
-                           $"Condition: {result.Condition} | " +
-                           $"IsHot: {result.IsHot} | " +
-                           $"IsRainy: {result.IsRainy}");
-        }
-
-        public async Task<IActionResult> TestRoute()
-        {
-            var routes = await _routeService.GetRoutesAsync("Cairo", "Alexandria");
-            var result = string.Join(" | ", routes.Select(r =>
-                $"{r.Summary}: {r.DistanceKm:F0}km, {r.DurationMinutes}min, {r.TrafficCondition}"));
-            return Content(result);
-        }
-
-        public async Task<IActionResult> TestCost()
-        {
-            var result = await _costService.CalculateAsync(
-                origin: "Cairo",
-                destination: "Alexandria",
-                distanceKm: 220,
-                fuelPricePerLiter: 13.75f,
-                fuelEfficiencyL100km: 8.5f,
-                passengerCount: 1,
-                isAcOn: true);
-
-            return Content(
-                $"Total: EGP {result.TotalCost} | " +
-                $"Per KM: {result.CostPerKm} | " +
-                $"Weather: {result.WeatherCondition} ({result.WeatherMultiplier}x) | " +
-                $"Traffic: {result.TrafficCondition} ({result.TrafficMultiplier}x) | " +
-                $"Fuel: {result.FuelConsumed}L");
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var history = await _context.Trips
+                .Include(t => t.Vehicle)
+                .Include(t => t.TripCostResult)
+                .Where(t => t.UserId == userId)
+                .OrderByDescending(t => t.CreatedAt)
+                .ToListAsync();
+            return View(history);
         }
     }
 }

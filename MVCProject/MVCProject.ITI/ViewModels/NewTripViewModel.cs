@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MVCProject.ITI.ViewModels
 {
@@ -14,6 +15,9 @@ namespace MVCProject.ITI.ViewModels
 
         public DateTime? ScheduledTime { get; set; } = DateTime.Now;
         public Guid UserId { get; set; }
+
+        [Required(ErrorMessage = "Please select a vehicle from your garage")]
         public Guid VehicleId { get; set; }
+        public List<SelectListItem>? AvailableVehicles { get; set; }
     }
 }

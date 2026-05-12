@@ -1,105 +1,142 @@
-﻿@model IEnumerable<TripCardViewModel>
-
+﻿@using MVCProject.ITI.DataAccessLayer.Entities
+@model IEnumerable<Trip>
 @{
-    // Layout = "~/Views/Trip/_TripLayout.cshtml";
-    ViewData["Title"] = "Trip History";
     Layout = "_AppLayout";
-
-
-    // Static data for Test
-    var trips = new[]
-    {
-        new { From="Cairo", To="Alexandria",     Date="2024-01-15", Km=220, Traffic="Medium", Cost=272  },
-        new { From="Cairo", To="Giza Pyramids",  Date="2024-01-12", Km=25,  Traffic="Low",    Cost=31   },
-        new { From="Cairo", To="Sharm El Sheikh",Date="2024-01-08", Km=480, Traffic="Heavy",  Cost=594  },
-        new { From="Cairo", To="Hurghada",       Date="2024-01-05", Km=460, Traffic="Low",    Cost=532  },
-        new { From="Cairo", To="Luxor",          Date="2023-12-28", Km=670, Traffic="Medium", Cost=774  },
-    };
-    int count = Model.Count();
+    ViewData["Title"] = "Trip History";
+    int count = Model?.Count() ?? 0;
 }
-@section Styles{
-    <link rel="stylesheet" href="~/css/trip-style.css" />
-    <link rel="stylesheet" href="~/css/trip-completion-extras.css" />
-}
-<div id="page-history">
-    <div class="topbar">
-        <div class="tb-left">
-            @* <button class="back-btn" onclick="history.back()" aria-label="Back"> *@
-            @*     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"> *@
-            @*         <polyline points="15 18 9 12 15 6" /> *@
-            @*     </svg> *@
-            @* </button> *@
-            <div class="tb-title">
-                <h2>Trip History</h2>
-                <p>@count trip@(count != 1 ? "s" : "") recorded</p>
-            </div>
-        </div>
-        @* <div class="tb-acts"> *@
-        @*     <button class="icon-btn icon-btn-ghost" aria-label="Search"> *@
-        @*         <svg viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"> *@
-        @*             <circle cx="11" cy="11" r="8" /> *@
-        @*             <line x1="21" y1="21" x2="16.65" y2="16.65" /> *@
-        @*         </svg> *@
-        @*     </button> *@
-        @* </div> *@
-    </div>
+<style>
+    .history-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-    <div class="page-scroll">
-        <div class="history-list">
-            @if (count == 0)
-            {
-                <div style="text-align:center;padding:60px 20px;color:var(--muted);">
-                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.4" stroke-linecap="round" style="margin-bottom:14px;">
-                        <circle cx="12" cy="10" r="3" />
-                        <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
-                    </svg>
-                    <p style="font-size:15px;font-weight:700;color:var(--soft);">No trips yet</p>
-                    <p style="font-size:13px;margin-top:4px;">Your completed trips will appear here.</p>
-                </div>
-            }
-            else
-            {
-                foreach (TripCardViewModel t in Model)
-                {
+    .h-item {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        border: 1px solid #E5E7EB;
+        text-decoration: none;
+        color: inherit;
+        transition: 0.3s;
+        position: relative;
+    }
 
-                    @* string pillCls = "Heavy"; *@
-                    @* t.Traffic == "Low" ? "pill-low" : *@
-                    @*                      t.Traffic == "Heavy" ? "pill-heavy" : "pill-medium"; *@
-                    <a href="@Url.Action("CompletionTrip", "Trip")" class="h-item"
-                       style="animation-delay:@(5 * 0.06)s; text-decoration:none; color:inherit;">
-                        <div class="h-av">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke="var(--teal-dk)">
-                                <circle cx="12" cy="10" r="3" />
-                                <path d="M12 2a8 8 0 018 8c0 6-8 14-8 14S4 16 4 10a8 8 0 018-8z" />
-                            </svg>
-                        </div>
-                        <div class="h-info">
-                            <div class="h-route">@t.OriginName &rarr; @t.DestinationName</div>
-                            <div class="h-meta">
-                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                                    <line x1="16" y1="2" x2="16" y2="6" />
-                                    <line x1="8" y1="2" x2="8" y2="6" />
-                                    <line x1="3" y1="10" x2="21" y2="10" />
-                                </svg>
-                                @t.TripDate.ToString(("yyyy-MM-dd")) &nbsp; @t.DistanceKm km &nbsp;
-                                @* <span class="t-pill @pillCls">@pillCls</span> *@
-                            </div>
-                        </div>
-                        <div style="text-align:right;margin-left:14px;">
-                            <div class="h-cost">@t.TripTotalCost</div>
-                            <div class="h-unit">EGP</div>
-                        </div>
-                        <div class="h-acts">
-                            <button class="arr-btn" tabindex="-1">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke="var(--muted)">
-                                    <polyline points="9 18 15 12 9 6" />
-                                </svg>
-                            </button>
-                        </div>
-                    </a>
-                }
-            }
-        </div>
-    </div>
+        .h-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+    .h-av {
+        width: 50px;
+        height: 50px;
+        background: #F0FDFA;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+    }
+
+    .h-info {
+        flex: 1;
+    }
+
+    .h-route {
+        font-weight: 800;
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    .h-meta {
+        color: #6B7280;
+        font-size: 13px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .h-cost-box {
+        text-align: right;
+        margin-right: 15px;
+    }
+
+    .h-cost {
+        font-weight: 900;
+        font-size: 18px;
+        color: #111827;
+    }
+
+    .del-btn {
+        background: #FEE2E2;
+        border: none;
+        color: #EF4444;
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s;
+        z-index: 10;
+    }
+
+        .del-btn:hover {
+            background: #EF4444;
+            color: white;
+        }
+</style>
+<div class="topbar" style="background:white; padding:20px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+    <h2 style="margin:0; font-size:20px;">Trip History</h2>
+    <span style="background:#F3F4F6; padding:5px 12px; border-radius:20px; font-size:13px; font-weight:600;">@count trips</span>
 </div>
+<div class="history-container">
+    @if (count == 0)
+    {
+        <div style="text-align:center; padding:100px 0; color:#9CA3AF;"><p>No trips recorded yet.</p></div>
+    }
+    else
+    {
+        @foreach (var t in Model)
+        {
+            <div class="h-item" id="trip-@t.Id">
+                <a href="@Url.Action("CompletionTrip", "Trip", new { id = t.Id })" style="text-decoration:none; color:inherit; display:flex; flex:1; align-items:center;">
+                    <div class="h-av">
+                        <svg width="24" height="24" fill="none" stroke="#2DD4BF" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <div class="h-info">
+                        <div class="h-route">@t.OriginName → @t.DestinationName</div>
+                        <div class="h-meta"><span>@t.TripDate.ToString("dd MMM")</span><span>•</span><span>@t.DistanceKm.ToString("F1") km</span></div>
+                    </div>
+                    <div class="h-cost-box">
+                        <div class="h-cost">@((t.TripCostResult?.TotalCost ?? 0).ToString("N0"))</div>
+                        <div style="font-size:10px; color:#6B7280;">EGP</div>
+                    </div>
+                </a>
+                <button class="del-btn" onclick="deleteTrip('@t.Id')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </button>
+            </div>
+        }
+    }
+</div>
+<script>
+    async function deleteTrip(tripId) {
+        if (!confirm("Are you sure you want to delete this trip?")) return;
+        try {
+            const response = await fetch(`/Trip/DeleteTrip/${tripId}`, { method: 'POST' });
+            const data = await response.json();
+            if (data.success) {
+                document.getElementById(`trip-${tripId}`).remove();
+            } else {
+                alert("Failed to delete trip.");
+            }
+        } catch (e) {
+            alert("Error occurred.");
+        }
+    }
+</script>
