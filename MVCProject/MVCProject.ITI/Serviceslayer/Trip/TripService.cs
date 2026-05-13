@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Models;
 using MVCProject.ITI.ViewModels;
 
 namespace MVCProject.ITI.Serviceslayer.Trip
@@ -70,6 +71,7 @@ namespace MVCProject.ITI.Serviceslayer.Trip
             };
         }
 
+      
 
         public async Task<bool> SaveTripSplitAsync(SplitTripViewModel vm, Guid userId)
         {

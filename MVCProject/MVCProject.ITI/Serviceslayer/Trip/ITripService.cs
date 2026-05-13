@@ -1,4 +1,5 @@
-﻿using MVCProject.ITI.ViewModels;
+﻿using MVCProject.ITI.Models;
+using MVCProject.ITI.ViewModels;
 
 namespace MVCProject.ITI.Serviceslayer.Trip
 {

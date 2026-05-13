@@ -1,117 +1,208 @@
-@using MVCProject.ITI.ViewModels
+﻿@using MVCProject.ITI.ViewModels
 @model AnalyticsViewModel
 @{
     ViewData["Title"] = "Analytics";
     Layout = "_AppLayout";
 }
+@section Styles {
+    <link rel="stylesheet" href="~/css/Garage,analytics.css" asp-append-version="true" />
+}
 
-<section class="analytics-header">
-    <div>
-        <h1 class="analytics-title">Analytics</h1>
-        <p class="analytics-subtitle">Your travel insights</p>
-    </div>
-    <span class="time-pill">All Time</span>
-</section>
+<div class="page-wrap">
 
-<section class="row g-3">
-
-    <!-- Total Distance -->
-    <div class="col-lg-6">
-        <div class="analytics-kpi">
-            <span class="kpi-icon kpi-icon-teal">km</span>
-            <div class="kpi-value">@Model.TotalDistance.ToString("0.00") km</div>
-            <div class="kpi-label">Total Distance</div>
-            <div class="kpi-sub">@Model.TripCount trips</div>
+    <div class="page-top">
+        <div>
+            <h1 class="page-title">Analytics</h1>
+            <p class="page-sub">Your travel insights at a glance</p>
         </div>
+        <span class="st-pill">
+            <i class="fa-regular fa-calendar"></i> All Time
+        </span>
     </div>
 
-    <!-- Total Spent -->
-    <div class="col-lg-6">
-        <div class="analytics-kpi">
-            <span class="kpi-icon kpi-icon-purple">$</span>
-            <div class="kpi-value">EGP @Model.TotalSpent.ToString("0.00")</div>
-            <div class="kpi-label">Total Spent</div>
-            <div class="kpi-sub">
-                Avg EGP @(Model.TripCount == 0 ? 0 : (Model.TotalSpent / Model.TripCount)) / trip
+    <div class="kpi-grid">
+
+        <div class="kpi-card">
+            <div class="kpi-icon-box teal">
+                <i class="fa-solid fa-route"></i>
+            </div>
+            <div class="kpi-big-val">@Model.TotalDistance.ToString("0.##")</div>
+            <div class="kpi-unit">km</div>
+            <div class="kpi-name">Total Distance</div>
+            <span class="kpi-badge teal">@Model.TripCount trips</span>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-icon-box purple">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+            <div class="kpi-big-val">@Model.TotalSpent.ToString("0.##")</div>
+            <div class="kpi-unit">EGP</div>
+            <div class="kpi-name">Total Spent</div>
+            <span class="kpi-badge purple">Avg EGP @(Model.TripCount == 0 ? "0" : (Model.TotalSpent / Model.TripCount).ToString("0.##")) / trip</span>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-icon-box orange">
+                <i class="fa-solid fa-gas-pump"></i>
+            </div>
+            <div class="kpi-big-val">@Model.FuelCost.ToString("0.##")</div>
+            <div class="kpi-unit">EGP</div>
+            <div class="kpi-name">Fuel Cost</div>
+            <span class="kpi-badge orange">@Model.FuelPercentage% of total</span>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-icon-box green">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="kpi-big-val">@Model.Emissions.ToString("0.##")</div>
+            <div class="kpi-unit">kg CO₂</div>
+            <div class="kpi-name">Emissions</div>
+            <span class="kpi-badge green">131 g/km</span>
+        </div>
+
+    </div>
+
+    <!-- Monthly Spending -->
+    <div class="st-card">
+        <div class="st-card-header">
+            <span class="st-card-title">
+                <i class="fa-solid fa-chart-line"></i>
+                Monthly Spending
+            </span>
+            <span class="st-card-meta">All time</span>
+        </div>
+        <script>
+            const monthlySpending = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlySpending));
+        </script>
+        <div class="chart-row">
+            <div class="chart-y-axis">
+                <span>2800</span><span>2100</span><span>1400</span><span>700</span><span>0</span>
+            </div>
+            <div class="chart-svg-wrap">
+                <svg id="spendingChart" viewBox="0 0 400 140" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#0d9488" stop-opacity=".22" />
+                            <stop offset="100%" stop-color="#0d9488" stop-opacity="0" />
+                        </linearGradient>
+                    </defs>
+                    <polygon id="spendFill" fill="url(#tg)" />
+                    <polyline id="spendLine" fill="none" stroke="#0d9488" stroke-width="2.5"
+                              stroke-linejoin="round" stroke-linecap="round" />
+                </svg>
+            </div>
+        </div>
+        <div class="chart-x-axis" id="spendLabels"></div>
+    </div>
+
+    <!-- Distance Traveled -->
+    <div class="st-card">
+        <div class="st-card-header">
+            <span class="st-card-title">
+                <i class="fa-solid fa-chart-column"></i>
+                Distance Traveled
+            </span>
+            <span class="st-card-meta">km per month</span>
+        </div>
+        <script>
+            const monthlyDistance = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyDistance));
+        </script>
+        <div class="chart-row" style="align-items:stretch;">
+            <div class="chart-y-axis">
+                <span>2000</span><span>1500</span><span>1000</span><span>500</span><span>0</span>
+            </div>
+            <div class="bars-wrap" id="distanceBars"></div>
+        </div>
+        <div class="chart-x-axis" id="distLabels"></div>
+    </div>
+
+    <!-- Cost Breakdown -->
+    <div class="st-card">
+        <div class="st-card-header">
+            <span class="st-card-title">
+                <i class="fa-solid fa-chart-pie"></i>
+                Cost Breakdown
+            </span>
+            <span class="st-card-meta">All time</span>
+        </div>
+        <div class="breakdown-row">
+            <div class="donut-wrap">
+                <svg viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="46" fill="none" stroke="#f1f5f9" stroke-width="14" />
+                    <circle cx="60" cy="60" r="46" fill="none" stroke="#0d9488" stroke-width="14"
+                            stroke-dasharray="@((2.89 * Model.FuelPercentage).ToString("0.##")) 289"
+                            stroke-dashoffset="72" stroke-linecap="round" />
+                    <circle cx="60" cy="60" r="46" fill="none" stroke="#7c3aed" stroke-width="14"
+                            stroke-dasharray="@((2.89 * Model.TollsPercentage).ToString("0.##")) 289"
+                            stroke-dashoffset="-@((2.89 * Model.FuelPercentage - 72).ToString("0.##"))" stroke-linecap="round" />
+                    <circle cx="60" cy="60" r="46" fill="none" stroke="#fb923c" stroke-width="14"
+                            stroke-dasharray="@((2.89 * Model.MaintenancePercentage).ToString("0.##")) 289"
+                            stroke-dashoffset="-@((2.89 * (Model.FuelPercentage + Model.TollsPercentage) - 72).ToString("0.##"))" stroke-linecap="round" />
+                </svg>
+                <div class="donut-center">
+                    <span>100%</span>
+                    <small>Total</small>
+                </div>
+            </div>
+            <div class="legend-list">
+                <div class="legend-row">
+                    <div class="legend-dot" style="background:#0d9488;"></div>
+                    <div class="legend-label">Fuel</div>
+                    <div class="legend-bar-bg"><div class="legend-bar-fill" style="width:@Model.FuelPercentage%;background:#0d9488;"></div></div>
+                    <div class="legend-pct">@Model.FuelPercentage%</div>
+                </div>
+                <div class="legend-row">
+                    <div class="legend-dot" style="background:#7c3aed;"></div>
+                    <div class="legend-label">Tolls</div>
+                    <div class="legend-bar-bg"><div class="legend-bar-fill" style="width:@Model.TollsPercentage%;background:#7c3aed;"></div></div>
+                    <div class="legend-pct">@Model.TollsPercentage%</div>
+                </div>
+                <div class="legend-row">
+                    <div class="legend-dot" style="background:#fb923c;"></div>
+                    <div class="legend-label">Maintenance</div>
+                    <div class="legend-bar-bg"><div class="legend-bar-fill" style="width:@Model.MaintenancePercentage%;background:#fb923c;"></div></div>
+                    <div class="legend-pct">@Model.MaintenancePercentage%</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Fuel Cost -->
-    <div class="col-lg-6">
-        <div class="analytics-kpi">
-            <span class="kpi-icon kpi-icon-amber">F</span>
-            <div class="kpi-value">EGP @Model.FuelCost.ToString("0.00")</div>
-            <div class="kpi-label">Fuel Cost</div>
-            <div class="kpi-sub">@Model.FuelPercentage% of total</div>
-        </div>
-    </div>
+</div>
 
-    <!-- Emissions -->
-    <div class="col-lg-6">
-        <div class="analytics-kpi">
-            <span class="kpi-icon kpi-icon-green">CO2</span>
-            <div class="kpi-value">@Model.Emissions.ToString("0.00") kg</div>
-            <div class="kpi-label">CO2 Emissions</div>
-            <div class="kpi-sub">131 g/km</div>
-        </div>
-    </div>
-
-</section>
-
-<!-- Monthly Spending Chart -->
-<section class="analytics-panel mt-3">
-    <h3 class="panel-title">Monthly Spending</h3>
-
+@section Scripts {
     <script>
-            const monthlySpending = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlySpending));
-            console.log("Monthly Spending:", monthlySpending);
+        (function () {
+            if (!monthlySpending || !monthlySpending.length) return;
+            const max = Math.max(...monthlySpending.map(x => x.Value), 1);
+            const W = 400, H = 140;
+            const pts = monthlySpending.map((x, i) => ({
+                x: 10 + i * (W - 20) / (monthlySpending.length - 1 || 1),
+                y: H - 10 - (x.Value / max) * (H - 20),
+                lbl: x.Key
+            }));
+            const pStr = pts.map(p => p.x + "," + p.y).join(" ");
+            document.getElementById("spendLine").setAttribute("points", pStr);
+            document.getElementById("spendFill").setAttribute("points",
+                pStr + " " + pts[pts.length - 1].x + "," + H + " 10," + H);
+            const xRow = document.getElementById("spendLabels");
+            pts.forEach(p => { const s = document.createElement("span"); s.textContent = p.lbl; xRow.appendChild(s); });
+        })();
+
+        (function () {
+            if (!monthlyDistance || !monthlyDistance.length) return;
+            const max = Math.max(...monthlyDistance.map(x => x.Value), 1);
+            const wrap = document.getElementById("distanceBars");
+            const lbls = document.getElementById("distLabels");
+            monthlyDistance.forEach((x, i) => {
+                const pct = Math.max((x.Value / max) * 100, 2);
+                const bar = document.createElement("div");
+                bar.className = "bar-item " + (i % 2 === 0 ? "light" : "primary");
+                bar.style.height = pct + "%";
+                wrap.appendChild(bar);
+                const l = document.createElement("span"); l.textContent = x.Key; lbls.appendChild(l);
+            });
+        })();
     </script>
-
-    <div class="chart chart-line">
-        <div class="chart-axis-y">
-            <span>2800</span>
-            <span>2100</span>
-            <span>1400</span>
-            <span>700</span>
-        </div>
-        <div class="chart-canvas">
-            <div class="line-dot"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Monthly Distance Chart -->
-<section class="analytics-panel mt-3">
-    <h3 class="panel-title">Distance Traveled</h3>
-
-    <script>
-            const monthlyDistance = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyDistance));
-            console.log("Monthly Distance:", monthlyDistance);
-    </script>
-
-    <div class="chart chart-bar">
-        <div class="chart-axis-y">
-            <span>2000 km</span>
-            <span>1500 km</span>
-            <span>1000 km</span>
-            <span>500 km</span>
-        </div>
-        <div class="chart-canvas">
-            <div class="bar-fill"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Cost Breakdown -->
-<section class="analytics-panel mt-3">
-    <h3 class="panel-title">Cost Breakdown</h3>
-    <div class="breakdown-wrap">
-        <div class="donut-chart"></div>
-        <div class="breakdown-legend">
-            <div class="legend-row"><span><i class="dot dot-fuel"></i>Fuel</span><strong>@Model.FuelPercentage%</strong></div>
-            <div class="legend-row"><span><i class="dot dot-tolls"></i>Tolls</span><strong>@Model.TollsPercentage%</strong></div>
-            <div class="legend-row"><span><i class="dot dot-maintenance"></i>Maintenance</span><strong>@Model.MaintenancePercentage%</strong></div>
-        </div>
-    </div>
-</section>
+}

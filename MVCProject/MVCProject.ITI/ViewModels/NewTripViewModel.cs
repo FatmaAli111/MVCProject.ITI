@@ -12,6 +12,7 @@ namespace MVCProject.ITI.ViewModels
         public string To { get; set; }
 
         public bool LeaveNow { get; set; } = true;
+        public bool IsAcOn { get; set; }
 
         public DateTime? ScheduledTime { get; set; } = DateTime.Now;
         public Guid UserId { get; set; }

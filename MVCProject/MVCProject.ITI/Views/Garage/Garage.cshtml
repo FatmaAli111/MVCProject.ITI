@@ -3,63 +3,95 @@
     ViewData["Title"] = "Garage";
     Layout = "_AppLayout";
 }
-<section class="garage-header">
-    <div>
-        <h1 class="analytics-title">My Garage</h1>
-        <p class="analytics-subtitle">@Model.Count() vehicles</p>
+@section Styles {
+    <link rel="stylesheet" href="~/css/Garage,analytics.css" asp-append-version="true" />
+}
+
+<div class="page-wrap">
+
+    <div class="garage-header">
+        <div>
+            <h1 class="page-title">My Garage</h1>
+            <p class="page-sub">@Model.Count() vehicle@(Model.Count() != 1 ? "s" : "") registered</p>
+        </div>
+        <a class="btn btn-teal" asp-controller="Garage" asp-action="AddVehicle">
+            <i class="fa-solid fa-plus"></i> Add Vehicle
+        </a>
     </div>
-    <a class="btn btn-teal" asp-controller="Garage" asp-action="AddVehicle">+ Add Vehicle</a>
-</section>
-<div class="vehicle-list">
 
-    @foreach (var v in Model)
-    {
-        <div class="vehicle-card">
-            <div class="vehicle-icon">
-                <i class="fa-solid fa-car-side"></i>
-            </div>
+    <div class="vehicle-list">
+        @foreach (var v in Model)
+        {
+            <div class="vehicle-card">
+                <!-- colored left accent — must be first -->
+                <div class="vc-accent" style="background:@v.ColorHex;"></div>
 
-            <div class="color-strip" style="background-color:@v.ColorHex;"></div>
-
-            <div class="vehicle-body">
-
-                <div class="vehicle-header">
-                    <h3>@v.NickName</h3>
-                    @if (v.IsDefault)
-                    {
-                        <span class="default-badge">Default</span>
-                    }
+                <!-- icon -->
+                <div class="vehicle-icon">
+                    <i class="bi bi-car-front-fill"></i>
                 </div>
 
-                <div class="vehicle-info">
-                    <p><strong>@v.CarModel.Year @v.CarModel.Make @v.CarModel.Model</strong></p>
-                    <p>@v.CarModel.FuelType</p>
-                    <p>@v.CarModel.WltpMixed L/100km</p>
-                </div>
+                <!-- body -->
+                <div class="vehicle-body">
 
-                <div class="vehicle-actions">
-                    @if (!v.IsDefault)
-                    {
-                        <form method="post" asp-action="SetDefault" asp-route-id="@v.Id">
-                            <button class="icon-btn default" title="Set as Default">
-                                <i class="fa-solid fa-star"></i>
+                    <div class="vehicle-header">
+                        <div class="vc-name-row">
+                            <h3 class="vehicle-name">@v.NickName</h3>
+                            @if (v.IsDefault)
+                            {
+                                <span class="default-badge">
+                                    <i class="bi bi-star-fill" style="font-size:9px;"></i> Default
+                                </span>
+                            }
+                        </div>
+                        <p class="vc-year-model">@v.CarModel.Year &nbsp;·&nbsp; @v.CarModel.Make @v.CarModel.Model</p>
+                    </div>
+
+                    <div class="vc-chips">
+                        <span class="vc-chip">
+                            <i class="bi bi-fuel-pump-fill"></i> @v.CarModel.FuelType
+                        </span>
+                        <span class="vc-chip">
+                            <i class="bi bi-speedometer2"></i> @v.CarModel.WltpMixed L/100km
+                        </span>
+                    </div>
+
+                    <div class="vehicle-actions">
+                        @if (!v.IsDefault)
+                        {
+                            <form method="post" asp-action="SetDefault" asp-route-id="@v.Id">
+                                <button class="icon-btn default" title="Set as Default">
+                                    <i class="bi bi-star-fill"></i> Set Default
+                                </button>
+                            </form>
+                        }
+                        <a asp-action="Edit" asp-route-id="@v.Id" class="icon-btn edit" title="Edit">
+                            <i class="bi bi-pencil-fill"></i> Edit
+                        </a>
+                        <form method="post" asp-action="DeleteVehicle" asp-route-id="@v.Id" style="display:inline;">
+                            <button class="icon-btn delete" title="Delete">
+                                <i class="bi bi-trash3-fill"></i> Delete
                             </button>
                         </form>
-                    }
+                    </div>
 
-                    <a asp-action="Edit" asp-route-id="@v.Id" class="icon-btn edit" title="Edit">
-                        <i class="fa-solid fa-pen"></i>
-                    </a>
-
-                    <form method="post" asp-action="DeleteVehicle" asp-route-id="@v.Id" style="display:inline;">
-                        <button class="icon-btn delete" title="Delete">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </form>
                 </div>
-
             </div>
+        }
 
-        </div>
-    }
+        @if (!Model.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+                <h3 class="empty-title">No vehicles yet</h3>
+                <p class="empty-sub">Add your first vehicle to start tracking trips and expenses.</p>
+                <a class="btn btn-teal" asp-controller="Garage" asp-action="AddVehicle">
+                    <i class="fa-solid fa-plus"></i> Add Your First Vehicle
+                </a>
+            </div>
+        }
+    </div>
+
 </div>

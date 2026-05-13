@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.ITI.DataAccessLayer.Data;
 using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Models;
+using MVCProject.ITI.Serviceslayer;
 using MVCProject.ITI.Serviceslayer.Trip;
 using MVCProject.ITI.ViewModels;
 using System.Security.Claims;
@@ -27,32 +30,47 @@ namespace MVCProject.ITI.Controllers
         private readonly ITripCostService _costService;
         private readonly ApplicationDbContext _context;
         private readonly ITripService _tripService;
+        private readonly IRecentTripService _recentTripService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly VehicleService _vehicleService;
 
-        public TripController(IRouteService routeService, ITripCostService costService, ApplicationDbContext context, ITripService tripService)
+        public TripController(IRouteService routeService, ITripCostService costService,
+            ApplicationDbContext context, ITripService tripService,
+            IRecentTripService recentTripService,UserManager<ApplicationUser> userManager,VehicleService vehicleService)
         {
             _routeService = routeService;
             _costService = costService;
             _context = context;
             _tripService = tripService;
-
+           _recentTripService = recentTripService;
+            _userManager = userManager;
+            _vehicleService = vehicleService;
         }
 
         [HttpGet]
         public async Task<IActionResult> StartNewTrip()
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userIdClaim)) return RedirectToAction("Login", "Account");
-            var userId = Guid.Parse(userIdClaim);
-            var vehicles = await _context.Vehicles.Where(v => v.UserId == userId).ToListAsync();
-            var viewModel = new NewTripViewModel
+            try
             {
-                AvailableVehicles = vehicles.Select(v => new SelectListItem { Value = v.Id.ToString(), Text = v.NickName }).ToList()
-            };
-            return View(viewModel);
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                if (user is null)
+                    return RedirectToPage("/Account/Login", new { area = "Identity" });
+
+                Guid id = user.Id;
+                ViewBag.Vehicle = await _vehicleService.GetDefaultVehicleAsync(id);
+
+                IEnumerable<TripCardViewModel> AllTrips = await _recentTripService.GetAllTrips(id);
+                ViewData["AllTrips"] = AllTrips;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> StartTrip([FromBody] NewTripRequest request)
+        public async Task<IActionResult> StartTrip(NewTripViewModel request)
         {
             try
             {
@@ -62,7 +80,8 @@ namespace MVCProject.ITI.Controllers
 
                 var routes = await _routeService.GetRoutesAsync(request.From, request.To);
                 var bestRoute = routes.First();
-
+                var vehicle = await _vehicleService.GetDefaultVehicleAsync(userId);
+                request.VehicleId = vehicle.Id;
                 var trip = new Trip
                 {
                     UserId = userId,
@@ -84,7 +103,7 @@ namespace MVCProject.ITI.Controllers
                 _context.TripCostResults.Add(costResult);
                 await _context.SaveChangesAsync();
 
-                return Json(new { success = true, redirectUrl = Url.Action("CompletionTrip", new { id = trip.Id }) });
+                return RedirectToAction("CompletionTrip", new { id = trip.Id });
             }
             catch (Exception ex)
             {
@@ -117,12 +136,7 @@ namespace MVCProject.ITI.Controllers
         public async Task<IActionResult> History()
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var history = await _context.Trips
-                .Include(t => t.Vehicle)
-                .Include(t => t.TripCostResult)
-                .Where(t => t.UserId == userId)
-                .OrderByDescending(t => t.CreatedAt)
-                .ToListAsync();
+            var history = await _recentTripService.GetAllTrips(userId);
             return View(history);
 
         }

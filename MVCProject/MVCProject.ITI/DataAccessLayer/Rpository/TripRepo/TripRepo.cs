@@ -11,6 +11,15 @@ namespace MVCProject.ITI.DataAccessLayer.Rpository.TripRepo
         {
         }
 
+        public async Task<IEnumerable<Trip>> GetAllTripsWithVehicleAndCostResult(Guid id)
+        {
+            var TripsWithVehicleAndCostResult = await _dbContext.Trips.Where(t => t.UserId == id).Include(t => t.Vehicle)
+                                                          .Include(t => t.TripCostResult).ToListAsync();
+               if (TripsWithVehicleAndCostResult is null)
+                return Enumerable.Empty<Trip>();
+            return TripsWithVehicleAndCostResult;
+        }
+
         public async Task<IEnumerable<Trip>> GetTripsWithVehicleAndCostResult(Guid id)
         {
             var TripsWithVehicleAndCostResult=await  _dbContext.Trips.Where(t => t.UserId == id).Include(t => t.Vehicle)

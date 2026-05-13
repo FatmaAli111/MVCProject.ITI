@@ -38,8 +38,8 @@ namespace MVCProject.ITI.Serviceslayer
 
         public async Task<IEnumerable<TripCardViewModel>> GetAllTrips(Guid userId)
         {
-            IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> AllTrips =
-                _tripRepo.GetTableNoTracking().Where(t=>t.UserId== userId);
+            IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> AllTrips =await
+                _tripRepo.GetAllTripsWithVehicleAndCostResult(userId);
 
 
             if (!AllTrips.Any())

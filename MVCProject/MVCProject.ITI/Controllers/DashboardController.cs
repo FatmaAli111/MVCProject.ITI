@@ -49,57 +49,6 @@ namespace MVCProject.ITI.Controllers
                 return RedirectToAction("Error","Home",ex.Message);
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> StartNewTripAsync()
-        {
-            try
-            {
-                ApplicationUser user = await _userManager.GetUserAsync(User);
-                if (user is null)
-                    return RedirectToPage("/Account/Login", new { area = "Identity" });
-
-                Guid id = user.Id;
-                ViewBag.Vehicle =await _vechileService.GetDefaultVehicleAsync(id);
-
-                IEnumerable<TripCardViewModel> AllTrips = await _recentTripService.GetAllTrips(id);
-                ViewData["AllTrips"] = AllTrips;
-                return View();
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Error", "Home", new { message = ex.Message });
-            }
-        }
-        [HttpPost]
-        public async Task<IActionResult> StartNewTripAsync(NewTripViewModel newTripViewModel)
-        {
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    ApplicationUser user = await _userManager.GetUserAsync(User);
-                    if (user is null)
-                        return RedirectToPage("/Account/Login", new { area = "Identity" });
-
-                    Guid id = user.Id;
-                    var vehicle=await _vechileService.GetDefaultVehicleAsync(id);
-                    newTripViewModel.UserId = id;
-                    if(vehicle!=null)
-                    newTripViewModel.VehicleId = vehicle.Id;
-                    else
-                        return RedirectToAction("Error", "Home", new { message = "You Should Set Vehicle" });
-                    await _recentTripService.AddTrip(newTripViewModel);
-
-                }
-                catch (Exception ex)
-                {
-                    //return RedirectToAction("Error", "Home", new { message = ex.Message });
-                    throw;
-                }
-            }
-            return RedirectToAction("History", "Trip");
-        }
-
+   
     }
 }

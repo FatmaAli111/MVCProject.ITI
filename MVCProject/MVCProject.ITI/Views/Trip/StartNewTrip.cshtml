@@ -2,208 +2,115 @@
 @model NewTripViewModel
 @{
     Layout = "_AppLayout";
-    if (Model == null) { return; }
 }
 @section Styles {
-    <link rel="stylesheet" href="~/css/NewTrip.css" />
-    <style>
-        .form-select-custom {
-            border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            background-color: #f8fafc;
-        }
-        .form-select-custom:focus {
-            border-color: #2dd4bf;
-            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
-            outline: none;
-        }
-        .toggle-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .toggle-btn {
-            flex: 1;
-            padding: 12px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-weight: 500;
-            color: #64748b;
-        }
-        .toggle-btn.active {
-            background: #2dd4bf;
-            border-color: #2dd4bf;
-            color: white;
-        }
-        .scheduled-input-container {
-            margin-top: 15px;
-            animation: fadeIn 0.3s ease;
-        }
-        @("@")keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .submit-btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: #2dd4bf;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(45, 212, 191, 0.25);
+<link rel="stylesheet" href="~/css/NewTrip.css" />
 }
-
-.submit-btn:hover {
-    background: #25b9a7;
-    box-shadow: 0 6px 16px rgba(45, 212, 191, 0.35);
-    transform: translateY(-1px);
-}
-
-.submit-btn:active {
-    transform: scale(0.98);
-}
-    </style>
-}
-
-<div class="page">
-    <form id="tripForm" onsubmit="handleSubmit(event)">
+<form asp-action="StartTrip" asp-controller="Trip" method="post">
+    <div class="page">
         <div class="card">
             <div class="loc-label">From</div>
             <div class="location-row">
                 <span class="loc-dot green"></span>
-                <input class="loc-input" id="fromInput" placeholder="Starting location" required />
+                <input class="loc-input" asp-for="From" placeholder="Starting location" autocomplete="off" />
+                <span asp-validation-for="From" class="text-danger"></span>
             </div>
             <div class="loc-connector"><div class="loc-line"></div></div>
             <div class="loc-label">To</div>
             <div class="location-row">
                 <span class="loc-dot red"></span>
-                <input class="loc-input" id="toInput" placeholder="Destination" required />
+                <input class="loc-input" asp-for="To" placeholder="Destination" autocomplete="off" />
+                <span asp-validation-for="To" class="text-danger"></span>
             </div>
         </div>
-
         <div class="card">
-            <div class="section-label">Departure Time</div>
+            <div class="section-label">When do you want to leave?</div>
             <div class="toggle-row">
-                <button type="button" class="toggle-btn active" id="btnLeaveNow" onclick="setDeparture(true)">
+                <button type="button" class="toggle-btn active" id="btnLeaveNow" onclick="setLeaveNow()">
                     <i class="bi bi-clock"></i> Leave Now
                 </button>
-                <button type="button" class="toggle-btn" id="btnSchedule" onclick="setDeparture(false)">
-                    <i class="bi bi-calendar-event"></i> Schedule
+                <button type="button" class="toggle-btn" id="btnSchedule" onclick="setSchedule()">
+                    <i class="bi bi-calendar3"></i> Schedule
                 </button>
             </div>
-            
-            <input type="hidden" id="leaveNowInput" value="true" />
-            
-            <div id="scheduleContainer" class="scheduled-input-container" style="display:none;">
-                <input type="datetime-local" id="scheduledTimeInput" class="form-control form-select-custom" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+            <input type="hidden" asp-for="LeaveNow" id="leaveNowInput" />
+            <div class="schedule-input" id="scheduleInput">
+                <input type="datetime-local" class="loc-input" asp-for="ScheduledTime" />
+                <span asp-validation-for="ScheduledTime" class="text-danger"></span>
             </div>
         </div>
-
         <div class="card">
-            <div class="section-label">Select Your Vehicle</div>
-            <select id="vehicleIdInput" class="form-select-custom w-100" required>
-                <option value="">-- Choose a vehicle from your garage --</option>
-                @if (Model.AvailableVehicles != null)
-                {
-                    @foreach (var vehicle in Model.AvailableVehicles)
+            <div class="vehicle-row" onclick="toggleVehicle()">
+                <div class="vehicle-icon"><i class="bi bi-car-front-fill"></i></div>
+                <div class="vehicle-info">
+                    <div class="vehicle-name">Daily Driver</div>
+                    @if (ViewBag.Vehicle != null)
                     {
-                        <option value="@vehicle.Value">@vehicle.Text</option>
+                        <div class="vehicle-sub">@ViewBag.Vehicle.NickName • @ViewBag.Vehicle.CarModel.Model</div>
                     }
+                    else
+                    {
+                        <div class="vehicle-sub">No Default Vehicle Selected</div>
+                    }
+                </div>
+                @* <i class="bi bi-chevron-down chevron" id="vehicleChevron"></i> *@
+            </div>
+        </div>
+        <div class="smart-card">
+            <div class="smart-icon"><i class="bi bi-stars"></i></div>
+            <div class="smart-info">
+                <h4>Smart Trip Analysis</h4>
+                <p>Get route comparison, best time to travel &amp; ride-share comparison</p>
+            </div>
+        </div>
+        <div class="section-title">Popular Destinations</div>
+        <div class="chips">
+            @if (ViewData["AllTrips"]!=null)
+            {
+                @foreach (var i in (IEnumerable<TripCardViewModel>)ViewData["AllTrips"])
+                {
+                    <div class="chip" onclick="setDest(this)"><i class="bi bi-geo-alt-fill"></i><span>@i.DestinationName</span></div>
+
                 }
-            </select>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">Submit Trip</button>
-        
-        <div id="loadingSpinner" style="display:none; text-align:center; padding: 20px;">
-            <div class="spinner-border text-primary" role="status"></div>
-            <p class="mt-2 text-muted">Calculating your trip cost...</p>
-        </div>
-    </form>
-</div>
-
-<script>
-    function setDeparture(isLeaveNow) {
-        document.getElementById('leaveNowInput').value = isLeaveNow;
-        
-        const btnNow = document.getElementById('btnLeaveNow');
-        const btnSched = document.getElementById('btnSchedule');
-        const container = document.getElementById('scheduleContainer');
-
-        if (isLeaveNow) {
-            btnNow.classList.add('active');
-            btnSched.classList.remove('active');
-            container.style.display = 'none';
-        } else {
-            btnNow.classList.remove('active');
-            btnSched.classList.add('active');
-            container.style.display = 'block';
-        }
-    }
-
-    async function submitTrip() {
-        const from = document.getElementById('fromInput').value;
-        const to = document.getElementById('toInput').value;
-        const vehicleId = document.getElementById('vehicleIdInput').value;
-        const leaveNow = document.getElementById('leaveNowInput').value === 'true';
-        const scheduledTime = document.getElementById('scheduledTimeInput').value;
-
-        if (!vehicleId) {
-            alert("Please select a vehicle");
-            return;
-        }
-
-        document.getElementById('submitBtn').style.display = 'none';
-        document.getElementById('loadingSpinner').style.display = 'block';
-
-        try {
-            const response = await fetch('/Trip/StartTrip', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    from: from,
-                    to: to,
-                    vehicleId: vehicleId,
-                    isAcOn: true,
-                    leaveNow: leaveNow,
-                    scheduledTime: scheduledTime
-                })
-            });
-
-            const data = await response.json();
-            if (data.success) {
-                window.location.href = data.redirectUrl;
-            } else {
-                alert('Error: ' + data.message);
-                resetUI();
             }
-        } catch (error) {
-            alert('An unexpected error occurred');
-            resetUI();
-        }
+            else
+            {
+                    <h2 style="text-align:center">No Popular Distenation</h2>
+
+            }
+           
+        </div>
+    </div>
+    <div class="compare-bar">
+        <button type="submit" class="compare-btn">
+            <i class="bi bi-arrow-left-right"></i> Start Trip
+        </button>
+    </div>
+</form>
+<script>
+    function setLeaveNow() {
+        document.getElementById('btnLeaveNow').classList.add('active');
+        document.getElementById('btnSchedule').classList.remove('active');
+        document.getElementById('scheduleInput').classList.remove('show');
+        document.getElementById('leaveNowInput').value = 'true';
+    }
+    function setSchedule() {
+        document.getElementById('btnSchedule').classList.add('active');
+        document.getElementById('btnLeaveNow').classList.remove('active');
+        document.getElementById('scheduleInput').classList.add('show');
+        document.getElementById('leaveNowInput').value = 'false';
+    }
+    function toggleVehicle() {
+        const ch = document.getElementById('vehicleChevron');
+        ch.className = ch.className.includes('down') ? 'bi bi-chevron-up chevron' : 'bi bi-chevron-down chevron';
+    }
+    function setDest(el) {
+        document.querySelectorAll('.loc-input')[1].value = el.querySelector('span').textContent;
     }
 
-    function resetUI() {
-        document.getElementById('submitBtn').style.display = 'block';
-        document.getElementById('loadingSpinner').style.display = 'none';
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        submitTrip();
-    }
+    // set default value on load
+    document.getElementById('leaveNowInput').value = 'true';
 </script>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

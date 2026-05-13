@@ -6,5 +6,7 @@ namespace MVCProject.ITI.DataAccessLayer.Rpository.TripRepo
     public interface ITripRepo:IGenericRepository<Trip>
     {
         Task<IEnumerable<Trip>> GetTripsWithVehicleAndCostResult(Guid id);
+        Task<IEnumerable<Trip>> GetAllTripsWithVehicleAndCostResult(Guid id);
+
     }
 }
