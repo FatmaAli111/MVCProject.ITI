@@ -58,5 +58,29 @@
                 }
             } catch (e) { console.error(e); }
         }
+
+        async function deleteTrip(tripId) {
+            if (!confirm('Delete this trip?')) return;
+            try {
+                const response = await fetch(`/Trip/DeleteTrip?id=${tripId}`, {
+                    method: 'POST',
+                    headers: { 'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || '' }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    const link = document.getElementById(`trip-${tripId}`)?.closest('.history-trip-link');
+                    if (link) link.remove();
+                    else window.location.href = '@Url.Action("History", "Trip")';
+                    if (!document.querySelector('.history-trip-link')) {
+                        window.location.reload();
+                    }
+                } else {
+                    alert(result.message || 'Could not delete trip.');
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Could not delete trip.');
+            }
+        }
     </script>
 }

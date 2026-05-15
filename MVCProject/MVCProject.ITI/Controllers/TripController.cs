@@ -126,8 +126,10 @@ namespace MVCProject.ITI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteTrip(Guid id)
         {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var trip = await _context.Trips.FindAsync(id);
-            if (trip == null) return Json(new { success = false });
+            if (trip == null || trip.UserId != userId)
+                return Json(new { success = false, message = "Trip not found" });
             _context.Trips.Remove(trip);
             await _context.SaveChangesAsync();
             return Json(new { success = true });

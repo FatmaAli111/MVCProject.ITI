@@ -277,6 +277,22 @@
                 console.error('Error toggling favorite:', error);
             }
         }
+
+        async function deleteTrip(tripId) {
+            if (!confirm('Delete this trip?')) return;
+            try {
+                const response = await fetch(`/Trip/DeleteTrip?id=${tripId}`, { method: 'POST' });
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById(`trip-${tripId}`)?.remove();
+                } else {
+                    alert(result.message || 'Could not delete trip.');
+                }
+            } catch (error) {
+                console.error('Error deleting trip:', error);
+                alert('Could not delete trip.');
+            }
+        }
     </script>
 
 </body>
