@@ -10,12 +10,14 @@ using MVCProject.ITI.Services;
 using MVCProject.ITI.Mapper;
 using MVCProject.ITI.Serviceslayer.Trip;
 using MVCProject.ITI.Serviceslayer;
+using MVCProject.ITI.Serviceslayer.Admin;
+using MVCProject.ITI.Data;
 
 namespace MVCProject.ITI;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -80,8 +82,14 @@ public class Program
         builder.Services.AddScoped<ITripCostService, TripCostService>();
         builder.Services.AddScoped<IRecentTripService, RecentTripService>();
         builder.Services.AddScoped<IUserSettingsService, UserSettingsService>();
+        builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            await IdentitySeeder.SeedAsync(scope.ServiceProvider, builder.Configuration);
+        }
 
         if (app.Environment.IsDevelopment())
             app.UseMigrationsEndPoint();
@@ -93,6 +101,9 @@ public class Program
         app.UseAuthorization();
 
         app.MapStaticAssets();
+        app.MapControllerRoute(
+            name: "areas",
+            pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}")

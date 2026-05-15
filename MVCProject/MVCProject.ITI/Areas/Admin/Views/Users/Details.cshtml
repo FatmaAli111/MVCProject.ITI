@@ -1,0 +1,15 @@
+@model AdminUserListItemViewModel
+@{ ViewData["Title"] = "User Details"; ViewData["Subtitle"] = Model.Email; }
+<div class="admin-card admin-form-card">
+    <div class="p-4">
+        <p><strong>Full name:</strong> @Model.FullName</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Email confirmed:</strong> @(Model.EmailConfirmed ? "Yes" : "No")</p>
+        <p><strong>Roles:</strong> @string.Join(", ", Model.Roles.DefaultIfEmpty("User"))</p>
+        <p><strong>Lockout:</strong> @(Model.IsLockedOut ? "Locked" : "Not locked")</p>
+        <div class="d-flex gap-2 mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-outline-secondary">Back</a>
+        </div>
+    </div>
+</div>

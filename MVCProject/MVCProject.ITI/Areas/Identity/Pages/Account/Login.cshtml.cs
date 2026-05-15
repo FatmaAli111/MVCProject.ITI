@@ -60,7 +60,7 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             if (_signInManager.IsSignedIn(User))
-                return RedirectToAction("Dashboard", "Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard", new { area = "" });
 
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
@@ -81,9 +81,9 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             if (_signInManager.IsSignedIn(User))
-                return RedirectToAction("Dashboard", "Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard", new { area = "" });
 
-            returnUrl ??= Url.Action("Dashboard", "Dashboard");
+            returnUrl ??= Url.Content("~/Dashboard/Dashboard");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -104,7 +104,7 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return LocalRedirect(NormalizeReturnUrl(returnUrl));
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -123,6 +123,18 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
             }
 
             return Page();
+        }
+
+        private string NormalizeReturnUrl(string? returnUrl)
+        {
+            var dashboard = Url.Content("~/Dashboard/Dashboard");
+            if (string.IsNullOrWhiteSpace(returnUrl) || !Url.IsLocalUrl(returnUrl))
+                return dashboard;
+
+            if (returnUrl.Contains("/Identity/", StringComparison.OrdinalIgnoreCase))
+                return dashboard;
+
+            return returnUrl;
         }
     }
 }

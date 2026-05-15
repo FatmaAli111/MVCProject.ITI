@@ -1,5 +1,6 @@
-﻿@using MVCProject.ITI.DataAccessLayer.Entities
+@using MVCProject.ITI.DataAccessLayer.Entities
 @using Microsoft.AspNetCore.Identity
+@using MVCProject.ITI.Constants
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -11,6 +12,12 @@
         ? currentUser.FullName
         : User.Identity?.Name;
         <span class="nav-link nav-link-custom" style="cursor:default;">Hello, @displayName!</span>
+        @if (await UserManager.IsInRoleAsync(currentUser!, RoleNames.Admin))
+        {
+            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn-auth btn-auth-outline">
+                <i class="bi bi-shield-lock me-1"></i> Admin
+            </a>
+        }
         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="margin:0;">
             <button type="submit" class="btn-auth btn-auth-outline">Logout</button>
         </form>

@@ -1,0 +1,43 @@
+@model AdminUserEditViewModel
+@{ ViewData["Title"] = "Edit User"; ViewData["Subtitle"] = Model.Email; }
+<div class="admin-card admin-form-card">
+    <div class="p-4">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="mb-3 form-check">
+                <input asp-for="EmailConfirmed" class="form-check-input" />
+                <label asp-for="EmailConfirmed" class="form-check-label"></label>
+            </div>
+            @if (Model.CanManageAdmins)
+            {
+                <div class="mb-3 form-check">
+                    <input asp-for="IsAdmin" class="form-check-input" />
+                    <label asp-for="IsAdmin" class="form-check-label">Administrator role</label>
+                    <div class="form-text text-muted">Only the system administrator can assign this role.</div>
+                </div>
+            }
+            else if (Model.IsAdmin)
+            {
+                <p class="small text-muted mb-3"><i class="bi bi-shield-lock me-1"></i> This user is an administrator. Role changes require the system administrator account.</p>
+            }
+            <div class="mb-3 form-check">
+                <input asp-for="IsLockedOut" class="form-check-input" />
+                <label asp-for="IsLockedOut" class="form-check-label">Lock account</label>
+            </div>
+            <button type="submit" class="btn btn-primary gradient-bg border-0">Save changes</button>
+            <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+        </form>
+        <hr />
+        <form asp-action="Delete" method="post" onsubmit="return confirm('Delete this user and all their data?');">
+            <input type="hidden" name="id" value="@Model.Id" />
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-outline-danger btn-sm">Delete user</button>
+        </form>
+    </div>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

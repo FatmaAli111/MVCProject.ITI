@@ -133,12 +133,11 @@ namespace MVCProject.ITI.Controllers
             return Json(new { success = true });
         }
 
-        public async Task<IActionResult> History()
+        public async Task<IActionResult> History(int page = 1)
         {
-            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var history = await _recentTripService.GetAllTrips(userId);
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var history = await _recentTripService.GetTripsPagedAsync(userId, page, 10);
             return View(history);
-
         }
 
         public async Task<IActionResult> CompletionTrip(Guid id)

@@ -1,0 +1,15 @@
+@model AdminFuelPriceViewModel
+@{ ViewData["Title"] = Model.Id.HasValue ? "Edit Fuel Price" : "Add Fuel Price"; }
+<div class="admin-card admin-form-card"><div class="p-4">
+<form asp-action="@(Model.Id.HasValue ? "Edit" : "Create")" method="post">
+    @if (Model.Id.HasValue) { <input type="hidden" asp-for="Id" /> }
+    <div class="mb-3"><label asp-for="FuelType" class="form-label"></label><select asp-for="FuelType" asp-items="Html.GetEnumSelectList<FuelTypeEnum>()" class="form-select"></select></div>
+    <div class="mb-3"><label asp-for="Region" class="form-label"></label><input asp-for="Region" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="PricePerUnit" class="form-label"></label><input asp-for="PricePerUnit" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="Currency" class="form-label"></label><input asp-for="Currency" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="RecordedDate" class="form-label"></label><input asp-for="RecordedDate" type="date" class="form-control" /></div>
+    <button type="submit" class="btn btn-primary gradient-bg border-0">Save</button>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

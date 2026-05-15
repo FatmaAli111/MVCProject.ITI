@@ -1,0 +1,90 @@
+@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    ViewData["Subtitle"] = "Platform overview and recent activity";
+}
+
+<div class="admin-stat-grid">
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon gradient-bg"><i class="bi bi-people-fill"></i></div>
+        <div class="admin-stat-value">@Model.TotalUsers</div>
+        <div class="admin-stat-label">Registered Users</div>
+    </div>
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)"><i class="bi bi-map-fill"></i></div>
+        <div class="admin-stat-value">@Model.TotalTrips</div>
+        <div class="admin-stat-label">Total Trips</div>
+    </div>
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#f97316,#ea580c)"><i class="bi bi-car-front-fill"></i></div>
+        <div class="admin-stat-value">@Model.TotalVehicles</div>
+        <div class="admin-stat-label">Vehicles</div>
+    </div>
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)"><i class="bi bi-tags-fill"></i></div>
+        <div class="admin-stat-value">@Model.TotalCarModels</div>
+        <div class="admin-stat-label">Car Models</div>
+    </div>
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="bi bi-wallet2"></i></div>
+        <div class="admin-stat-value">@Model.TotalRevenue.ToString("N0")</div>
+        <div class="admin-stat-label">Total Cost (EGP)</div>
+    </div>
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon" style="background:linear-gradient(135deg,#14b8a6,#0d9488)"><i class="bi bi-signpost-split-fill"></i></div>
+        <div class="admin-stat-value">@Model.TotalDistanceKm.ToString("N0")</div>
+        <div class="admin-stat-label">Distance (km)</div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <h2><i class="bi bi-clock-history me-2 text-primary"></i>Recent Trips</h2>
+                <a asp-area="Admin" asp-controller="Trips" asp-action="Index" class="btn btn-sm btn-outline-primary">View all</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table admin-table mb-0">
+                    <thead><tr><th>Route</th><th>User</th><th>km</th></tr></thead>
+                    <tbody>
+                        @foreach (var trip in Model.RecentTrips)
+                        {
+                            <tr>
+                                <td><a asp-area="Admin" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">@trip.OriginName &rarr; @trip.DestinationName</a></td>
+                                <td class="text-muted small">@trip.UserEmail</td>
+                                <td>@trip.DistanceKm.ToString("N0")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <h2><i class="bi bi-person-plus me-2 text-primary"></i>Recent Users</h2>
+                <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-sm btn-outline-primary">View all</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table admin-table mb-0">
+                    <thead><tr><th>Name</th><th>Email</th><th>Status</th></tr></thead>
+                    <tbody>
+                        @foreach (var user in Model.RecentUsers)
+                        {
+                            <tr>
+                                <td><a asp-area="Admin" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">@(string.IsNullOrWhiteSpace(user.FullName) ? "—" : user.FullName)</a></td>
+                                <td class="text-muted small">@user.Email</td>
+                                <td>
+                                    @if (user.EmailConfirmed) { <span class="admin-badge admin-badge-success">Verified</span> }
+                                    else { <span class="admin-badge admin-badge-warning">Pending</span> }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

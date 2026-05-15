@@ -1,0 +1,19 @@
+@model AdminCarModelViewModel
+@{ ViewData["Title"] = Model.Id.HasValue ? "Edit Car Model" : "Add Car Model"; }
+<div class="admin-card admin-form-card"><div class="p-4">
+<form asp-action="@(Model.Id.HasValue ? "Edit" : "Create")" method="post">
+    @if (Model.Id.HasValue) { <input type="hidden" asp-for="Id" /> }
+    <div class="row g-3">
+        <div class="col-md-6"><label asp-for="Make" class="form-label"></label><input asp-for="Make" class="form-control" /></div>
+        <div class="col-md-6"><label asp-for="Model" class="form-label"></label><input asp-for="Model" class="form-control" /></div>
+        <div class="col-md-4"><label asp-for="Year" class="form-label"></label><input asp-for="Year" class="form-control" /></div>
+        <div class="col-md-4"><label asp-for="FuelType" class="form-label"></label><select asp-for="FuelType" asp-items="Html.GetEnumSelectList<FuelTypeEnum>()" class="form-select"></select></div>
+        <div class="col-md-4"><label asp-for="WltpMixed" class="form-label"></label><input asp-for="WltpMixed" class="form-control" /></div>
+        <div class="col-md-6"><label asp-for="TankCapacity" class="form-label"></label><input asp-for="TankCapacity" class="form-control" /></div>
+        <div class="col-md-6"><label asp-for="BatteryCapacity" class="form-label"></label><input asp-for="BatteryCapacity" class="form-control" /></div>
+    </div>
+    <button type="submit" class="btn btn-primary gradient-bg border-0 mt-3">Save</button>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-2 mt-3">Cancel</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

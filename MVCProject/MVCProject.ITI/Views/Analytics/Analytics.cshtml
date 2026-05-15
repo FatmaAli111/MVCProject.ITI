@@ -77,9 +77,7 @@
             const monthlySpending = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlySpending));
         </script>
         <div class="chart-row">
-            <div class="chart-y-axis">
-                <span>2800</span><span>2100</span><span>1400</span><span>700</span><span>0</span>
-            </div>
+            <div class="chart-y-axis" id="spendYAxis"></div>
             <div class="chart-svg-wrap">
                 <svg id="spendingChart" viewBox="0 0 400 140" preserveAspectRatio="none">
                     <defs>
@@ -110,9 +108,7 @@
             const monthlyDistance = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyDistance));
         </script>
         <div class="chart-row" style="align-items:stretch;">
-            <div class="chart-y-axis">
-                <span>2000</span><span>1500</span><span>1000</span><span>500</span><span>0</span>
-            </div>
+            <div class="chart-y-axis" id="distYAxis"></div>
             <div class="bars-wrap" id="distanceBars"></div>
         </div>
         <div class="chart-x-axis" id="distLabels"></div>
@@ -173,9 +169,27 @@
 
 @section Scripts {
     <script>
+        function formatAxis(maxVal) {
+            const steps = 4;
+            const labels = [];
+            for (let i = steps; i >= 0; i--)
+                labels.push(Math.round(maxVal * i / steps).toLocaleString());
+            return labels;
+        }
+
+        function renderYAxis(elId, maxVal) {
+            const el = document.getElementById(elId);
+            if (!el) return;
+            el.innerHTML = formatAxis(maxVal).map(v => `<span>${v}</span>`).join('');
+        }
+
         (function () {
-            if (!monthlySpending || !monthlySpending.length) return;
+            if (!monthlySpending || !monthlySpending.length) {
+                document.getElementById('spendLabels').innerHTML = '<span>No data yet</span>';
+                return;
+            }
             const max = Math.max(...monthlySpending.map(x => x.Value), 1);
+            renderYAxis('spendYAxis', max);
             const W = 400, H = 140;
             const pts = monthlySpending.map((x, i) => ({
                 x: 10 + i * (W - 20) / (monthlySpending.length - 1 || 1),
@@ -191,8 +205,12 @@
         })();
 
         (function () {
-            if (!monthlyDistance || !monthlyDistance.length) return;
+            if (!monthlyDistance || !monthlyDistance.length) {
+                document.getElementById('distLabels').innerHTML = '<span>No data yet</span>';
+                return;
+            }
             const max = Math.max(...monthlyDistance.map(x => x.Value), 1);
+            renderYAxis('distYAxis', max);
             const wrap = document.getElementById("distanceBars");
             const lbls = document.getElementById("distLabels");
             monthlyDistance.forEach((x, i) => {

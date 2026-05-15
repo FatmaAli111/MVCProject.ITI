@@ -1,5 +1,7 @@
-﻿using MVCProject.ITI.DataAccessLayer.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MVCProject.ITI.DataAccessLayer.Entities;
 using MvcProject.iti.DataAccessLayer.Repository.GenericRepo;
+using MVCProject.ITI.Extensions;
 using MVCProject.ITI.Models;
 using AutoMapper;
 using System.Collections.Generic;
@@ -38,14 +40,26 @@ namespace MVCProject.ITI.Serviceslayer
 
         public async Task<IEnumerable<TripCardViewModel>> GetAllTrips(Guid userId)
         {
-            IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Trip> AllTrips =await
-                _tripRepo.GetAllTripsWithVehicleAndCostResult(userId);
+            var paged = await GetTripsPagedAsync(userId, 1, int.MaxValue);
+            return paged.Data;
+        }
 
+        public async Task<PaginatedResult<TripCardViewModel>> GetTripsPagedAsync(Guid userId, int page, int pageSize = 10)
+        {
+            var query = _tripRepo.GetTableNoTracking()
+                .Include(t => t.Vehicle)
+                .Include(t => t.TripCostResult)
+                .Where(t => t.UserId == userId)
+                .OrderByDescending(t => t.CreatedAt);
 
-            if (!AllTrips.Any())
-                return Enumerable.Empty<TripCardViewModel>();
-            IEnumerable<TripCardViewModel> recentTripsVM = _mapper.Map<IEnumerable<TripCardViewModel>>(AllTrips);
-            return recentTripsVM;
+            var pagedTrips = await query.ToPaginatedListAsync(page, pageSize);
+            var cards = _mapper.Map<List<TripCardViewModel>>(pagedTrips.Data);
+
+            return PaginatedResult<TripCardViewModel>.Success(
+                cards,
+                pagedTrips.TotalCount,
+                pagedTrips.CurrentPage,
+                pagedTrips.PageSize);
         }
 
         public async Task<IEnumerable<TripCardViewModel>> GetRecentTrips(Guid id)

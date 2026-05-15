@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Extensions;
 using MVCProject.ITI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 [Authorize]
@@ -20,12 +22,11 @@ public class GarageController : Controller
         _userManager = userManager;
     }
 
-    public IActionResult Garage()
+    public async Task<IActionResult> Garage(int page = 1)
     {
-        var userId = Guid.Parse(_userManager.GetUserId(User));
-        var vehicles = _vehicleService.GetUserVehicles(userId);
+        var userId = Guid.Parse(_userManager.GetUserId(User)!);
+        var vehicles = await _vehicleService.GetUserVehiclesPagedAsync(userId, page, 8);
         return View(vehicles);
-
     }
 
     [HttpGet]

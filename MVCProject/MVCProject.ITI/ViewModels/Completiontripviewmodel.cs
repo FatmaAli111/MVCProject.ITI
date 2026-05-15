@@ -35,5 +35,15 @@ namespace MVCProject.ITI.ViewModels
     public double WeatherMultiplier { get; set; } = 1.0;
     public double TrafficMultiplier { get; set; } = 1.0;
         public List<PassengerSplitVM> Passengers { get; set; } = new();
+
+        public bool HasSavedSplit => Passengers.Count > 0;
+
+        public double DriverShareAmount => HasSavedSplit
+            ? Math.Max(0, TotalCost - Passengers.Sum(p => p.ShareAmount))
+            : TotalCost;
+
+        public double DriverSharePercent => HasSavedSplit
+            ? Math.Max(0, 100 - Passengers.Sum(p => p.SharePercentage))
+            : 100;
     }
 }
