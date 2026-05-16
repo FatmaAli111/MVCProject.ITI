@@ -1,18 +1,18 @@
-@model IEnumerable<MVCProject.ITI.DataAccessLayer.Entities.Vehicle>
+@model PaginatedResult<MVCProject.ITI.DataAccessLayer.Entities.Vehicle>
 @{
     ViewData["Title"] = "Garage";
     Layout = "_AppLayout";
+    var vehicles = Model.Data;
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/Garage,analytics.css" asp-append-version="true" />
 }
 
 <div class="page-wrap">
-
     <div class="garage-header">
         <div>
             <h1 class="page-title">My Garage</h1>
-            <p class="page-sub">@Model.Count() vehicle@(Model.Count() != 1 ? "s" : "") registered</p>
+            <p class="page-sub">@Model.TotalCount vehicle@(Model.TotalCount != 1 ? "s" : "") registered</p>
         </div>
         <a class="btn btn-teal" asp-controller="Garage" asp-action="AddVehicle">
             <i class="fa-solid fa-plus"></i> Add Vehicle
@@ -20,20 +20,14 @@
     </div>
 
     <div class="vehicle-list">
-        @foreach (var v in Model)
+        @foreach (var v in vehicles)
         {
             <div class="vehicle-card">
-                <!-- colored left accent ó must be first -->
                 <div class="vc-accent" style="background:@v.ColorHex;"></div>
-
-                <!-- icon -->
                 <div class="vehicle-icon">
                     <i class="bi bi-car-front-fill"></i>
                 </div>
-
-                <!-- body -->
                 <div class="vehicle-body">
-
                     <div class="vehicle-header">
                         <div class="vc-name-row">
                             <h3 class="vehicle-name">@v.NickName</h3>
@@ -44,23 +38,21 @@
                                 </span>
                             }
                         </div>
-                        <p class="vc-year-model">@v.CarModel.Year &nbsp;∑&nbsp; @v.CarModel.Make @v.CarModel.Model</p>
+                        <p class="vc-year-model">@v.CarModel?.Year &nbsp;ù&nbsp; @v.CarModel?.Make @v.CarModel?.Model</p>
                     </div>
-
                     <div class="vc-chips">
                         <span class="vc-chip">
-                            <i class="bi bi-fuel-pump-fill"></i> @v.CarModel.FuelType
+                            <i class="bi bi-fuel-pump-fill"></i> @v.CarModel?.FuelType
                         </span>
                         <span class="vc-chip">
-                            <i class="bi bi-speedometer2"></i> @v.CarModel.WltpMixed L/100km
+                            <i class="bi bi-speedometer2"></i> @v.CarModel?.WltpMixed L/100km
                         </span>
                     </div>
-
                     <div class="vehicle-actions">
                         @if (!v.IsDefault)
                         {
                             <form method="post" asp-action="SetDefault" asp-route-id="@v.Id">
-                                <button class="icon-btn default" title="Set as Default">
+                                <button class="icon-btn default" title="Set as Default" type="submit">
                                     <i class="bi bi-star-fill"></i> Set Default
                                 </button>
                             </form>
@@ -69,17 +61,16 @@
                             <i class="bi bi-pencil-fill"></i> Edit
                         </a>
                         <form method="post" asp-action="DeleteVehicle" asp-route-id="@v.Id" style="display:inline;">
-                            <button class="icon-btn delete" title="Delete">
+                            <button class="icon-btn delete" title="Delete" type="submit">
                                 <i class="bi bi-trash3-fill"></i> Delete
                             </button>
                         </form>
                     </div>
-
                 </div>
             </div>
         }
 
-        @if (!Model.Any())
+        @if (!vehicles.Any())
         {
             <div class="empty-state">
                 <div class="empty-icon">
@@ -94,4 +85,8 @@
         }
     </div>
 
+    @if (Model.TotalPages > 1)
+    {
+        @await Html.PartialAsync("_AppPagination", Model)
+    }
 </div>

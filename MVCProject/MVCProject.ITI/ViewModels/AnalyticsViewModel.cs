@@ -8,8 +8,8 @@
         public double FuelCost { get; set; }
         public double Emissions { get; set; }
 
-        public List<double> MonthlySpending { get; set; } = new();
-        public List<double> MonthlyDistance { get; set; } = new();
+        public List<MonthlyChartPoint> MonthlySpending { get; set; } = new();
+        public List<MonthlyChartPoint> MonthlyDistance { get; set; } = new();
 
         public double FuelPercentage { get; set; }
         public double TollsPercentage { get; set; }

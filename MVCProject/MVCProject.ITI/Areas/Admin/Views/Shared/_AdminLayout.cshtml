@@ -1,0 +1,99 @@
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    string NavClass(string ctrl) => controller.Equals(ctrl, StringComparison.OrdinalIgnoreCase) ? "admin-nav-link active" : "admin-nav-link";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin | Smart Trip</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="mesh-gradient">
+<div class="admin-shell">
+    <aside class="admin-sidebar">
+        <div class="admin-brand">
+            <div class="admin-brand-icon gradient-bg">
+                <i class="bi bi-shield-lock-fill"></i>
+            </div>
+            <div class="admin-brand-text">
+                Smart Trip
+                <small>Administration</small>
+            </div>
+        </div>
+
+        <div class="admin-nav-section">Overview</div>
+        <a class="@NavClass("Dashboard")" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+
+        <div class="admin-nav-section">Management</div>
+        <a class="@NavClass("Users")" asp-area="Admin" asp-controller="Users" asp-action="Index">
+            <i class="bi bi-people-fill"></i> Users
+        </a>
+        <a class="@NavClass("Trips")" asp-area="Admin" asp-controller="Trips" asp-action="Index">
+            <i class="bi bi-map-fill"></i> Trips
+        </a>
+        <a class="@NavClass("Vehicles")" asp-area="Admin" asp-controller="Vehicles" asp-action="Index">
+            <i class="bi bi-car-front-fill"></i> Vehicles
+        </a>
+        <a class="@NavClass("CarModels")" asp-area="Admin" asp-controller="CarModels" asp-action="Index">
+            <i class="bi bi-tags-fill"></i> Car Models
+        </a>
+
+        <div class="admin-nav-section">Data</div>
+        <a class="@NavClass("FuelPrices")" asp-area="Admin" asp-controller="FuelPrices" asp-action="Index">
+            <i class="bi bi-fuel-pump-fill"></i> Fuel Prices
+        </a>
+        <a class="@NavClass("FuelEfficiency")" asp-area="Admin" asp-controller="FuelEfficiency" asp-action="Index">
+            <i class="bi bi-speedometer"></i> Efficiency Profiles
+        </a>
+
+        <div class="admin-nav-section mt-3">App</div>
+        <a class="admin-nav-link" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">
+            <i class="bi bi-arrow-left-circle"></i> User App
+        </a>
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" class="px-3 mt-2">
+            <button type="submit" class="admin-nav-link border-0 bg-transparent w-100 text-start">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+        </form>
+    </aside>
+
+    <div class="admin-main">
+        <header class="admin-topbar">
+            <div>
+                <h1 class="h5 mb-0 fw-bold">@ViewData["Title"]</h1>
+                @if (ViewData["Subtitle"] != null)
+                {
+                    <p class="text-muted small mb-0">@ViewData["Subtitle"]</p>
+                }
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <span class="admin-badge admin-badge-primary"><i class="bi bi-shield-check me-1"></i> Admin</span>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            @if (TempData["Success"] != null)
+            {
+                <div class="admin-alert alert alert-success border-0">@TempData["Success"]</div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="admin-alert alert alert-danger border-0">@TempData["Error"]</div>
+            }
+            @RenderBody()
+        </main>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

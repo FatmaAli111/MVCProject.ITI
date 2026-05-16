@@ -15,7 +15,6 @@ namespace MVCProject.ITI.Serviceslayer
 
         public async Task<AnalyticsViewModel> calcAnalytics(Guid userId)
         {
-
             var trips = await _context.Trips
                 .Include(t => t.TripCostResult)
                 .Where(t => t.UserId == userId)
@@ -23,32 +22,48 @@ namespace MVCProject.ITI.Serviceslayer
 
             var vm = new AnalyticsViewModel();
 
-            if (trips.Any())
+            if (!trips.Any())
+                return vm;
+
+            vm.TripCount = trips.Count;
+            vm.TotalDistance = trips.Sum(t => t.DistanceKm);
+            vm.TotalSpent = trips.Sum(t => t.TripCostResult?.TotalCost ?? 0);
+
+            var fuelCostTotal = trips.Sum(t => (t.TripCostResult?.FuelConsumed ?? 0) * 18.5);
+            var maintenanceTotal = trips.Sum(t => t.DistanceKm * 0.75);
+            vm.FuelCost = fuelCostTotal;
+
+            vm.Emissions = vm.TotalDistance * 0.131;
+
+            if (vm.TotalSpent > 0)
             {
-                vm.TripCount = trips.Count;
-                vm.TotalDistance = trips.Sum(t => t.DistanceKm);
-                vm.TotalSpent = trips.Sum(t => t.TripCostResult?.TotalCost ?? 0);
-                vm.FuelCost = trips.Sum(t => t.TripCostResult?.FuelConsumed ?? 0);
+                vm.FuelPercentage = Math.Round(fuelCostTotal / vm.TotalSpent * 100, 1);
+                vm.MaintenancePercentage = Math.Round(maintenanceTotal / vm.TotalSpent * 100, 1);
+                var remainder = 100 - vm.FuelPercentage - vm.MaintenancePercentage;
+                vm.TollsPercentage = Math.Max(0, Math.Round(remainder, 1));
+            }
 
-                vm.Emissions = vm.TotalDistance * 0.131;
-
-                vm.MonthlySpending = trips
-                .GroupBy(t => t.TripDate.Month)
-                .OrderBy(g => g.Key)
-                .Select(g => (double)g.Sum(t => t.TripCostResult?.TotalCost ?? 0))
+            var monthStart = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1).AddMonths(-11);
+            var monthBuckets = Enumerable.Range(0, 12)
+                .Select(i => monthStart.AddMonths(i))
                 .ToList();
 
+            vm.MonthlySpending = monthBuckets.Select(m => new MonthlyChartPoint
+            {
+                Key = m.ToString("MMM yy"),
+                Value = trips
+                    .Where(t => t.TripDate.Year == m.Year && t.TripDate.Month == m.Month)
+                    .Sum(t => (double)(t.TripCostResult?.TotalCost ?? 0))
+            }).ToList();
 
-                vm.MonthlyDistance = trips
-                 .GroupBy(t => t.TripDate.Month)
-                     .OrderBy(g => g.Key)
-                      .Select(g => (double)g.Sum(t => t.DistanceKm))
-                       .ToList();
+            vm.MonthlyDistance = monthBuckets.Select(m => new MonthlyChartPoint
+            {
+                Key = m.ToString("MMM yy"),
+                Value = trips
+                    .Where(t => t.TripDate.Year == m.Year && t.TripDate.Month == m.Month)
+                    .Sum(t => t.DistanceKm)
+            }).ToList();
 
-                vm.FuelPercentage = 73;
-                vm.TollsPercentage = 17;
-                vm.MaintenancePercentage = 10;
-            }
             return vm;
         }
     }

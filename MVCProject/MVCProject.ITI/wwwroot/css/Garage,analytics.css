@@ -936,6 +936,30 @@
         border-color: #fecdd3 !important;
     }
 
+/* trip history */
+.history-page .history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 0 24px;
+}
+
+.history-trip-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.app-pagination .page-link {
+    color: var(--teal);
+    border-color: var(--bdr);
+}
+
+.app-pagination .page-item.active .page-link {
+    background: var(--teal);
+    border-color: var(--teal);
+}
+
 /* empty state */
 .empty-state {
     display: flex;

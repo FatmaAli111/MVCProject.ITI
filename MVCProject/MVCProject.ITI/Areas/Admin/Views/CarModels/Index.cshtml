@@ -1,0 +1,29 @@
+@model PaginatedResult<AdminCarModelViewModel>
+@{ ViewData["Title"] = "Car Models"; }
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Car Models</h2>
+        <a asp-action="Create" class="btn btn-sm btn-primary gradient-bg border-0"><i class="bi bi-plus-lg"></i> Add</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table admin-table mb-0">
+            <thead><tr><th>Make</th><th>Model</th><th>Year</th><th>Fuel</th><th>WLTP</th><th></th></tr></thead>
+            <tbody>
+            @foreach (var c in Model.Data)
+            {
+                <tr>
+                    <td>@c.Make</td><td>@c.Model</td><td>@c.Year</td><td>@c.FuelType</td><td>@c.WltpMixed</td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-sm btn-outline-primary admin-btn-icon"><i class="bi bi-pencil"></i></a>
+                        <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Delete?');">
+                            <input type="hidden" name="id" value="@c.Id" />@Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-sm btn-outline-danger admin-btn-icon"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+@await Html.PartialAsync("_Pagination", Model)

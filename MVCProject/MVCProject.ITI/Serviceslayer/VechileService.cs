@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MvcProject.iti.DataAccessLayer.Repository.GenericRepo;
 using MVCProject.ITI.DataAccessLayer.Entities;
+using MVCProject.ITI.Extensions;
 
 public class VehicleService
 {
@@ -14,11 +15,21 @@ public class VehicleService
 
     public IEnumerable<Vehicle> GetUserVehicles(Guid userId)
     {
-
         return _vehicleRepo.GetTableNoTracking()
                            .Include(v => v.CarModel)
                            .Where(v => v.UserId == userId)
                            .ToList();
+    }
+
+    public async Task<PaginatedResult<Vehicle>> GetUserVehiclesPagedAsync(Guid userId, int page, int pageSize = 8)
+    {
+        var query = _vehicleRepo.GetTableNoTracking()
+            .Include(v => v.CarModel)
+            .Where(v => v.UserId == userId)
+            .OrderByDescending(v => v.IsDefault)
+            .ThenBy(v => v.NickName);
+
+        return await query.ToPaginatedListAsync(page, pageSize);
     }
     public Vehicle GetById(Guid id)
     {

@@ -85,7 +85,7 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
         {
             
             if (_signInManager.IsSignedIn(User))
-                return RedirectToAction("Dashboard", "Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard", new { area = "" });
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -97,7 +97,7 @@ namespace MVCProject.ITI.Areas.Identity.Pages.Account
         {
             
             if (_signInManager.IsSignedIn(User))
-                return RedirectToAction("Dashboard", "Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard", new { area = "" });
 
             returnUrl ??= Url.Content("~/Dashboard/Dashboard");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

@@ -1,0 +1,12 @@
+@model AdminTripDetailsViewModel
+@{ ViewData["Title"] = "Trip Details"; }
+<div class="admin-card admin-form-card"><div class="p-4">
+    <p><strong>User:</strong> @Model.UserFullName (@Model.UserEmail)</p>
+    <p><strong>Vehicle:</strong> @Model.VehicleName</p>
+    <p><strong>Route:</strong> @Model.OriginName &rarr; @Model.DestinationName</p>
+    <p><strong>Distance:</strong> @Model.DistanceKm km &middot; <strong>Duration:</strong> @Model.DurationMinutes min</p>
+    <p><strong>Passengers:</strong> @Model.PassengerCount @(Model.PassengerNames.Any() ? $"({string.Join(", ", Model.PassengerNames)})" : "")</p>
+    <p><strong>Cost:</strong> @(Model.TotalCost?.ToString("N2") ?? "—") EGP @(Model.CostPerPassenger.HasValue ? $"/ {Model.CostPerPassenger:N2} per passenger" : "")</p>
+    <p><strong>Date:</strong> @Model.TripDate.ToString("f")</p>
+    <a asp-action="Index" class="btn btn-outline-secondary mt-2">Back</a>
+</div></div>

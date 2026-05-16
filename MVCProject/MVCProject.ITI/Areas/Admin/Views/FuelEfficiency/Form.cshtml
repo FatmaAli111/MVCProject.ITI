@@ -1,0 +1,13 @@
+@model AdminFuelEfficiencyViewModel
+@{ ViewData["Title"] = Model.Id.HasValue ? "Edit Profile" : "Add Profile"; }
+<div class="admin-card admin-form-card"><div class="p-4">
+<form asp-action="@(Model.Id.HasValue ? "Edit" : "Create")" method="post">
+    @if (Model.Id.HasValue) { <input type="hidden" asp-for="Id" /> }
+    <div class="mb-3"><label asp-for="VehicleId" class="form-label">Vehicle</label><select asp-for="VehicleId" asp-items="ViewBag.Vehicles" class="form-select"></select></div>
+    <div class="mb-3"><label asp-for="ConsumptionRate" class="form-label"></label><input asp-for="ConsumptionRate" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="Unit" class="form-label"></label><input asp-for="Unit" class="form-control" /></div>
+    <button type="submit" class="btn btn-primary gradient-bg border-0">Save</button>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

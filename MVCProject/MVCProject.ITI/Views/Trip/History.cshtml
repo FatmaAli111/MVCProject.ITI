@@ -1,34 +1,48 @@
-@using MVCProject.ITI.DataAccessLayer.Entities
-@model IEnumerable<TripCardViewModel>
+@model PaginatedResult<TripCardViewModel>
 @{
     Layout = "_AppLayout";
     ViewData["Title"] = "Trip History";
-    int count = Model?.Count() ?? 0;
+    var count = Model.TotalCount;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Garage,analytics.css" asp-append-version="true" />
 }
 
+<div class="page-wrap history-page">
+    <div class="garage-header">
+        <div>
+            <h1 class="page-title">Trip History</h1>
+            <p class="page-sub">@count trip@(count != 1 ? "s" : "") recorded</p>
+        </div>
+        <a class="btn btn-teal" asp-controller="Trip" asp-action="StartNewTrip">
+            <i class="bi bi-plus-lg"></i> New Trip
+        </a>
+    </div>
 
-
-<h2 style="margin:10px; font-size:20px;">Trip History</h2>
-<span style="background:#F3F4F6; padding:5px 12px; border-radius:20px; font-size:13px; font-weight:600; display:inline-block;  margin-bottom:10px;">
-    @count trips
-</span>
-<div class="history-container">
-    @if (count == 0)
+    @if (!Model.Data.Any())
     {
-        <div style="text-align:center; padding:100px 0; color:#9CA3AF;"><p>No trips recorded yet.</p></div>
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            <h3 class="empty-title">No trips yet</h3>
+            <p class="empty-sub">Start your first trip to see your route history and cost breakdowns here.</p>
+            <a class="btn btn-teal" asp-controller="Trip" asp-action="StartNewTrip">
+                <i class="bi bi-geo-alt-fill"></i> Plan a Trip
+            </a>
+        </div>
     }
     else
     {
-            @foreach (var i in Model)
+        <div class="history-container">
+            @foreach (var trip in Model.Data)
             {
-                    <a href="@Url.Action("CompletionTrip", "Trip", new { id = i.Id })" style="text-decoration:none; color:inherit; display:flex; flex:1; align-items:center;">
-                
-                   
-                        @Html.Partial("_RecentTripCardPartial", i)
-                    
+                <a href="@Url.Action("CompletionTrip", "Trip", new { id = trip.Id })" class="history-trip-link">
+                    <partial name="_RecentTripCardPartial" model="trip" />
                 </a>
-                
-        }
+            }
+        </div>
+        @await Html.PartialAsync("_AppPagination", Model)
     }
 </div>
 
@@ -40,18 +54,33 @@
                 const result = await response.json();
                 if (result.success) {
                     btn.classList.toggle('active', result.isFavorite);
-                    btn.querySelector('svg').setAttribute('fill', result.isFavorite ? 'currentColor' : 'none');
+                    btn.querySelector('svg')?.setAttribute('fill', result.isFavorite ? 'currentColor' : 'none');
                 }
             } catch (e) { console.error(e); }
         }
 
         async function deleteTrip(tripId) {
-            if (!confirm("Are you sure?")) return;
+            if (!confirm('Delete this trip?')) return;
             try {
-                const response = await fetch(`/Trip/DeleteTrip/${tripId}`, { method: 'POST' });
-                const data = await response.json();
-                if (data.success) document.getElementById(`trip-${tripId}`).remove();
-            } catch (e) { alert("Error occurred."); }
+                const response = await fetch(`/Trip/DeleteTrip?id=${tripId}`, {
+                    method: 'POST',
+                    headers: { 'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || '' }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    const link = document.getElementById(`trip-${tripId}`)?.closest('.history-trip-link');
+                    if (link) link.remove();
+                    else window.location.href = '@Url.Action("History", "Trip")';
+                    if (!document.querySelector('.history-trip-link')) {
+                        window.location.reload();
+                    }
+                } else {
+                    alert(result.message || 'Could not delete trip.');
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Could not delete trip.');
+            }
         }
     </script>
 }
