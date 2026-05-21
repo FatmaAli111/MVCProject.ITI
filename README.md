@@ -2,6 +2,14 @@
 
 ASP.NET Core MVC web application for planning trips, estimating trip cost, and tracking driving activity.
 
+Smart Trip Cost Analyzer helps drivers understand the real cost of every journey before they start driving. It combines route distance and duration, vehicle fuel/energy consumption, AC usage, and current fuel assumptions to estimate trip expenses and expected travel effort. The platform is designed for everyday users who want to plan smarter trips and for admins who need visibility into usage trends and cost-related data.
+
+At a glance, the system supports:
+- Trip planning with cost-aware route insights
+- Personal vehicle profiles to improve estimate accuracy
+- History and analytics to compare driving behavior over time
+- Admin monitoring tools for fuel data, users, and trip activity
+
 ## Tech Stack
 - .NET 9 (ASP.NET Core MVC + Razor Pages)
 - Entity Framework Core (SQL Server)
